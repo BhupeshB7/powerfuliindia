@@ -30,7 +30,7 @@ function Setting() {
     fetchData();
   }, [token]);
 
-  const referralLink = `https://powerfulIndia.in/register?ref=${data.userId}`;
+  const referralLink = `https://powerfullindia.com/register?ref=${data.userId}`;
   const handleCopy = () => {
     if (navigator.clipboard) {
       navigator.clipboard
@@ -42,7 +42,7 @@ function Setting() {
     }
   };
   const handleWhatsAppClick = () => {
-    const message = ` https://globalsuccesspoint.in/register?ref=${data.userId}`;
+    const message = ` https://powerfullindia.com/register?ref=${data.userId}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://api.whatsapp.com/send?text=${encodedMessage}`;
     window.open(whatsappURL, "_blank");
