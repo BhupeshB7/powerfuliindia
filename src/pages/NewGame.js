@@ -198,7 +198,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import welcome from '../assets/gameWelcome.png'
-
+import spinner from '../assets/spinner2.gif'
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -215,6 +215,8 @@ const NewGame = () => {
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
@@ -224,6 +226,7 @@ const NewGame = () => {
     const expireTime = getTokenExpireTime();
     return expireTime ? expireTime < Date.now() : true;
   };
+  const token = localStorage.getItem('token');
   useEffect(() => {
     if (isTokenExpired()) {
       setIsTokenValid(false);
@@ -256,7 +259,38 @@ const NewGame = () => {
       [name]: value,
     });
   };
-  const userId = "PI17218169";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://mlm-production.up.railway.app/api/users/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const result = await response.json();
+        // const userLevel = getUserLevel(result.level);
+        // setLevel(userLevel);
+        if(result.role){
+          const userrole = result.role
+          // console.log(userrole);
+          if(userrole === 'admin'){
+            localStorage.setItem('check','nfwnwen');
+          }
+      }
+        setData(result);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [token]);
+  // const userId = "PI17218169";
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -333,7 +367,7 @@ const NewGame = () => {
   const fetchGameHistory = async (page) => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/game/history/${userId}?page=${page}`
+        `https://mlm-production.up.railway.app/api/game/history/${data.userId}?page=${page}`
       );
       const {
         page: currentPage,
@@ -352,7 +386,7 @@ const NewGame = () => {
 
   useEffect(() => {
     fetchGameHistory(currentPage);
-  }, [userId, currentPage]);
+  }, [data.userId, currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -361,7 +395,7 @@ const NewGame = () => {
   const fetchWithdrawalHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/history/${userId}`
+        `https://mlm-production.up.railway.app/api/history/${data.userId}`
       );
       setWithdrawalHistory(response.data);
     } catch (error) {
@@ -371,11 +405,11 @@ const NewGame = () => {
 
   useEffect(() => {
     fetchWithdrawalHistory();
-  }, [userId]);
+  }, [data.userId]);
   const fetchDepositHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/deposit/history/${userId}`
+        `https://mlm-production.up.railway.app/api/deposit/history/${data.userId}`
       );
       setDepositHistory(response.data);
     } catch (error) {
@@ -385,7 +419,7 @@ const NewGame = () => {
 
   useEffect(() => {
     fetchDepositHistory();
-  }, [userId]);
+  }, [data.userId]);
 
   const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * predefinedColors.length);
@@ -434,7 +468,7 @@ const NewGame = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/gameProfile/${userId}`
+        `https://mlm-production.up.railway.app/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -445,7 +479,7 @@ const NewGame = () => {
   };
   useEffect(() => {
     getGamerProfile();
-  }, [userId]);
+  }, [data.userId]);
   useEffect(() => {
     if (!targetColor) {
       setTargetColor(getRandomColor());
@@ -565,7 +599,9 @@ const NewGame = () => {
     }
     return array;
   }
-
+  if (isLoading) {
+    return <h6 className='text-center' style={{marginTop:'-70px', display:'flex', alignItems:'center', justifyContent:'center', height:'100vh', width:'100%' }}><img src={spinner} alt="spinner" height="100px" width="100px"  style={{display:'flex', justifyContent:'center', alignItems:'center'}}/></h6>;
+  }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
@@ -839,6 +875,7 @@ const NewGame = () => {
           <div className="col-5 col-sm-9 col-md-6 col-lg-4 game_balance">
             <h6 className="text-secondary">
               Balance <b style={{ color: "brown" }}> {profile.balance} ₹</b>
+              {/* UserId <b style={{ color: "brown" }}> {data.userId} ₹</b> */}
             </h6>
             <h5></h5>
             <h6 className="text-secondary">
