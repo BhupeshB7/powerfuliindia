@@ -505,7 +505,7 @@ const NewGame = () => {
         const response = await axios.post(
           "https://mlm-production.up.railway.app/api/gameProfile/startGame",
           {
-            userId: userId, // Make sure userId is defined or passed as a prop
+            userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
           }
         );
@@ -526,7 +526,7 @@ const NewGame = () => {
           const response = await axios.post(
             "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
             {
-              userId: userId, // Make sure userId is defined or passed as a prop
+              userId: data.userId, // Make sure userId is defined or passed as a prop
               winnings: winnings,
             }
           );
@@ -547,7 +547,7 @@ const NewGame = () => {
     }
     console.log(winningAmount);
     const gameDetails = {
-      userId: userId, // Make sure userId is defined or passed as a prop
+      userId: data.userId, // Make sure userId is defined or passed as a prop
       // entryFee: betAmount,
 
       targetColor: targetColor,
