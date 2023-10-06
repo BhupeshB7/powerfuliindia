@@ -653,7 +653,7 @@ const NewGame = () => {
           </Col>
           <Col sm={12} md={6}>
             <div>
-              <h6 className="text-secondary p-2">Have a Good Luck!</h6>
+              <h6 className="text-light p-2">Have a Good Luck!</h6>
             </div>
           </Col>
         </Row>

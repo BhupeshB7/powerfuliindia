@@ -664,10 +664,10 @@ const Dashboard = () => {
   // For deposit
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    transactionId: '',
-    userID: '',
-    depositAmount: '',
+    name: "",
+    transactionId: "",
+    userID: "",
+    depositAmount: "",
   });
   // const [activeUserData, setActiveUserData] = useState([]);
 
@@ -703,13 +703,13 @@ const Dashboard = () => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
-        if(result.role){
-          const userrole = result.role
+        if (result.role) {
+          const userrole = result.role;
           // console.log(userrole);
-          if(userrole === 'admin'){
-            localStorage.setItem('check','nfwnwen');
+          if (userrole === "admin") {
+            localStorage.setItem("check", "nfwnwen");
           }
-      }
+        }
         setData(result);
 
         setIsLoading(false);
@@ -863,20 +863,23 @@ const Dashboard = () => {
   const handleWithdrawalSubmit = (e) => {
     e.preventDefault();
     const amount = Number(withdrawalAmount); // convert string to number
-    fetch(`https://mlm-production.up.railway.app/api/withdraw/user/${data.userId}`, {
-    // fetch(`http://localhost:5000/api/withdraw/user/${data.userId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount,
-        GPay: data.GPay,
-        ifscCode: data.ifscCode,
-        accountNo: data.accountNo,
-        accountHolderName: data.accountHolderName,
-      }),
-    })
+    fetch(
+      `https://mlm-production.up.railway.app/api/withdraw/user/${data.userId}`,
+      {
+        // fetch(`http://localhost:5000/api/withdraw/user/${data.userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount,
+          GPay: data.GPay,
+          ifscCode: data.ifscCode,
+          accountNo: data.accountNo,
+          accountHolderName: data.accountHolderName,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -903,11 +906,11 @@ const Dashboard = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(formData)
+      console.log(formData);
       // const response = await axios.post('https://mlm-production.up.railway.app/api/deposit/upload', formData);
       const response = await axios.post(
         "https://mlm-production.up.railway.app/api/deposit/userAmount",
-      //  "http://localhost:5000/api/deposit/userAmount",
+        //  "http://localhost:5000/api/deposit/userAmount",
         formData
       );
       const data = response.data;
@@ -971,8 +974,8 @@ const Dashboard = () => {
   };
 
   const handleActivateUser = async () => {
-    if(data.topupWallet < 850){
-      alert('Insufficient funds for Activation');
+    if (data.topupWallet < 850) {
+      alert("Insufficient funds for Activation");
       return;
     }
     try {
@@ -1227,7 +1230,7 @@ const Dashboard = () => {
                     alt="img"
                     height="50px"
                     width="50px"
-                    style={{ marginRight: "20px", }}
+                    style={{ marginRight: "20px" }}
                   />
                 </h6>
                 <div
@@ -1255,7 +1258,7 @@ const Dashboard = () => {
                 <h6>Activation Date: {data.activationTime ? new Date(data.activationTime).toLocaleString() : 'unknown'}</h6>
               </li> */}
 
-                          {imagePresent ? (
+                          {/* {imagePresent ? (
                             <div className="company-logo">
                               <a href="/dashboard">
                                 <img
@@ -1268,7 +1271,7 @@ const Dashboard = () => {
                             </div>
                           ) : (
                             <>
-                            {/* <div className="company-logo">
+                            <div className="company-logo">
                               <a href="/dashboard">
                                 <img
                                   src={logo}
@@ -1277,28 +1280,45 @@ const Dashboard = () => {
                                   alt="logo"
                                 />
                               </a>
-                            </div> */}
+                            </div>
                             <FileInput
                               onUploadSuccess={handleImageUploadSuccess}
                               userId={data.userId}
                             />
                             </>
-                          )}
+                          )} */}
+                          <div className="company-logo">
+                            <a href="/dashboard">
+                              <img
+                                src={logo}
+                                height="220px"
+                                width="220px"
+                                alt="logo"
+                              />
+                            </a>
+                          </div>
                           <li>
                             <h6 className="text-info text-center mt-3">
                               {" "}
-                              Hello, {data.name} 
+                              Hello, {data.name}
                             </h6>
                           </li>
                           <li>
                             <>
-                            {data.role === 'admin' || data.role === 'Admin' ?(<>
-                            <div>
-                              <Link to={'/admin/dashboard'}>
-                              <h6 className="text-center">Admin Dashboard</h6>
-                              </Link>
-                            </div>
-                            </>):(<></>)}
+                              {data.role === "admin" ||
+                              data.role === "Admin" ? (
+                                <>
+                                  <div>
+                                    <Link to={"/admin/dashboard"}>
+                                      <h6 className="text-center">
+                                        Admin Dashboard
+                                      </h6>
+                                    </Link>
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
                             </>
                           </li>
                           <li>
@@ -1593,7 +1613,7 @@ const Dashboard = () => {
                       className="text-center fw-bold "
                       style={{ color: "cyan" }}
                     >
-                      UserID: {data.userId} 
+                      UserID: {data.userId}
                     </h6>
                     <h6 className="text-center " style={{ color: "#aaa" }}>
                       Email: {data.email}
@@ -1646,7 +1666,7 @@ const Dashboard = () => {
                 </div>
                 <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>DAILY INCOME</p>
-                  <h6>{data.topupWallets} 30 Rs</h6>
+                  <h6>{data.topupWallets} 25 Rs</h6>
                 </div>
                 <div
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
@@ -1760,7 +1780,10 @@ const Dashboard = () => {
                 <div className="modal-dialog ">
                   <div className="modal-content bg-success">
                     <div className="modal-header">
-                      <h5 className="modal-title text-warning" id="exampleModalLabel">
+                      <h5
+                        className="modal-title text-warning"
+                        id="exampleModalLabel"
+                      >
                         TEAM STRUCTURE
                       </h5>
                       <button
@@ -2450,7 +2473,7 @@ const Dashboard = () => {
 
                   <div>
                     <h6
-                      className="text-center text-secondary"
+                      className="text-center text-light"
                       style={{ textDecoration: "underline" }}
                     >
                       Join WhatsApp Group
@@ -2477,7 +2500,7 @@ const Dashboard = () => {
               />
               <h6
                 className=" mt-3 ms-3 "
-                style={{ width: "180px", color: "gray" }}
+                style={{ width: "180px", color: "#fff" }}
               >
                 Last update: {realTimeDate}
               </h6>
@@ -2507,8 +2530,11 @@ const Dashboard = () => {
                         />
                         <h6 className=" mt-1">Home</h6>
                       </Link>
-                      <Link to='/wallet'
-                       style={{ color: "cyan" }} className="footer_icon">
+                      <Link
+                        to="/wallet"
+                        style={{ color: "cyan" }}
+                        className="footer_icon"
+                      >
                         <img
                           src="https://cdn-icons-png.flaticon.com/128/9181/9181081.png"
                           alt="wallet"
