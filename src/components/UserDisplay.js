@@ -611,7 +611,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import Modal from "react-modal";
 import "./Dashboard.css";
 import logo from "../assets/PI1.png";
-import QRCODE from "../assets/QRCODE1.jpg";
+import QRCODE from "../assets/QRCODE2.jpg";
 import spinner from "../assets/spinner2.gif";
 import { MdOutlineTransferWithinAStation, MdEmail } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
@@ -1891,8 +1891,8 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>xxxxxxxxxx</td>
-                          <td>xxxxxxxxxxxxxxxx</td>
+                          <td>UTIB0002620</td>
+                          <td>923010046330302</td>
                         </tr>
                       </tbody>
                     </table>
@@ -1904,8 +1904,8 @@ const Dashboard = () => {
                     <table className="table table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col">Google Pay</th>
-                          <td>xxxxxxxxxxxx</td>
+                          <th scope="col">UPI</th>
+                          <td>kumaromprakashhdhdksks@axl</td>
                         </tr>
                       </thead>
                     </table>
