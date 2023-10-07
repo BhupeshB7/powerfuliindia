@@ -873,7 +873,6 @@ const Dashboard = () => {
         },
         body: JSON.stringify({
           amount,
-          GPay: data.GPay,
           ifscCode: data.ifscCode,
           accountNo: data.accountNo,
           accountHolderName: data.accountHolderName,
@@ -2014,11 +2013,7 @@ const Dashboard = () => {
                             </label>
                             {/* <input>value={data.ifscCode}</input> */}
                             <input type="text" value={data.ifscCode} disabled />
-                            <label style={{ fontSize: "17px" }}>
-                              Google Pay:
-                            </label>
-                            {/* <input>value={data.GPay}</input> */}
-                            <input type="text" value={data.GPay} disabled />
+                            
                             <label style={{ fontSize: "17px" }}>
                               Account Holder Name:
                             </label>
