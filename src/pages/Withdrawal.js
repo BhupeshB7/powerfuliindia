@@ -193,7 +193,7 @@ function Withdrawal() {
 
   useEffect(() => {
     if (data.userId) {
-      axios.get(`https://mlm-production.up.railway.app/api/withdrawals/${data.userId}`)
+      axios.get(`https://mlm-production.up.railway.app/api/withdraw/withdrawals/${data.userId}`)
         .then(response => setWithdrawalRequest(response.data))
         .catch(error => console.log(error));
     }
