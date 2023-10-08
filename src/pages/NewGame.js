@@ -316,6 +316,10 @@ const NewGame = () => {
     }
   };
   const handleSubmitWithdrawal = async (e) => {
+    if(formData1.amount<200){
+      alert("Minimum Withdrawal Amount 200");
+      return;
+    }
     e.preventDefault();
     try {
       const response = await fetch(
@@ -653,7 +657,7 @@ const NewGame = () => {
           </Col>
           <Col sm={12} md={6}>
             <div>
-              <h6 className="text-light p-2">Have a Good Luck!</h6>
+              <h6 className="text-primary p-2">Have a Good Luck!</h6>
             </div>
           </Col>
         </Row>

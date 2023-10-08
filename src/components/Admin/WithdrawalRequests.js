@@ -45,7 +45,7 @@ function WithdrawalRequests() {
   const handleWithdrawalDelete = async (request) => {
     try {
       await axios.delete(
-        `https://mlm-production.up.railway.app/api/withdrawalWallet/${request._id}`
+        `https://mlm-production.up.railway.app/api/withdraw/withdrawalWallet/${request._id}`
       );
       alert("Deleted successfully!");
     } catch (error) {

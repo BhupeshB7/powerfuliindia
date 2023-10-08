@@ -45,7 +45,7 @@ const GameHistory = () => {
                   <td>{item.userId}</td>
                   <td>{item.amount}</td>
                   <td>{item.UPI}</td>
-                  <td> <Button className="ms-1">{item.approved}</Button></td>
+                  <td> <Button variant="warning" className="ms-1">{item.approved}</Button></td>
                   {/* Add more table data cells as needed */}
                 </tr>
               ))}
