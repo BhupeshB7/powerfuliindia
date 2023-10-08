@@ -119,7 +119,7 @@ function UserData() {
   };
  
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{backgroundColor:'#fbffde'}}>
       <Container>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
@@ -228,7 +228,7 @@ function UserData() {
         Search
       </button> */}
       <div className="table-responsive">
-        <table className="table table-bordered table-striped table-light">
+        <table className="table table-bordered table-striped table-warning">
           <thead>
             <tr>
               <th>S.No</th>

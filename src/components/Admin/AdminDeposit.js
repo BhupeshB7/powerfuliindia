@@ -165,7 +165,7 @@ function AdminDeposit() {
                   className="btn btn-success sm m-1"
                   onClick={() => handleApproved(user._id)}
                 >
-                  Approve
+                  {user.isApproved ? "Approved" : "Pending"}
                 </button>
                 <button
                   className="btn btn-danger sm m-1"

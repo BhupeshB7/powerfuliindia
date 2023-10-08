@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 
-function WithdrawalRequests() {
+function  WithdrawalRequests() {
   const [withdrawalRequests, setWithdrawalRequests] = useState([]);
   const [withdrawalQuerySearch, setWithdrawalQuerySearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,7 +87,7 @@ function WithdrawalRequests() {
        <Container>
         <div className="form_container">
           <form>
-            <h6 className="mt-3">Update Wallet</h6>
+            <h6 className="mt-3 text-primary">Update Wallet</h6>
             <div className="formInput">
               <label> User Id must required! for update wallet.</label>
               {/* <label> User ID:</label> */}
@@ -172,7 +172,7 @@ function WithdrawalRequests() {
       </button> */}
 
       <div className="table-responsive">
-        <table className="table table-bordered">
+        <table className="table table-bordered table-warning">
           <thead>
             <tr>
               <th>S.No.</th>
