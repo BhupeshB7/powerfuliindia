@@ -32,6 +32,7 @@ import DashboardAdmin from './components/Admin/DashboardAdmin';
 import AdminTask from './components/Admin/AdminTask';
 import NewGame from './pages/NewGame';
 import GameDeposit from './components/Admin/GameDeposit';
+import SpinGame from './pages/SpinGame';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
           <Route path='/game' element={<Game/>} />
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
           <Route path='/game/colorpridiction' element={<NewGame/>} />
+          <Route path='/game/spinWheel' element={<SpinGame/>} />
           <Route path='/withdrawal' element={<Withdrawal/>} token={token}/>
           <Route path='/topUp' element={<TopUp/>}/>
           <Route path='/profile-update' element={<ProfileUpdate/>} />

@@ -788,3 +788,9 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
   /* background-repeat: no-repeat; */
   background-size: contain;
 }
+.bg-spin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

@@ -292,6 +292,10 @@ const NewGame = () => {
   }, [token]);
   // const userId = "PI17218169";
   const handleSubmit = async (e) => {
+    if(formData.amount<100){
+      alert("Minimum Withdrawal Amount 200");
+      return;
+    }
     e.preventDefault();
     try {
       const response = await fetch(
