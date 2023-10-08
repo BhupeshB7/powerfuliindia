@@ -29,7 +29,7 @@ const DashboardAdmin = () => {
   const checkT = localStorage.getItem("check");
   
   return (
-    <>
+    <div style={{backgroundColor:'#fbffde'}}>
     {checkT?(
       <>
        { isTokenValid ? (
@@ -50,7 +50,7 @@ const DashboardAdmin = () => {
     <h4> You are not Authorized</h4>
     </>)}
      
-    </>
+    </div>
   );
 };
 

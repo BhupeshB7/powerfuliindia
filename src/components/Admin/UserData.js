@@ -261,14 +261,14 @@ function UserData() {
                 <td>
                   {user.is_active ? (
                     <button
-                      className="btn btn-dark"
+                      className="btn btn-primary"
                       onClick={() => handleDeactivate(user._id)}
                     >
                       Deactivate
                     </button>
                   ) : (
                     <button
-                      className="btn btn-secondary"
+                      className="btn btn-success"
                       onClick={() => handleActivate(user._id)}
                     >
                       Activate
