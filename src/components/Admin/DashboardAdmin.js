@@ -27,6 +27,7 @@ const DashboardAdmin = () => {
     }
   }, []);
   const checkT = localStorage.getItem("check");
+  
   return (
     <>
     {checkT?(

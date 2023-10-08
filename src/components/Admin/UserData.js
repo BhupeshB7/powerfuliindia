@@ -112,52 +112,107 @@ function UserData() {
   };
 
   const handleDeleteUser = async (id) => {
-    await axios.delete(`https://mlm-production.up.railway.app/api/admin/api/users/${id}`);
+    await axios.delete(
+      `https://mlm-production.up.railway.app/api/admin/api/users/${id}`
+    );
     setUsers(users.filter((user) => user._id !== id));
   };
-
+ 
   return (
     <div className="container-fluid">
       <Container>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
-           
-            <div >
-                <div style={{height:'50px', width:'50px', display:'flex', background:'rgb(253, 203, 203)', justifyContent:'center', alignItems:'center', marginTop:'-30px', borderRadius:'50%'}}>
-
-                <img src="https://cdn-icons-png.flaticon.com/128/11533/11533705.png" height='35px'  width='35px'  alt="user" style={{}}/>
-                </div>
-                {newUsersCount !== null ? (
-              <h6 className="mt-2">
-                New users created in the last 15 days: &nbsp;<b>{newUsersCount}</b> 
-              </h6>
-            ) : (
-              <h6 className="mt-2">Error fetching data.</h6>
-            )} 
+            <div>
+              <div
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  display: "flex",
+                  background: "rgb(253, 203, 203)",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "-30px",
+                  borderRadius: "50%",
+                }}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/11533/11533705.png"
+                  height="35px"
+                  width="35px"
+                  alt="user"
+                  style={{}}
+                />
+              </div>
+              {newUsersCount !== null ? (
+                <h6 className="mt-2">
+                  New users created in the last 15 days: &nbsp;
+                  <b>{newUsersCount}</b>
+                </h6>
+              ) : (
+                <h6 className="mt-2">Error fetching data.</h6>
+              )}
             </div>
           </Col>
           {/* https://cdn-icons-png.flaticon.com/128/11533/11533705.png */}
-          <Col sm={12} md={6} lg={4} className="balanceCard1" >
-            <div >
-                <div style={{height:'50px', width:'50px', display:'flex', background:'rgb(223, 219, 251)', justifyContent:'center', alignItems:'center', marginTop:'-30px', borderRadius:'50%'}}>
-
-                <img src="https://cdn-icons-png.flaticon.com/128/4837/4837101.png" height='50px'  width='50px'  alt="user" style={{}}/>
-                </div>
-              <h6 className="mt-3">Total Users: &nbsp; <b style={{fontSize:'23px', lineHeight:'2px'}}>{count}</b> </h6>
+          <Col sm={12} md={6} lg={4} className="balanceCard1">
+            <div>
+              <div
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  display: "flex",
+                  background: "rgb(223, 219, 251)",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "-30px",
+                  borderRadius: "50%",
+                }}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/4837/4837101.png"
+                  height="50px"
+                  width="50px"
+                  alt="user"
+                  style={{}}
+                />
+              </div>
+              <h6 className="mt-3">
+                Total Users: &nbsp;{" "}
+                <b style={{ fontSize: "23px", lineHeight: "2px" }}>{count}</b>{" "}
+              </h6>
             </div>
           </Col>
-          <Col sm={12} md={6} lg={4} className="balanceCard1" >
-            <div >
-                <div style={{height:'50px', width:'50px', display:'flex', background:'rgb(220, 251, 219)', justifyContent:'center', alignItems:'center', marginTop:'-30px', borderRadius:'50%'}}>
-
-                <img src="https://cdn-icons-png.flaticon.com/128/9654/9654103.png" height='40px'  width='40px'  alt="user"/>
-                </div>
-              <h6 className="mt-3">Active Users: &nbsp; <b style={{fontSize:'20px'}}>{activeUserCount}</b> </h6>
+          <Col sm={12} md={6} lg={4} className="balanceCard1">
+            <div>
+              <div
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  display: "flex",
+                  background: "rgb(220, 251, 219)",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "-30px",
+                  borderRadius: "50%",
+                }}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/9654/9654103.png"
+                  height="40px"
+                  width="40px"
+                  alt="user"
+                />
+              </div>
+              <h6 className="mt-3">
+                Active Users: &nbsp;{" "}
+                <b style={{ fontSize: "20px" }}>{activeUserCount}</b>{" "}
+              </h6>
             </div>
           </Col>
         </Row>
       </Container>
-
+     
       <h4 className="text-center text-primary">User Details</h4>
       <input
         type="text"
@@ -173,67 +228,67 @@ function UserData() {
         Search
       </button> */}
       <div className="table-responsive">
-      <table className="table table-bordered table-striped table-light">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Mobile No</th>
-            <th>Sponsor Id</th>
-            <th>User Id</th>
-            <th>Status</th>
-            <th>Activation Time</th>
-            <th>Action</th>
-            <th>Delete User</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <td>{index + 1}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.mobile}</td>
-              <td>{user.sponsorId}</td>
-              <td>{user.userId}</td>
-              <td>{user.is_active ? "Active" : "Deactive"}</td>
-              <td>
-                {user.activationTime
-                  ? new Date(user.activationTime).toLocaleString()
-                  : "Unknown"}
-              </td>
-              <td>
-                {user.is_active ? (
-                  <button
-                    className="btn btn-dark"
-                    onClick={() => handleDeactivate(user._id)}
-                  >
-                    Deactivate
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => handleActivate(user._id)}
-                  >
-                    Activate
-                  </button>
-                )}
-              </td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDeleteUser(user._id)}
-                >
-                  Delete user
-                </button>
-              </td>
+        <table className="table table-bordered table-striped table-light">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile No</th>
+              <th>Sponsor Id</th>
+              <th>User Id</th>
+              <th>Status</th>
+              <th>Activation Time</th>
+              <th>Action</th>
+              <th>Delete User</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.mobile}</td>
+                <td>{user.sponsorId}</td>
+                <td>{user.userId}</td>
+                <td>{user.is_active ? "Active" : "Deactive"}</td>
+                <td>
+                  {user.activationTime
+                    ? new Date(user.activationTime).toLocaleString()
+                    : "Unknown"}
+                </td>
+                <td>
+                  {user.is_active ? (
+                    <button
+                      className="btn btn-dark"
+                      onClick={() => handleDeactivate(user._id)}
+                    >
+                      Deactivate
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleActivate(user._id)}
+                    >
+                      Activate
+                    </button>
+                  )}
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteUser(user._id)}
+                  >
+                    Delete user
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      
+
       <nav aria-label="Page navigation">
         <ul
           className="pagination"

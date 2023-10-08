@@ -13,7 +13,7 @@ import { MdExpandMore } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
 import ContactForm from "../pages/ContactUs";
 const Home = () => {
- 
+ const token = localStorage.getItem("token");
 
   return (
     <>
@@ -80,9 +80,14 @@ const Home = () => {
                     <hr />{" "}
                   </div>
                   <li className="nav-item">
-                    <a className="nav-link " href="/login">
+                    {token ?(<a className="nav-link " href="/dashboard">
+                      Dashboard
+                    </a>):(
+                      <a className="nav-link " href="/login">
                       Login
                     </a>
+                    )}
+                    
                   </li>{" "}
                   <div className="horizontal">
                     {" "}
