@@ -129,6 +129,7 @@ function  GameDeposit() {
               <th>Name</th>
               <th>UserId</th>
               <th>Amount</th>
+              <th>UTR</th>
               <th>Status</th>
               
             </tr>
@@ -139,6 +140,7 @@ function  GameDeposit() {
                 <td>{item.name}</td>
                 <td>{item.userId}</td>
                 <td>{item.amount}</td>
+                <td>{item.UTR}</td>
                 <td> <Button onClick={()=>handleApprove(item._id, item.amount)} className="ms-1">{item.approved}</Button></td>
                 {/* Add more table data cells as needed */}
               </tr>
