@@ -25,13 +25,13 @@ const UserWallet = () => {
     const expireTime = getTokenExpireTime();
     return expireTime ? expireTime < Date.now() : true;
   };
-//   useEffect(() => {
-//     if (isTokenExpired()) {
-//       setIsTokenValid(false);
-//       // redirect to homepage
-//       window.location.href = "/login";
-//     }
-//   }, []);
+  useEffect(() => {
+    if (isTokenExpired()) {
+      setIsTokenValid(false);
+      // redirect to homepage
+      window.location.href = "/login";
+    }
+  }, []);
   const handleWalletSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -83,10 +83,10 @@ const UserWallet = () => {
   };
   return (
     <div style={{backgroundColor:'#fbffde'}}>
-      {/* {isTokenValid ? 
-      ( */}
-      <NavbarComponent/>
-        <div >
+      {isTokenValid ? 
+      (
+          <div >
+            <NavbarComponent/>
           <Container>
             <div className="form_container pt-5">
               <form>
@@ -223,9 +223,9 @@ const UserWallet = () => {
         </div>
       </Container>
         </div>
-      {/* ) : (
+      ) : (
         <></>
-      )} */}
+      )}
     </div>
   );
 };
