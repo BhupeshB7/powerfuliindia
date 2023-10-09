@@ -33,6 +33,7 @@ import AdminTask from './components/Admin/AdminTask';
 import NewGame from './pages/NewGame';
 import GameDeposit from './components/Admin/GameDeposit';
 import SpinGame from './pages/SpinGame';
+import UserWallet from './components/Admin/UserWallet';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
           {/* <Route  path="/admin/dashboard" element={<AdminDashboard/>} /> */}
           <Route  path="/admin/dashboard" element={<DashboardAdmin/>} />
           <Route  path="/admin/dashboard/game" element={<GameDeposit/>} />
+          <Route  path="/admin/dashboard/userAccount" element={<UserWallet/>} />
           {/* <Route path="/admin/dashboard" component={AdminDashboard} /> */}
           <Route path="/task/deposit" element={<AdminTask/>} />
            {/* Profile Route */}

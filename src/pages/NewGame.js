@@ -199,6 +199,7 @@ import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import welcome from '../assets/gameWelcome.png'
 import spinner from '../assets/spinner2.gif'
+import QRCODE from "../assets/QRCODE2.jpg";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -238,6 +239,7 @@ const NewGame = () => {
     userId: "",
     name: "",
     amount: "",
+    UTR:"",
   });
   const [formData1, setFormData1] = useState({
     userId: "",
@@ -1077,7 +1079,23 @@ const NewGame = () => {
                 />
               </div>
               <div className="modal-body">
-                <h6 className="text-info">UPI: xxxxxxxx@paytm</h6>
+              <div
+                    className="image"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <img
+                      src={QRCODE}
+                      height="200px"
+                      width="200px"
+                      alt=""
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        border: "1px solid black",
+                      }}
+                    />
+                  </div>
+                <h6 className="text-info">UPI:kumaromprakashhdhdksks@axl</h6>
                 <form onSubmit={handleSubmit} className="deposit_Form">
                   <label>UserId:</label>
                   <input
@@ -1104,6 +1122,15 @@ const NewGame = () => {
                     name="amount"
                     placeholder="Amount"
                     value={formData.amount}
+                    onChange={handleChange}
+                    required
+                  />
+                  <label>UTR:</label>
+                  <input
+                    type="text"
+                    name="UTR"
+                    placeholder="UTR"
+                    value={formData.UTR}
                     onChange={handleChange}
                     required
                   />

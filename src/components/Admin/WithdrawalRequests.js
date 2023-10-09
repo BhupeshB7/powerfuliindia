@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 
 function  WithdrawalRequests() {
   const [withdrawalRequests, setWithdrawalRequests] = useState([]);
@@ -8,34 +7,7 @@ function  WithdrawalRequests() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [transaction, setTransaction] = useState("");
-  const [userId, setUserId] = useState('');
-  const [balance, setBalance] = useState('');
-  const [income, setIncome] = useState('');
-  const [selfIncome, setSelfIncome] = useState('');
-  const [teamIncome, setTeamIncome] = useState('');
-  const [withdrawal, setWithdrawal] = useState('');
-  const [rewards, setRewards] = useState('');
-  const handleWalletSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "https://mlm-production.up.railway.app/api/users/userWalletUpdating/",
-        {
-          userId,
-          balance,
-          income,
-          selfIncome,
-          teamIncome,
-          withdrawal,
-          rewards,
-        }
-      );
-      // console.log(response.data); // User wallet updated successfully
-      alert("Wallet updated successfully!");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   useEffect(() => {
     // Fetch data from your backend API with pagination and search
     fetch(
@@ -84,78 +56,7 @@ function  WithdrawalRequests() {
   };
   return (
     <div>
-       <Container>
-        <div className="form_container">
-          <form>
-            <h6 className="mt-3 text-primary">Update Wallet</h6>
-            <div className="formInput">
-              <label> User Id must required! for update wallet.</label>
-              {/* <label> User ID:</label> */}
-              <input
-                type="text"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-                placeholder="User ID"
-              />
-              {/* <label> Balance: </label> */}
-              <input
-                type="text"
-                value={balance}
-                onChange={(e) => setBalance(e.target.value)}
-                placeholder="Balance"
-              />
-
-              {/* <label> Income: </label> */}
-              <input
-                type="text"
-                value={income}
-                onChange={(e) => setIncome(e.target.value)}
-                placeholder="income"
-              />
-
-              {/* <label>Self Income: </label> */}
-              <input
-                type="text"
-                value={selfIncome}
-                onChange={(e) => setSelfIncome(e.target.value)}
-                placeholder="Self income"
-              />
-
-              {/* <label> Team Income: </label> */}
-              <input
-                type="text"
-                value={teamIncome}
-                onChange={(e) => setTeamIncome(e.target.value)}
-                placeholder="Team Income"
-              />
-
-              {/* <label>Withdrawal: </label> */}
-              <input
-                type="text"
-                value={withdrawal}
-                onChange={(e) => setWithdrawal(e.target.value)}
-                placeholder="Withdrawal"
-              />
-
-              {/* <label>Rewards:</label> */}
-              <input
-                type="text"
-                value={rewards}
-                onChange={(e) => setRewards(e.target.value)}
-                placeholder="Rewards"
-              />
-
-              <button
-                type="submit"
-                className="mb-3 btn btn-danger"
-                onClick={handleWalletSubmit}
-              >
-                Update User Wallet
-              </button>
-            </div>
-          </form>
-        </div>
-      </Container>
+     
       <h6 className="text-center text-secondary">Withdrawal Requests</h6>
       <input
         type="text"

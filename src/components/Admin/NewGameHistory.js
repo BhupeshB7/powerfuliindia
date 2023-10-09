@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -21,7 +22,26 @@ const GameHistory = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
+  const handleApprove = async (id) => {
+    const alreadyApprovedItem = gameHistory.find(item => item._id === id && item.approved === "Approved");
+  
+  if (alreadyApprovedItem) {
+    alert("Already approved!");
+    return;
+  }
+    try {
+      const response = await axios.put(`https://mlm-production.up.railway.app/api/withdrawal/approve/${id}`,);
+      alert(response.data.message);
+       // Update the status in the gameHistory array
+       const updatedGameHistory = gameHistory.map((item) =>
+       item._id === id ? { ...item, approved: "Approved" } : item
+     );
+     // Set the updated gameHistory in the state
+     setGameHistory(updatedGameHistory);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
   return (
     <div>
       <h4>Withdrawal History</h4>
@@ -45,7 +65,7 @@ const GameHistory = () => {
                   <td>{item.userId}</td>
                   <td>{item.amount}</td>
                   <td>{item.UPI}</td>
-                  <td> <Button variant="warning" className="ms-1">{item.approved}</Button></td>
+                  <td> <Button variant="warning" className="ms-1" onClick={()=>handleApprove(item._id)}>{item.approved}</Button></td>
                   {/* Add more table data cells as needed */}
                 </tr>
               ))}
