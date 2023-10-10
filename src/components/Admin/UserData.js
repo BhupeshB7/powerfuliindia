@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
-const itemsPerPage = 5; // Number of items to display per page
+const itemsPerPage = 20; // Number of items to display per page
 
 function UserData() {
   const [users, setUsers] = useState([]);
@@ -117,9 +117,9 @@ function UserData() {
     );
     setUsers(users.filter((user) => user._id !== id));
   };
- 
+
   return (
-    <div className="container-fluid" style={{backgroundColor:'#fbffde'}}>
+    <div className="container-fluid" style={{ backgroundColor: "#fbffde" }}>
       <Container>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
@@ -212,7 +212,7 @@ function UserData() {
           </Col>
         </Row>
       </Container>
-     
+
       <h4 className="text-center text-primary">User Details</h4>
       <input
         type="text"
@@ -288,28 +288,35 @@ function UserData() {
           </tbody>
         </table>
       </div>
-
-      <nav aria-label="Page navigation">
-        <ul
-          className="pagination"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          {Array.from({ length: totalPages }, (_, i) => (
-            <li
-              key={i}
-              className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
-            >
-              <Button
-                variant="outline-primary m-2"
-                className="page-link "
-                onClick={() => handlePageChange(i + 1)}
+      <Container>
+        <Row>
+          <Col sm={12}>
+            <nav aria-label="Page navigation">
+              <ul
+                className="pagination"
+                style={{ display: "flex", justifyContent: "center" }}
               >
-                {i + 1}
-              </Button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <li
+                    key={i}
+                    className={`page-item ${
+                      currentPage === i + 1 ? "active" : ""
+                    }`}
+                  >
+                    <Button
+                      variant="outline-primary m-2"
+                      className="page-link "
+                      onClick={() => handlePageChange(i + 1)}
+                    >
+                      {i + 1}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
