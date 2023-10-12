@@ -72,6 +72,7 @@ const PasswordReset = () => {
                 ) : (
                   ""
                 )}
+                <div className="password_Form">
                 <form style={{ maxWidth: "310px" }}>
                   <div >
                     <label
@@ -90,13 +91,15 @@ const PasswordReset = () => {
                     />
                   </div>
 
-                  <Button variant="outline-primary" className="m-2 p-4" onClick={sendLink}>
+                  <Button variant="outline-primary" className="m-2 p-2" onClick={sendLink}>
                     Send
                   </Button>
                   <p className="text-gray">
                     Note:- wait 10-15 seconds, for send Link.
                   </p>
                 </form>
+                </div>
+                
                 <ToastContainer />
               </div>
             </div>
