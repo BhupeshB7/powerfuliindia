@@ -54,8 +54,8 @@ const PasswordReset = () => {
       <Container>
         <Row>
           <Col sm={10} md={12} >
-            <div className="form_container mt-5">
-              <div className="form_data">
+            <div className="mt-5">
+              <div >
                 <div className="form_heading">
                   <h4
                     className="text-center mb-3"
@@ -72,7 +72,7 @@ const PasswordReset = () => {
                 ) : (
                   ""
                 )}
-                <form className="card" style={{ maxWidth: "310px" }}>
+                <form style={{ maxWidth: "310px" }}>
                   <div >
                     <label
                       htmlFor="email"
