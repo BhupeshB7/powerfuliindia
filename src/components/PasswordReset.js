@@ -73,7 +73,7 @@ const PasswordReset = () => {
                   ""
                 )}
                 <form style={{ maxWidth: "320px" }}>
-                  <div className="form_input">
+                  <div className="card">
                     <label
                       htmlFor="email"
                       style={{ fontSize: "17px", marginTop: "20px" }}
