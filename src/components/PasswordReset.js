@@ -91,7 +91,7 @@ const PasswordReset = () => {
                     />
                   </div>
 
-                  <Button variant="outline-primary" className="m-2 p-2" onClick={sendLink}>
+                  <Button variant="outline-primary" className="m-2 p-2" onClick={sendLink} style={{width:'200px'}}>
                     Send
                   </Button>
                   <p className="text-gray">
