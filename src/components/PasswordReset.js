@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 
 const PasswordReset = () => {
@@ -72,7 +72,7 @@ const PasswordReset = () => {
                 ) : (
                   ""
                 )}
-                <form style={{ maxWidth: "320px" }}>
+                <form style={{ maxWidth: "310px" }}>
                   <div className="card">
                     <label
                       htmlFor="email"
@@ -90,9 +90,9 @@ const PasswordReset = () => {
                     />
                   </div>
 
-                  <button className="form_button" onClick={sendLink}>
+                  <Button variant="outline-primary" onClick={sendLink}>
                     Send
-                  </button>
+                  </Button>
                   <p className="text-gray">
                     Note:- wait 10-15 seconds, for send Link.
                   </p>
