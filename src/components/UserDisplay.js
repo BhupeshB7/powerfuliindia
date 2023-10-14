@@ -2179,7 +2179,7 @@ const Dashboard = () => {
                                   userStatus === null ? (
                                     <p>Click the button to check status.</p>
                                   ) : (
-                                    <div className="d-flex justify-content-center align-items-center flex-row" style={{height:'200px', width:'250px'}} >
+                                    <div className="d-flex justify-content-center align-items-center flex-column" style={{height:'200px', width:'250px'}} >
                                       {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
