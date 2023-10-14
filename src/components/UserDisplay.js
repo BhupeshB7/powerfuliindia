@@ -679,6 +679,7 @@ const Dashboard = () => {
   const [copied, setCopied] = useState(false);
   const [userId, setUserId] = useState("");
   const [userStatus, setUserStatus] = useState(null);
+  const [showTopUpButton, setShowTopUpButton] = useState(false);
   const [topupButton, setTopupButton] = useState(true);
   const [topUpAmount, setTopUpAmount] = useState("");
   const [isApproved, setIsApproved] = useState(false);
@@ -967,12 +968,12 @@ const Dashboard = () => {
       } else {
         // setUserStatus(data.status);
         // setUserStatus(data.name + " is " + (data.status));
+        setShowTopUpButton(data.status === false);
         if (data.status === true) {
           setUserStatus(data.name + " is Active");
-      } else {
+        } else {
           setUserStatus(data.name + " is Inactive");
-      }
-      
+        }
       }
     } catch (error) {
       console.error("Error:", error);
@@ -2020,7 +2021,7 @@ const Dashboard = () => {
                             </label>
                             {/* <input>value={data.ifscCode}</input> */}
                             <input type="text" value={data.ifscCode} disabled />
-                            
+
                             <label style={{ fontSize: "17px" }}>
                               Account Holder Name:
                             </label>
@@ -2174,42 +2175,34 @@ const Dashboard = () => {
                                 className="content-para d-flex"
                                 style={{ justifyContent: "center" }}
                               >
-                                {userStatus === null ? (
-                                  <p>Click the button to check status.</p>
-                                ) :(
-                                  <>
-                                  {/* <p className="text-danger">
+                                {
+                                  userStatus === null ? (
+                                    <p>Click the button to check status.</p>
+                                  ) : (
+                                    <>
+                                      {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
-                                  <h5 className="text-primary text-center fw-bold">
-                                    {userStatus}
-                                  </h5> <br/>
-                                  {data.status === true ?(
-                                    
-                                      <>
-                                      {alert(data.status)}
-                                      Nothing</>
-                                  ):(<>
-                                   {alert(data.status)}
-                                   {alert(data.name)}
-                                  <button
-                                    className="form_button topUp_button1"
-                                    style={{ width: "300px" }}
-                                    onClick={handleActivateUser}
-                                  >
-                                    TopUp Now
-                                  </button></>)}
-                                  </>
-                                )
-                                //  : (
-                                //   <button
-                                //     className="form_button topUp_button1"
-                                //     style={{ width: "300px" }}
-                                //     onClick={handleActivateUser}
-                                //   >
-                                //     TopUp Now
-                                //   </button>
-                                // )
+                                      <h6 className="text-success text-center fw-bold">
+                                        {userStatus}
+                                      </h6>{" "}
+                                      <br />  &nbsp;&nbsp;&nbsp;&nbsp;
+                                      {showTopUpButton ? (
+                                        <button>TopUp</button>
+                                      ) : (
+                                        <button>Remove</button>
+                                      )}
+                                    </>
+                                  )
+                                  //  : (
+                                  //   <button
+                                  //     className="form_button topUp_button1"
+                                  //     style={{ width: "300px" }}
+                                  //     onClick={handleActivateUser}
+                                  //   >
+                                  //     TopUp Now
+                                  //   </button>
+                                  // )
                                 }
                                 <div></div>
                               </div>
