@@ -2177,11 +2177,8 @@ const Dashboard = () => {
                                     <p>Click the button to check status.</p>
                                   ) : (
                                     <div
-                                      className="d-flex justify-content-center align-items-center flex-column"
-                                      style={{
-                                        height: "150px",
-                                        width: "250px",
-                                      }}
+                                      className="topUPContent"
+                                     
                                     >
                                       {/* <p className="text-danger">
                                     User Already Activated!.
@@ -2191,7 +2188,7 @@ const Dashboard = () => {
                                       </h6>{" "}
                                       {showTopUpButton ? (
                                         <>
-                                          &nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                                         
                                           <button
                                             className="form_button topUp_button1"
                                             style={{ width: "300px" }}
