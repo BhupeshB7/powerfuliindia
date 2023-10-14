@@ -966,7 +966,7 @@ const Dashboard = () => {
         setTopupButton(true);
       } else {
         // setUserStatus(data.status);
-        setUserStatus(data.name + " is " + (data.is_active ? "Active" : "Inactive"));
+        setUserStatus(data.name + " is " + (data.status));
       }
     } catch (error) {
       console.error("Error:", error);
@@ -1778,7 +1778,7 @@ const Dashboard = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog ">
-                  <div className="modal-content bg-success">
+                  <div className="modal-content bg-dark">
                     <div className="modal-header">
                       <h5
                         className="modal-title text-warning"
@@ -1796,7 +1796,7 @@ const Dashboard = () => {
                     <div className="modal-body" style={{ overflowX: "auto" }}>
                       <table className="table table-bordered">
                         <thead className="fw-300">
-                          <tr>
+                          <tr className="text-light">
                             <th>S.No</th>
                             <th>Level</th>
                             <th>Active</th>
