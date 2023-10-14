@@ -2179,7 +2179,7 @@ const Dashboard = () => {
                                   userStatus === null ? (
                                     <p>Click the button to check status.</p>
                                   ) : (
-                                    <>
+                                    <div className="d-flex justify-content-center align-items-center" >
                                       {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
@@ -2188,11 +2188,18 @@ const Dashboard = () => {
                                       </h6>{" "}
                                       <br />  &nbsp;&nbsp;&nbsp;&nbsp;
                                       {showTopUpButton ? (
-                                        <button>TopUp</button>
+
+                                          <button
+                                      className="form_button topUp_button1"
+                                      style={{ width: "300px" }}
+                                      onClick={handleActivateUser}
+                                    >
+                                      TopUp Now
+                                    </button>
                                       ) : (
-                                        <button>Remove</button>
+                                        <></>
                                       )}
-                                    </>
+                                    </div>
                                   )
                                   //  : (
                                   //   <button
