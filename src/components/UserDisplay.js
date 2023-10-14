@@ -2183,8 +2183,8 @@ const Dashboard = () => {
                                   </p> */}
                                   <h6 className="text-success fw-bold">
                                     {userStatus}
-                                  </h6>
-                                  {!data.status && (
+                                  </h6> <br/>
+                                  {!data.status ?(
                                       <button
                                     className="form_button topUp_button1"
                                     style={{ width: "300px" }}
@@ -2192,7 +2192,7 @@ const Dashboard = () => {
                                   >
                                     TopUp Now
                                   </button>
-                                  )}
+                                  ):(<>dfghj</>)}
                                   </>
                                 )
                                 //  : (
