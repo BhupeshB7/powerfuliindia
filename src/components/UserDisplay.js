@@ -966,7 +966,13 @@ const Dashboard = () => {
         setTopupButton(true);
       } else {
         // setUserStatus(data.status);
-        setUserStatus(data.name + " is " + (data.status));
+        // setUserStatus(data.name + " is " + (data.status));
+        if (data.status === true) {
+          setUserStatus(data.name + " is Active");
+      } else {
+          setUserStatus(data.name + " is Inactive");
+      }
+      
       }
     } catch (error) {
       console.error("Error:", error);
@@ -2170,7 +2176,7 @@ const Dashboard = () => {
                               >
                                 {userStatus === null ? (
                                   <p>Click the button to check status.</p>
-                                ) : userStatus ? (
+                                ) :(
                                   <>
                                   {/* <p className="text-danger">
                                     User Already Activated!.
@@ -2178,16 +2184,27 @@ const Dashboard = () => {
                                   <h6 className="text-success fw-bold">
                                     {userStatus}
                                   </h6>
-                                  </>
-                                ) : (
-                                  <button
+                                  {!data.status && (
+                                      <button
                                     className="form_button topUp_button1"
                                     style={{ width: "300px" }}
                                     onClick={handleActivateUser}
                                   >
                                     TopUp Now
                                   </button>
-                                )}
+                                  )}
+                                  </>
+                                )
+                                //  : (
+                                //   <button
+                                //     className="form_button topUp_button1"
+                                //     style={{ width: "300px" }}
+                                //     onClick={handleActivateUser}
+                                //   >
+                                //     TopUp Now
+                                //   </button>
+                                // )
+                                }
                                 <div></div>
                               </div>
                             </div>
