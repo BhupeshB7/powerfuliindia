@@ -965,7 +965,8 @@ const Dashboard = () => {
         setUserStatus(null);
         setTopupButton(true);
       } else {
-        setUserStatus(data.status);
+        // setUserStatus(data.status);
+        setUserStatus(data.name + " is " + (data.is_active ? "Active" : "Inactive"));
       }
     } catch (error) {
       console.error("Error:", error);
@@ -2170,9 +2171,14 @@ const Dashboard = () => {
                                 {userStatus === null ? (
                                   <p>Click the button to check status.</p>
                                 ) : userStatus ? (
-                                  <p className="text-danger">
+                                  <>
+                                  {/* <p className="text-danger">
                                     User Already Activated!.
-                                  </p>
+                                  </p> */}
+                                  <h6 className="text-success fw-bold">
+                                    {userStatus}
+                                  </h6>
+                                  </>
                                 ) : (
                                   <button
                                     className="form_button topUp_button1"
