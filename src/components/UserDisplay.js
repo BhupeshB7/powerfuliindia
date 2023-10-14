@@ -2181,12 +2181,17 @@ const Dashboard = () => {
                                   {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
-                                  <h6 className="text-success text-center fw-bold">
+                                  <h5 className="text-primary text-center fw-bold">
                                     {userStatus}
-                                  </h6> <br/>
+                                  </h5> <br/>
                                   {data.status === true ?(
-                                      <></>
+                                    
+                                      <>
+                                      {alert(data.status)}
+                                      Nothing</>
                                   ):(<>
+                                   {alert(data.status)}
+                                   {alert(data.name)}
                                   <button
                                     className="form_button topUp_button1"
                                     style={{ width: "300px" }}
