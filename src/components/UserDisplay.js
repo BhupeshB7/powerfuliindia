@@ -2181,18 +2181,19 @@ const Dashboard = () => {
                                   {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
-                                  <h6 className="text-success fw-bold">
+                                  <h6 className="text-success text-center fw-bold">
                                     {userStatus}
                                   </h6> <br/>
-                                  {!data.status ?(
-                                      <button
+                                  {data.status === true ?(
+                                      <></>
+                                  ):(<>
+                                  <button
                                     className="form_button topUp_button1"
                                     style={{ width: "300px" }}
                                     onClick={handleActivateUser}
                                   >
                                     TopUp Now
-                                  </button>
-                                  ):(<>dfghj</>)}
+                                  </button></>)}
                                   </>
                                 )
                                 //  : (
