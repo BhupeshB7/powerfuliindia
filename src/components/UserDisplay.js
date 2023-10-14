@@ -971,9 +971,8 @@ const Dashboard = () => {
         setShowTopUpButton(data.status === false);
         if (data.status === true) {
           setUserStatus("Name:" + data.name + "\nuserId is Active");
-
         } else {
-          setUserStatus("Name:" +data.name + "\n userId is Inactive");
+          setUserStatus("Name:" + data.name + "\n userId is Inactive");
         }
       }
     } catch (error) {
@@ -2172,30 +2171,35 @@ const Dashboard = () => {
                                   </button>
                                 )}
                               </div>
-                              <div
-                                className="content-para d-flex"
-                              >
+                              <div className="content-para d-flex">
                                 {
                                   userStatus === null ? (
                                     <p>Click the button to check status.</p>
                                   ) : (
-                                    <div className="d-flex justify-content-center align-items-center flex-column" style={{height:'200px', width:'250px'}} >
+                                    <div
+                                      className="d-flex justify-content-center align-items-center flex-column"
+                                      style={{
+                                        height: "150px",
+                                        width: "250px",
+                                      }}
+                                    >
                                       {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
                                       <h6 className="text-success text-center fw-bold">
                                         {userStatus}
                                       </h6>{" "}
-                                      <br />  &nbsp;&nbsp;&nbsp;&nbsp;
                                       {showTopUpButton ? (
-
+                                        <>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;{" "}
                                           <button
-                                      className="form_button topUp_button1"
-                                      style={{ width: "300px" }}
-                                      onClick={handleActivateUser}
-                                    >
-                                      TopUp Now
-                                    </button>
+                                            className="form_button topUp_button1"
+                                            style={{ width: "300px" }}
+                                            onClick={handleActivateUser}
+                                          >
+                                            TopUp Now
+                                          </button>
+                                        </>
                                       ) : (
                                         <></>
                                       )}
