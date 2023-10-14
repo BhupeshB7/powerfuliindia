@@ -970,9 +970,9 @@ const Dashboard = () => {
         // setUserStatus(data.name + " is " + (data.status));
         setShowTopUpButton(data.status === false);
         if (data.status === true) {
-          setUserStatus(data.name + " is Active");
+          setUserStatus(data.name + "'s userId is Active");
         } else {
-          setUserStatus(data.name + " is Inactive");
+          setUserStatus(data.name + "'s userId is Inactive");
         }
       }
     } catch (error) {
@@ -2179,7 +2179,7 @@ const Dashboard = () => {
                                   userStatus === null ? (
                                     <p>Click the button to check status.</p>
                                   ) : (
-                                    <div className="d-flex justify-content-center align-items-center" >
+                                    <div className="d-flex justify-content-center align-items-center" style={{height:'200px', width:'250px'}} >
                                       {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
