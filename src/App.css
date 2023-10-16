@@ -784,7 +784,8 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
   }
 }
 .colorbackGround {
-  background-image: url("https://img.freepik.com/free-vector/smooth-golden-wave-background_23-2148804707.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais");
+  /* background-image: url("https://img.freepik.com/free-vector/smooth-golden-wave-background_23-2148804707.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais"); */
+  background-image: url("https://img.freepik.com/free-vector/neon-lights-background-theme_52683-44625.jpg?w=996&t=st=1697444236~exp=1697444836~hmac=3c95d83d49b494cd252e0f15b10f3ef594cd76a1b1339f4d2df1bb5c46c50632");
   /* background-repeat: no-repeat; */
   background-size: contain;
 }
