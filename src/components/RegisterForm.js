@@ -28,6 +28,8 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [sponsorId, setSponsorId] = useState("");
+  const [sponsorName, setSponsorName] = useState("");
+
   // const [emailId, setEmailId] = useState('');
   const [errors, setErrors] = useState("");
   //show password
@@ -62,6 +64,22 @@ const RegisterForm = () => {
   //   }
   // }, [location.search]);
   // Get the ref parameter from the URL
+
+  const fetchSponsorName = async () => {
+    try {
+      const sponsorResponse = await axios.get(
+        `https://mlm-production.up.railway.app/api/users/getSponsorName/${formData.sponsorId}`
+        // `https://mlm-production.up.railway.app/api/users/getSponsorName/${formData.sponsorId}`
+      );
+      setSponsorName(sponsorResponse.data.name);
+      // alert(sponsorName);
+    } catch (error) {
+      // Handle any errors when fetching the sponsor's name
+      console.error("Error fetching sponsor name:", error);
+      setSponsorName(""); // Clear the sponsor name on error
+    }
+  };
+
   const searchParams = new URLSearchParams(window.location.search);
   const ref = searchParams.get("ref");
 
@@ -107,7 +125,14 @@ const RegisterForm = () => {
   return (
     <>
       {!userId ? (
-        <div className="form_container" style={{ backgroundImage: "url('https://bhupeshb7-portfolio.netlify.app/static/media/BG.bea8eb4418bfdd2f52d9.webp')", backgroundSize:'cover',}}>
+        <div
+          className="form_container"
+          style={{
+            backgroundImage:
+              "url('https://bhupeshb7-portfolio.netlify.app/static/media/BG.bea8eb4418bfdd2f52d9.webp')",
+            backgroundSize: "cover",
+          }}
+        >
           <div className="form_data">
             <form className="register_img mt-3" onSubmit={handleSubmit}>
               <div className="formInput">
@@ -229,7 +254,7 @@ const RegisterForm = () => {
                   <label htmlFor="sponsorId" className="form-label">
                     Sponsor ID
                   </label>
-                  <input
+                  {/* <input
                     type="text"
                     id="sponsorId"
                     name="sponsorId"
@@ -242,8 +267,32 @@ const RegisterForm = () => {
                     required={!location.search}
                     readOnly={location.search ? true : false}
                     defaultValue={location.search.substring(1)}
+                  /> */}
+
+                  <input
+                    type="text"
+                    id="sponsorId"
+                    name="sponsorId"
+                    placeholder="Enter Sponsor ID"
+                    className={`form-input ${
+                      errors.sponsorId ? "is-invalid" : ""
+                    }`}
+                    value={formData.sponsorId}
+                    onChange={handleChange}
+                    required={!location.search}
+                    onBlur={() => {
+                      handleFocus();
+                      fetchSponsorName(); // Fetch sponsor name when input loses focus
+                    }}
+                    readOnly={location.search ? true : false}
+                    defaultValue={location.search.substring(1)}
                   />
                 </div>
+                {sponsorName ? (
+                  <div className="sponsor-name">
+                    Sponsor Name: {sponsorName}
+                  </div>
+                ):(<div className="text-center text-danger">Sponsor Name Not Found</div>)}
                 <div className="captcha">
                   {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
                 </div>
@@ -255,6 +304,7 @@ const RegisterForm = () => {
                     backgroundImage:
                       "linear-gradient(to right, #000428  0%,  #004e92 100%)",
                   }}
+                  disabled={!sponsorName} 
                 >
                   {isSubmitting ? "processing..." : "Register"}
                 </button>
@@ -266,8 +316,7 @@ const RegisterForm = () => {
                   <b style={{ textDecoration: "underline" }}>Login</b>
                 </Link>
               </div>
-              <div style={{height:'50px'}}>
-              </div>
+              <div style={{ height: "50px" }}></div>
             </form>
             <ToastContainer />
             {/* {userId && (
