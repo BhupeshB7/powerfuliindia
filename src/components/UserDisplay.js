@@ -1189,9 +1189,24 @@ const Dashboard = () => {
     "Royal Star",
     "Diamond",
   ];
-  let activationTime = "Unknown";
+  // let activationTime = "Unknown";
 
+  // if (data.activationTime) {
+  //   activationTime = new Date(data.activationTime).toLocaleString("en-IN", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "2-digit",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   });
+  // }
+  let activationTime = "Unknown";
+  let reactivationTime = "Unknown";
+  let daysLeftForReactivation = "Unknown";
+  
   if (data.activationTime) {
+    // Calculate the activation time
     activationTime = new Date(data.activationTime).toLocaleString("en-IN", {
       year: "numeric",
       month: "long",
@@ -1200,8 +1215,31 @@ const Dashboard = () => {
       minute: "2-digit",
       hour12: true,
     });
+  
+    // Calculate the reactivation time (1 year from activation time)
+    const oneYearFromActivation = new Date(data.activationTime);
+    oneYearFromActivation.setFullYear(oneYearFromActivation.getFullYear() + 1);
+    reactivationTime = oneYearFromActivation.toLocaleString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  
+    // Calculate the number of days left for reactivation
+    const currentDate = new Date();
+    const daysRemaining = Math.ceil(
+      (oneYearFromActivation - currentDate) / (1000 * 60 * 60 * 24)
+    );
+    if (daysRemaining > 0) {
+      daysLeftForReactivation = `Reactivate in ${daysRemaining} days`;
+    } else {
+      daysLeftForReactivation = `Account has been reactivated`;
+    }
   }
-
+  
   return (
     <div>
       {/* <div style={{ background: "#000428" }}> */}
@@ -1305,7 +1343,7 @@ const Dashboard = () => {
                             </a>
                           </div>
                           <li>
-                            <h6 className="text-info text-center mt-3">
+                            <h6 className="text-warning text-center mt-3">
                               {" "}
                               Hello, {data.name}
                             </h6>
@@ -1317,7 +1355,7 @@ const Dashboard = () => {
                                 <>
                                   <div>
                                     <Link to={"/admin/dashboard"}>
-                                      <h6 className="text-center">
+                                      <h6 className="text-center text-light" style={{textDecoration:'underline'}}>
                                         Admin Dashboard
                                       </h6>
                                     </Link>
@@ -1328,6 +1366,27 @@ const Dashboard = () => {
                               )}
                             </>
                           </li>
+                          <div
+                                className="notification-text"
+                                style={{ color: "cyan" }}
+                              >
+                          <img src="https://cdn-icons-png.flaticon.com/128/11243/11243068.png" height='30px' width='30px' alt="reactivation"/>
+                          
+                               
+                                &nbsp; &nbsp; Reactivation due on: <br/>
+                                {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
+                                &nbsp; &nbsp;&nbsp; &nbsp;
+                          <img src="https://cdn-icons-png.flaticon.com/128/556/556690.png" height='25px' width='25px' alt="reactivation"/>
+                                 {reactivationTime}
+                              </div>
+
+                              <div
+                                className="notification-text"
+                                style={{ color: "cyan", fontSize:'17px' }}
+                              ><br/>
+                                <img src="https://cdn-icons-png.flaticon.com/128/2268/2268536.png" height='30px' width='25px' alt="reactivation" style={{marginTop:'-15px'}}/>
+                                &nbsp; &nbsp;  {daysLeftForReactivation}
+                              </div>
                           <li>
                             <div className="notification-container">
                               {/* <IoNotificationsCircle style={{ color: 'yellow', backgroundColor: 'red', borderRadius: '50%' }} className="notification-icon" /> */}
@@ -1350,6 +1409,7 @@ const Dashboard = () => {
                                   : "unknown"} */}
                                 {activationTime}
                               </div>
+                              
                             </div>
                           </li>
                           <li className="nav-item">
@@ -2176,10 +2236,7 @@ const Dashboard = () => {
                                   userStatus === null ? (
                                     <p>Click the button to check status.</p>
                                   ) : (
-                                    <div
-                                      className="topUPContent"
-                                     
-                                    >
+                                    <div className="topUPContent">
                                       {/* <p className="text-danger">
                                     User Already Activated!.
                                   </p> */}
@@ -2188,7 +2245,6 @@ const Dashboard = () => {
                                       </h6>{" "}
                                       {showTopUpButton ? (
                                         <>
-                                         
                                           <button
                                             className="form_button topUp_button1"
                                             style={{ width: "300px" }}

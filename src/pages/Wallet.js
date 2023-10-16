@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import spinner from "../assets/spinner2.gif";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import TransferForm from "./TransferForm";
 function Setting() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -138,7 +139,9 @@ function Setting() {
                 </div>
               </div>
             </div>
-
+            <Container>
+              <TransferForm sourceUserId={data.userId}/>
+            </Container>
             <div className="bottom_section " style={{ marginTop: "100px" }}>
               <div
                 className="row  footer_row_content "

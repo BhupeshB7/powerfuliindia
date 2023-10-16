@@ -823,3 +823,23 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
   font-weight: 600;
   margin-top: 7px;
 }
+.transferWallet{
+  width: 100%;
+  height: 380px;
+  padding: 12px;
+  border-radius: 7px;
+  border: 1px solid #01b7ff;
+  box-shadow: 0 2px 4x rgba(0, 0, 0, 0.25);
+  
+}
+.transferWallet label, .transferWallet input{
+  color: #01b7ff !important;
+}
+.transferWallet input{
+  border: 1px solid #01b7ff !important;
+}
+.transferWallet input:active, .transferWallet input:hover, .transferWallet input:focus{
+  background: #0f1126;
+  border: 2px solid #107f7f !important;
+
+}
