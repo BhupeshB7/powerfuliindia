@@ -30,7 +30,7 @@ const TransferForm = ({ sourceUserId }) => {
       setAmount("");
       setMessage("");
       // Reload the page
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       // Display an error message if the transfer fails
       setMessage("");
@@ -38,7 +38,7 @@ const TransferForm = ({ sourceUserId }) => {
       // Reset the form
       setTargetUserId("");
       setAmount("");
-      setMessage("");
+      window.location.reload();
     }
   };
 
@@ -52,11 +52,11 @@ const TransferForm = ({ sourceUserId }) => {
         {error && <p style={{ color: "red" }}>{error}</p>}
         <form onSubmit={handleTransfer}>
           <div>
-            <label>Source User ID:</label>
+            <label>User ID:</label>
             <input type="text" value={sourceUserId} readOnly />
           </div>
           <div>
-            <label>Target User ID:</label>
+            <label>TransferAccount User ID:</label>
             <input
               type="text"
               value={targetUserId}
