@@ -98,7 +98,10 @@ const handleProfile = () =>{
 
           </div>
         </div>):(
-          <h3>Re login to continue...</h3>
+           <>
+           <h6 className="text-center text-secondary">Re login to continue...</h6>
+           <Link to="/login" className="text-center text-primary" style={{textDecoration:'underline'}}>Login</Link>
+           </>
         )}
     </div>
   );

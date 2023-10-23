@@ -1691,7 +1691,10 @@ const Dashboard = () => {
                   </div>
                 </div>
               ) : (
-                <h6 className="text-center">Re Login to continue...</h6>
+                <>
+                <h6 className="text-center text-secondary">Re login to continue...</h6>
+                <Link to="/login" className="text-center text-primary" style={{textDecoration:'underline'}}>Login</Link>
+                </>
               )}
 
               <div className="id-status" style={{ letterSpacing: "2px" }}>

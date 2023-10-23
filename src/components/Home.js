@@ -279,6 +279,40 @@ const Home = () => {
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div className="Faq" style={{ width: "90vw" }}>
+          
+        <Accordion>
+            <AccordionSummary
+              expandIcon={<MdExpandMore />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+              className="faqBody"
+              style={{ marginTop: "10px" }}
+            >
+              <Typography>How can I play the color prediction games?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+              To play the color prediction games, you need to create an account and deposit a certain amount. Once your account is funded, you can start predicting the colors and potentially win rewards based on your predictions.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+{/*  */}
+<Accordion>
+            <AccordionSummary
+              expandIcon={<MdExpandMore />}
+              aria-controls="panel1ab-content"
+              id="panel1ab-header"
+              style={{ marginTop: "10px" }}
+            >
+              <Typography>Is the gaming website safe and secure?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+              Yes, we prioritize the safety and security of our users. We use encryption to protect your personal and financial information, and we have measures in place to ensure fair gameplay.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          {/*  */}
           <Accordion>
             <AccordionSummary
               expandIcon={<MdExpandMore />}
@@ -320,7 +354,7 @@ const Home = () => {
               <Typography>Minimum withdrawal Amount.</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>500</Typography>
+              <Typography>First Withdrawal :200 <br/> Second Withdrawal :500 and, <br/> After then unlimited withdrawal above 800</Typography>
             </AccordionDetails>
           </Accordion>
           <Accordion>
@@ -374,7 +408,7 @@ const Home = () => {
                   </li>
                   {/* <li><a href="/contact">Careers</a></li> */}
                   <li>
-                    <a href="/contact">Contact us</a>
+                    <a href="#contact">Contact us</a>
                   </li>
                 </ul>
               </div>

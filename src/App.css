@@ -843,3 +843,32 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
   border: 2px solid #107f7f !important;
 
 }
+.contact-row{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.contact_input{
+  width: 100%;
+  min-width: 320px !important;
+}
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: none !important;
+  outline: 0;
+  box-shadow: none !important;
+}
+.faqBody{
+  border-radius: 20px !important;
+}
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root{
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  border: 1px solid #dad9d9 !important;
+  /* border-bottom: red !important; */
+  border-bottom: 1px solid #773fe7 !important;
+  color: #8064b6 !important;
+  /* background-color: #fcfaff !important; */
+}

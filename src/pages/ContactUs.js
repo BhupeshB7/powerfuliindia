@@ -75,7 +75,7 @@ function ContactForm() {
   };
 
   return (
-    <Container className="mb-4 " id='contact'>
+    <Container  id='contact'>
       <Row className="contact-row" style={{ marginTop: "20px" }}>
         <Col sm={12} md={6} lg={7} className="contact-section ">
           <Form onSubmit={handleSubmit} style={{minWidth:'100%'}}>
@@ -88,6 +88,7 @@ function ContactForm() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    className='contact_input'
                   />
                 </Form.Group>
               </div>
@@ -99,6 +100,7 @@ function ContactForm() {
                     value={email}
                     onChange={handleEmailChange}
                     required
+                    className='contact_input'
                   />
                 </Form.Group>
               </div>
@@ -111,10 +113,13 @@ function ContactForm() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     required
+                    className='contact_input'
                   />
                 </Form.Group>
                 {/* Similar structure for email and message */}
-                <Button variant="outline-primary" className='m-2 p-2 fw-bold' style={{width:'150px'}} type="submit">Send</Button>
+                <div className='d-flex m-auto'>
+                <Button variant="outline-primary" className='m-2 p-2'  style={{width:'150px'}} type="submit">Send</Button>
+                </div>
               </div>
             </div>
           </Form>

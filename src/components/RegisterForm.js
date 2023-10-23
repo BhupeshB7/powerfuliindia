@@ -79,7 +79,9 @@ const RegisterForm = () => {
       setSponsorName(""); // Clear the sponsor name on error
     }
   };
-
+  useEffect(()=>{
+fetchSponsorName();
+  },[])
   const searchParams = new URLSearchParams(window.location.search);
   const ref = searchParams.get("ref");
 
