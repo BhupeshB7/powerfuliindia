@@ -323,13 +323,17 @@ const RegisterForm = () => {
                     {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
                   </div>
 
-                  <button
+                  {/* <button
                     type="submit"
                     className="btn btn-success mt-2"
                     disabled={!sponsorName}
                   >
                     {isSubmitting ? "processing..." : "Register"}
-                  </button>
+                  </button> */}
+
+                  <button type="submit"  disabled={!sponsorName} className='btn text-light m-3' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
+      {isSubmitting? 'processing...':'LOGIN'}
+      </button>
                   <Link
                     style={{ color: "gray", marginBottom: "8px" }}
                     to={"/login"}
