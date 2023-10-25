@@ -64,10 +64,11 @@ const LoginForm = ({setToken}) => {
   return (
     <>
     <div >
-    <ParticleComponent />
+    {/* <ParticleComponent /> */}
     </div>
-    <div className="form_container">
-    {/* <div className="form_container" style={{ backgroundImage: "url('https://media.istockphoto.com/id/1347283792/photo/galaxy-outer-space-starry-sky-purple-red-abstract-star-pattern-futuristic-nebula-background.webp?b=1&s=170667a&w=0&k=20&c=8gMS2kDr8DELjwAnj-nB_jHvJRmolqgeFSf17_Ca6KI=')", backgroundSize:'cover'}}> */}
+    <div className="form_container" style={{ backgroundImage: "url('https://img.freepik.com/free-vector/website-login-page-template-design_1017-30785.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')",  backgroundRepeat:'no-repeat',
+            backgroundSize: '100% 100vh',
+            height: "95vh",}}>
       <div className="card12 login_Image">
         <div className='login_Image2'> 
          <div className="img"><img src={logo} height={"220px"} width={"220px"} alt="Logo" /></div>
@@ -101,6 +102,7 @@ const LoginForm = ({setToken}) => {
 
     </form>
       </div>
+      
    
     <ToastContainer/>
     </div>

@@ -543,7 +543,7 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right, #000428 0%, #004e92 100%);
+  background-image: linear-gradient(to right, #000428 0%, #591a19 100%);
   opacity: 0.7;
   border-radius: 50%;
 }
@@ -881,3 +881,6 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
 .search-icon:hover{
   padding: 3px;
 }
+/* .register label{
+  color: #1de2c4;
+} */

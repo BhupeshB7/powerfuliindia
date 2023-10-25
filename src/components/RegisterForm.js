@@ -80,9 +80,9 @@ const RegisterForm = () => {
       setSponsorName(""); // Clear the sponsor name on error
     }
   };
-  useEffect(()=>{
-fetchSponsorName();
-  },[])
+  useEffect(() => {
+    fetchSponsorName();
+  }, []);
   const searchParams = new URLSearchParams(window.location.search);
   const ref = searchParams.get("ref");
 
@@ -131,14 +131,16 @@ fetchSponsorName();
         <div
           className="form_container"
           style={{
-            backgroundImage:
-              {registerImage},
-            backgroundSize: "cover",
+            backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
+            //  backgroundImage: `url(${registerImage})`,
+            backgroundRepeat:'no-repeat',
+            backgroundSize: '100% 100vh',
+            height: "95vh",
           }}
         >
           <div className="form_data">
             <form className="register_img mt-3" onSubmit={handleSubmit}>
-              <div className="formInput">
+              <div className="formInput register">
                 <div className="form_section">
                   <div className="img">
                     <img
@@ -156,14 +158,14 @@ fetchSponsorName();
                         fontWeight: "normal",
                         marginTop: "16px",
                         marginBottom: "-15px",
-                        color: "gray",
+                        color: "green",
                       }}
                     >
                       Welcome
                     </div>{" "}
                     <hr />
                     <div
-                      className="body"
+                      className="body text-dark"
                       style={{ fontSize: "15px", marginTop: "-15px" }}
                     >
                       Register to continue
@@ -295,19 +297,19 @@ fetchSponsorName();
                   <div className="sponsor-name">
                     Sponsor Name: {sponsorName}
                   </div>
-                ):(<div className="text-center text-danger">Sponsor Name Not Found</div>)}
+                ) : (
+                  <div className="text-center text-danger">
+                    Sponsor Name Not Found
+                  </div>
+                )}
                 <div className="captcha">
                   {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
                 </div>
 
                 <button
                   type="submit"
-                  className=" form_button"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, #000428  0%,  #004e92 100%)",
-                  }}
-                  disabled={!sponsorName} 
+                  className="btn btn-success"
+                  disabled={!sponsorName}
                 >
                   {isSubmitting ? "processing..." : "Register"}
                 </button>
