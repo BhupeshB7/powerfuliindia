@@ -210,7 +210,7 @@ function Setting() {
       ) : (
         <>
         <h6 className="text-center text-secondary">Re login to continue...</h6>
-        <Link to="/login" className="text-center text-primary" style={{textDecoration:'underline'}}>Login</Link>
+        <Link to="/login"  style={{textDecoration:'underline'}}><p className="text-center text-primary">Login</p></Link>
         </>
       )}
     </div>

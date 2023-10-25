@@ -7,7 +7,38 @@ const TransferForm = ({ sourceUserId }) => {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [userName, setUserName] = useState("");
+  const [notFound, setNotFound] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const handleSearch = () => {
+    if (!targetUserId) {
+      setErrorMessage("Please enter a User ID.");
+      setUserName("");
+      setNotFound(false);
+      return;
+    }
+
+    axios
+      .get(
+        `https://mlm-production.up.railway.app/api/targetTransfer/name/${targetUserId}`
+      )
+      .then((response) => {
+        if (response.data.name) {
+          setUserName(response.data.name);
+          setNotFound(false);
+          setErrorMessage("");
+        } else {
+          setNotFound(true);
+          setErrorMessage("User not found");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setNotFound(true);
+        setErrorMessage("An error occurred while fetching user data.");
+      });
+  };
   const handleTransfer = async (e) => {
     e.preventDefault();
 
@@ -53,19 +84,48 @@ const TransferForm = ({ sourceUserId }) => {
         <form onSubmit={handleTransfer}>
           <div>
             <label>User ID:</label>
+            <br />
             <input type="text" value={sourceUserId} readOnly />
           </div>
           <div>
-            <label>TransferAccount User ID:</label>
-            <input
-              type="text"
-              value={targetUserId}
-              onChange={(e) => setTargetUserId(e.target.value)}
-              required
-            />
+            <label>TransferAccount User ID:</label> <br />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                type="text"
+                value={targetUserId}
+                onChange={(e) => setTargetUserId(e.target.value)}
+                required
+                className="target-user"
+              />
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/954/954591.png"
+                height="30px"
+                width="30px"
+                alt="search"
+                className="search-icon"
+                onClick={handleSearch}
+              />
+            </div>{" "}
           </div>
+          {errorMessage && <p>{errorMessage}</p>}
+          {!errorMessage && notFound ? (
+            <p>User not found</p>
+          ) : (
+            userName && (
+              <p className="text-center text-info">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/7641/7641727.png"
+                  height="30px"
+                  width="30px"
+                  alt="verified"
+                />{" "}
+                User Name: {userName}
+              </p>
+            )
+          )}
+
           <div>
-            <label>Transfer Amount:</label>
+            <label>Transfer Amount:</label> <br />
             <input
               type="number"
               value={amount}

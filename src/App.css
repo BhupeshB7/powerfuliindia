@@ -872,3 +872,12 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
   color: #8064b6 !important;
   /* background-color: #fcfaff !important; */
 }
+
+.search-icon{
+  margin-left: -33px;
+  padding: 4px;
+  cursor: pointer;
+}
+.search-icon:hover{
+  padding: 3px;
+}
