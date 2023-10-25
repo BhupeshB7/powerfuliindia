@@ -36,12 +36,15 @@ const TransferForm = ({ sourceUserId }) => {
       .catch((error) => {
         console.error(error);
         setNotFound(true);
-        setErrorMessage("An error occurred while fetching user data.");
+        setErrorMessage("User Not Found");
       });
   };
   const handleTransfer = async (e) => {
     e.preventDefault();
-
+    if (sourceUserId === targetUserId) {
+      setError("Please enter different user IDs. Both are the same user ID.");
+    return;
+    }
     try {
       // Send a request to the backend API
       const response = await axios.post(
