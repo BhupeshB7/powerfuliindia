@@ -310,7 +310,7 @@ const RegisterForm = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-success"
+                  className="btn btn-success mt-2"
                   disabled={!sponsorName}
                 >
                   {isSubmitting ? "processing..." : "Register"}
