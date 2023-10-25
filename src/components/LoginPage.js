@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Link } from 'react-router-dom';
-import ParticleComponent from './Task/ParticleComponent';
 
 const LoginForm = ({setToken}) => {
   const [userId, setUserId] = useState('');
@@ -63,28 +62,29 @@ const LoginForm = ({setToken}) => {
   };
   return (
     <>
-    <div >
-    {/* <ParticleComponent /> */}
-    </div>
-    <div className="form_container" style={{ backgroundImage: "url('https://img.freepik.com/free-vector/website-login-page-template-design_1017-30785.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')",  backgroundRepeat:'no-repeat',
-            backgroundSize: '100% 100vh',
-            height: "95vh",}}>
+    <div className='loginBG'
+    style={{ 
+      // backgroundImage: "url('https://assets-global.website-files.com/5a9423a3f702750001758d4f/64ddbcac254f68d3f78c983e_%20-%2012-p-500.jpg')",  backgroundRepeat:'no-repeat',
+    backgroundSize: '100% 100vh',
+   }}>
       <div className="card12 login_Image">
         <div className='login_Image2'> 
-         <div className="img"><img src={logo} height={"220px"} width={"220px"} alt="Logo" /></div>
+         <div className="img"><img src={logo} height={"140px"} width={"150px"} alt="Logo"/></div>
         </div>
+    <div className="form_container loginBG1" >
         {/* <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?size=626&ext=jpg&uid=R102726883&ga=GA1.2.1717175719.1670043102&semt=sph" alt="" /> */}
-      <form className='login_img' onSubmit={handleSubmit}>
-       <div className="formInput">
+      <form  onSubmit={handleSubmit}>
+       <div>
            
-      {error && <div className="error text-danger">{error}</div>}
-      <div className="form_input">
-      <label>UserId:</label>
-        <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} required/>
+      {error && <div className="error text-danger" style={{marginLeft:'10px'}}>{error}</div>}
+      <div className='loginInput'>
+      {/* <label>UserId:</label> */}
+      <img src='https://cdn-icons-png.flaticon.com/128/12515/12515987.png' height='30px' width='30px' alt='user' style={{marginLeft:'20px'}}/>
+        <input type="text" placeholder='Enter userID' value={userId} onChange={(e) => setUserId(e.target.value)} required/>
       </div>
-     <div className="form_input">
-     <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+     <div className='loginInput'>
+     <img src='https://cdn-icons-png.flaticon.com/128/11135/11135314.png' height='30px' width='30px' alt='password' style={{marginLeft:'20px'}}/>
+      <input type="password" placeholder='Enter Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
      </div>
     <div className="form_input">
     <ReCAPTCHA  style={{background:'transparent'}}
@@ -93,11 +93,12 @@ const LoginForm = ({setToken}) => {
             ref={captchaRef}
           />
     </div>
-      <button type="submit" className='form_button' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
+      <button type="submit" className='btn text-light m-3' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
       {isSubmitting? 'processing...':'LOGIN'}
       </button>
-      <Link to={'/register'}  style={{color:'#aaa'}} >Don't have an account yet? <a href='/register' style={{textDecoration:"underline", color:"gray"}}>SignUp</a> </Link>
-      <Link to={'/password-reset'} style={{marginBottom:'8px', color:'gray',}}> <b style={{textDecoration:'underline', fontWeight:'500'}}>Forgot Password</b> </Link>
+      <br/>
+      <Link to={'/register'}  style={{color:'#eee', marginLeft:'5px'}} >Don't have an account yet? <a href='/register' style={{textDecoration:"underline", color:"gray"}}>SignUp</a> </Link>
+      <Link to={'/password-reset'} style={{marginBottom:'8px', color:'#ddd', marginLeft:'8px'}}> <b style={{textDecoration:'underline', fontWeight:'500'}}>Forgot Password</b> </Link>
       </div>
 
     </form>
@@ -106,7 +107,7 @@ const LoginForm = ({setToken}) => {
    
     <ToastContainer/>
     </div>
-
+    </div>
     </>
   );
 };
