@@ -3,6 +3,7 @@ import axios from "axios";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 // import ReCAPTCHA from 'react-google-recaptcha';
 import logo from "../assets/PI1.png";
+import registerImage from "../assets/register.jpg";
 import congrats from "../assets/congrats.png";
 import "./LoginSuccess.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -131,7 +132,7 @@ fetchSponsorName();
           className="form_container"
           style={{
             backgroundImage:
-              "url('https://bhupeshb7-portfolio.netlify.app/static/media/BG.bea8eb4418bfdd2f52d9.webp')",
+              {registerImage},
             backgroundSize: "cover",
           }}
         >

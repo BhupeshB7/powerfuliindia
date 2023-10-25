@@ -72,8 +72,8 @@ function Profile() {
       {token ? (
         <div className="dashboard-profile-center">
           <div className="user-profile">
-            <Container className="p-1">
-            <div className="container" style={{ marginTop: "20px" }}>
+            <Container>
+            <div className="container table-responsive" style={{ marginTop: "20px" }}>
               <h5 className="text-center text-secondary">
                 Welcome, {data.name}
               </h5>
