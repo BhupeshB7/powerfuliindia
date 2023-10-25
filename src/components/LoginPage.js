@@ -87,18 +87,18 @@ const LoginForm = ({setToken}) => {
       <input type="password" placeholder='Enter Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
      </div>
     <div className="form_input">
-    <ReCAPTCHA  style={{background:'transparent'}}
+    <ReCAPTCHA  style={{background:'transparent', margin:'10px'}}
             sitekey="6LesDAkmAAAAANop2voHvPE_NCuh17wZf7J85ybm"
             onChange={handleCaptchaChange}
             ref={captchaRef}
           />
     </div>
-      <button type="submit" className='btn text-light m-3' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
+      <button type="submit" className='btn text-light m-2 mt-0' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03',}} >
       {isSubmitting? 'processing...':'LOGIN'}
       </button>
       <br/>
-      <Link to={'/register'}  style={{color:'#eee', marginLeft:'5px'}} >Don't have an account yet? <a href='/register' style={{textDecoration:"underline", color:"gray"}}>SignUp</a> </Link>
-      <Link to={'/password-reset'} style={{marginBottom:'8px', color:'#ddd', marginLeft:'8px'}}> <b style={{textDecoration:'underline', fontWeight:'500'}}>Forgot Password</b> </Link>
+      <Link to={'/register'}  style={{color:'#eee', marginLeft:'8px'}} >Don't have an account yet? <a href='/register' style={{textDecoration:"underline", color:"gray"}}>SignUp</a> </Link>
+      <Link to={'/password-reset'} style={{marginBottom:'10px', color:'#ddd', marginLeft:'8px'}}> <b style={{textDecoration:'underline', fontWeight:'500'}}>Forgot Password</b> </Link>
       </div>
 
     </form>
