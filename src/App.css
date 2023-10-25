@@ -75,21 +75,25 @@ h1 {
   display: flex;
   flex-direction: column;
 }
+.password_input-container{
+  /* position: relative;
+  width: 100%; */
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  width: 100%;
+  flex-direction: row;
+}
 .password_input-container input {
-  position: relative;
   width: 100%;
 }
 .password-button {
-  display: inline-block;
   margin-top: 10px;
   border: none;
-  /* left: 56%; */
-  left: 80%;
-  font-size: 21px;
-  z-index: 1000;
   background: transparent;
-  position: absolute;
-  color: #1e7845;
+  color: #061934;
+  height: 45px;
+  margin-left: -40px;
 }
 .formInput {
   display: flex;
@@ -884,3 +888,7 @@ background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, F
 /* .register label{
   color: #1de2c4;
 } */
+.Register_Container{
+  background-color: #2884b8;
+background-image: linear-gradient(315deg, #2884b8 0%, #d1bad2 74%);
+}
