@@ -44,7 +44,7 @@ const PasswordReset = () => {
         // toast.error("Invalid User",{
         //     position: "top-center"
         // })
-        alert("Invalid User or User Does not Exists");
+        alert("Email not Found , Please check your email address😔");
       }
     }
   };
