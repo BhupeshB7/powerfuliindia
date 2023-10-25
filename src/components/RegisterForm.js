@@ -222,7 +222,7 @@ const RegisterForm = () => {
                       // required
                       onBlur={handleFocus}
                       focused={focused.toString()}
-                      pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+                      // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
                     />
                     <button
                       className="password-button"
@@ -231,8 +231,10 @@ const RegisterForm = () => {
                       {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
                     </button>
                     <span>
-                      Password must contain 1 Capital, 1 Small letter, 1number
-                      and 1 special character.
+                      {/* Password must contain 1 Capital, 1 Small letter, 1number
+
+                      and 1 special character. */}
+                      Enter Password
                     </span>
                   </div>
                 </div>
