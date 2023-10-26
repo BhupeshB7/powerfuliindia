@@ -126,6 +126,12 @@ textarea:hover {
   border-bottom: 2.2px solid #1d3f72;
   border: 2px solid #1d3f72;
 }
+.register input{
+  border: 2px solid #0a1a32;
+}
+.register label, .register input::placeholder{
+  color: rgb(2, 10, 10);
+}
 .input:active,
 input:focus,
 textarea:active,

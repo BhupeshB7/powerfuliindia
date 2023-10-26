@@ -132,7 +132,7 @@ const RegisterForm = () => {
       {!userId ? (
         <div className="Register_Container"
         style={{
-          backgroundImage:'linear-gradient(325deg, #fce055 1%, #46237a  70%, #256eff 100%)',
+          backgroundImage:'linear-gradient(329deg, #fce055 10%, #46237a  75%, #256eff 100%)',
           height: "100vh",
         }}>
 
