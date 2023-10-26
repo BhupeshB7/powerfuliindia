@@ -114,6 +114,7 @@ const RegisterForm = () => {
       setIsSubmitting(false);
       alert("User Registered SucceccFully!");
     } catch (error) {
+      
       if (error.response && error.response.status === 400) {
         toast.error("Email or mobile number already in use.");
       } else if (error.response && error.response.status === 404) {
@@ -122,6 +123,7 @@ const RegisterForm = () => {
         setErrors("An error occurred. Please try again later.");
         toast.error("An error occurred. Please try again later.");
       }
+      setIsSubmitting(false);
     }
   };
 
@@ -332,7 +334,7 @@ const RegisterForm = () => {
                   </button> */}
 
                   <button type="submit"  disabled={!sponsorName} className='btn text-light m-3' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
-      {isSubmitting? 'processing...':'LOGIN'}
+      {isSubmitting? 'processing...':'Register'}
       </button>
                   <Link
                     style={{ color: "gray", marginBottom: "8px" }}
