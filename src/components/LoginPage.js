@@ -140,7 +140,7 @@ const LoginForm = ({ setToken }) => {
                   }}
                 >
                   {isSubmitting ? (
-                    <img src={spinner2} alt="Loading" />
+                    <img src={spinner2} height='30px' width='30px' alt="Loading" />
                   ) : (
                     "LOGIN"
                   )}
