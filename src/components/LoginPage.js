@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Link } from 'react-router-dom';
-
+import spinner2 from '../assets/spinner2.gif'
 const LoginForm = ({setToken}) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -52,6 +52,7 @@ const LoginForm = ({setToken}) => {
     catch (error) {
       setError(error.message);
       alert(error.message)
+      setIsSubmitting(false);
     }
 
     
@@ -94,7 +95,7 @@ const LoginForm = ({setToken}) => {
           />
     </div>
       <button type="submit" className='btn text-light m-2 mt-0' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03',}} >
-      {isSubmitting? 'processing...':'LOGIN'}
+      {isSubmitting? {spinner2}:'LOGIN'}
       </button>
       <br/>
       <Link to={'/register'}  style={{color:'#eee', marginLeft:'8px'}} >Don't have an account yet? <a href='/register' style={{textDecoration:"underline", color:"gray"}}>SignUp</a> </Link>
