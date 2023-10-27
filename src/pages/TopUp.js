@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Pagination, Container, Button } from "react-bootstrap";
+import { Table, Container, Button } from "react-bootstrap";
 import spinner from "../assets/spinner2.gif";
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function Topup() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-production.up.railway.app/api/users/profile",
+        "https://mlm-production.up.railway.appp/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,13 +34,15 @@ function Topup() {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
         const response = await  axios
         .get(
-          `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
+          // `http://localhost:5000/api/topupHistory/${userId}`
+         `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
         )
         const { topUpdata, currentPage, totalPages } = response.data;
-
+      console.log(topUpdata);
         settopUpData(topUpdata);
         setCurrentPage(currentPage);
         setTotalPages(totalPages);
@@ -74,10 +76,10 @@ function Topup() {
                     striped
                     bordered
                     hover
-                    style={{ border: "2px solid black" }}
+                    style={{ border: "2px solid white" }}
                   >
                     <thead>
-                      <tr style={{ color: "#000428" }}>
+                      <tr style={{ color: "yellow" }}>
                         <th className="text-center">Name</th>
                         <th className="text-center">Amount</th>
                         <th className="text-center">UserId</th>
@@ -88,7 +90,7 @@ function Topup() {
                     </thead>
                     <tbody>
                       {topUpdata.map((item) => (
-                        <tr key={item._id} className="text-dark">
+                        <tr key={item._id} className="text-light">
                           <td>{item.name}</td>
                           <td>{item.amount}</td>
                           <td>{item.userId}</td>
@@ -106,15 +108,17 @@ function Topup() {
 
           <div>
             <Button
+              className="m-1"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
             >
-              Previous Page
+              Previous
             </Button>
-            <span>
+            <h6>
               Page {currentPage} of {totalPages}
-            </span>
+            </h6>
             <Button
+              className="m-1"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
             >
