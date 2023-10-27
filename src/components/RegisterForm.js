@@ -168,7 +168,7 @@ const RegisterForm = () => {
                           fontWeight: "600",
                           marginTop: "16px",
                           marginBottom: "-15px",
-                          color: "pink",
+                          color: "#000428",
                         }}
                       >
                         Welcome
@@ -176,7 +176,7 @@ const RegisterForm = () => {
                       <hr style={{fontWeight:'bold', height:'2px', color:'pink'}}/>
                       <div
                         className="body"
-                        style={{ fontSize: "16px", marginTop: "-15px", color:'brown' }}
+                        style={{ fontSize: "16px", marginTop: "-15px", color:'#000356' }}
                       >
                         Register to continue
                       </div>
@@ -338,7 +338,7 @@ const RegisterForm = () => {
       {isSubmitting? 'processing...':'Register'}
       </button>
                   <Link
-                    style={{ color: "gray", marginBottom: "8px" }}
+                    style={{ color: "white", marginBottom: "8px" }}
                     to={"/login"}
                   >
                     Already registered{" "}

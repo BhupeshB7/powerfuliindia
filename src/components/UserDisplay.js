@@ -1205,9 +1205,9 @@ const Dashboard = () => {
       daysLeftForReactivation = `Account has been reactivated`;
     }
   }
-  depositFormPage=()=>{
-    window.location.href='/depositform'
-  }
+  const depositFormPage = () => {
+    window.location.href = '/depositform';
+  };
   return (
     <div>
       {/* <div style={{ background: "#000428" }}> */}
@@ -1737,7 +1737,7 @@ const Dashboard = () => {
                 </div> */}
                 <div
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
-                  onClick={depositFormPage}
+                  onClick={()=>depositFormPage}
                   style={{ paddingLeft: "40px" }}
                 >
                   <AiOutlinePlusCircle className="dashboard-icon m-1" />
