@@ -39,7 +39,7 @@ function Topup() {
           `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
         );
         const { topUpdata, currentPage, totalPages } = response.data;
-        console.log(topUpdata);
+        // console.log(topUpdata);
         settopUpData(topUpdata);
         setCurrentPage(currentPage);
         setTotalPages(totalPages);
@@ -62,9 +62,7 @@ function Topup() {
     <div>
       {token ? (
         <div className="topUPBg">
-          <h4 className="text-center text-warning p-4">
-            Hello, {data.name}
-          </h4>
+          <h4 className="text-center text-warning pt-4">Hello, {data.name}</h4>
           <h6 className="text-center text-light">TopUp History...</h6>
           <div className="table-responsive">
             <Container>
@@ -111,21 +109,23 @@ function Topup() {
 
           <div>
             <Button
+              variant="outline-warning"
               className="m-1"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
             >
               Previous
             </Button>
-            <h6>
+            <label>
               Page {currentPage} of {totalPages}
-            </h6>
+            </label>
             <Button
+              variant="outline-warning"
               className="m-1"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
             >
-              Next Page
+              Next
             </Button>
           </div>
         </div>
