@@ -118,7 +118,7 @@ function Topup() {
             >
               Previous
             </Button>
-            <label text-light>
+            <label className="text-light">
               Page {currentPage} of {totalPages}
             </label>
             <Button
