@@ -72,7 +72,6 @@ const TransferForm = ({ sourceUserId }) => {
       // Reset the form
       setTargetUserId("");
       setAmount("");
-      window.location.reload();
     }
   };
 
