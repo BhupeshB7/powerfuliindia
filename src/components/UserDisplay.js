@@ -1206,7 +1206,7 @@ const Dashboard = () => {
     }
   }
   const depositFormPage = () => {
-    window.location.href = '/login';
+    window.location.href = '/depositform';
   };
   return (
     <div>
@@ -1735,14 +1735,14 @@ const Dashboard = () => {
                   <p>WITHDRAWAL WALLET</p>
                   <h6>{data.withdrawal} Rs</h6>
                 </div> */}
-                <div
+                <Link to='/depositform'
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
                   onClick={()=>depositFormPage}
                   style={{ paddingLeft: "40px" }}
                 >
                   <AiOutlinePlusCircle className="dashboard-icon m-1" />
                   <h6> DEPOSIT</h6>
-                </div>
+                </Link>
                 <div
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
                   type="button"
