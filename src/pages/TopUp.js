@@ -76,20 +76,22 @@ function Topup() {
                   >
                     <thead>
                       <tr style={{ color: "yellow" }}>
-                        <th className="text-center">Name</th>
+                        <th className="text-center">#</th>
                         <th className="text-center">Amount</th>
                         <th className="text-center">UserId</th>
+                        <th className="text-center">Name</th>
                         <th className="text-center">Transfer Id</th>
                         <th>Date</th>
                         {/* Add more table headers for additional fields */}
                       </tr>
                     </thead>
                     <tbody>
-                      {topUpdata.map((item) => (
+                      {topUpdata.map((item, index) => (
                         <tr key={item._id} className="text-light">
-                          <td>{item.name}</td>
+                          <td>{index +1}</td>
                           <td>{item.amount}</td>
                           <td>{item.userId}</td>
+                          <td>{item.name}</td>
                           <td>{item.targetUserId}</td>
                           {/* <td>{item.createdAt}</td> */}
                           <td>
