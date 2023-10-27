@@ -213,7 +213,7 @@ function AdminDeposit() {
             <img
               src={`https://res.cloudinary.com/dmoukvc5o/image/upload/${showImage.public_id}.jpg`}
               alt="Selected"
-              height='400px'
+              height='500px'
               width='300px'
               className="centered-image"
             />

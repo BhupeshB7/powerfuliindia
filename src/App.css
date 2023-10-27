@@ -997,11 +997,11 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 450px;
+  height: 620px;
   width: 100%;
 }
 .modal-contentImage{
-  height:420px;
+  height:600px;
   width: 400px;
   display: flex;
   flex-direction: column;
