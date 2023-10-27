@@ -34,6 +34,7 @@ import NewGame from './pages/NewGame';
 import GameDeposit from './components/Admin/GameDeposit';
 import SpinGame from './pages/SpinGame';
 import UserWallet from './components/Admin/UserWallet';
+import DepositForm from './pages/DepositForm';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
           <Route path='/fundHistory' element={<FundHistory/>}/>
           <Route path='/task-report' element={<TaskReport/>}/>
           <Route path='/tasks/:taskId' element={<Task/>}/>
+          <Route path='/depositform' element={<DepositForm/>}/>
           <Route  path="*" element={<Error/>} />
 
         </Routes>

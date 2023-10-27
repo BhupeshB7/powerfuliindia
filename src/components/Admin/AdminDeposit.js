@@ -7,6 +7,20 @@ function AdminDeposit() {
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState(""); // Assuming you have a search input
   const [isTokenValid, setIsTokenValid] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [showImage, setShowImage] = useState(null);
+
+  // Open the modal to display the selected image
+  const openImage = (image) => {
+    setShowImage(image);
+    setShowModal(true);
+  };
+
+  // Close the modal
+  const closeImage = () => {
+    setShowImage(null);
+    setShowModal(false);
+  };
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
@@ -108,6 +122,7 @@ function AdminDeposit() {
           <th>TransactionId</th>
           <th>Amount</th>
           <th>Status</th>
+          <th>Image</th>
           <th>Time</th>
           <th>Actions</th>
         </tr>
@@ -159,6 +174,15 @@ function AdminDeposit() {
                   timeZone: "Asia/Kolkata",
                 })}
               </td>{" "}
+              <td>
+                <div className="image-list m-5">
+                  {user.images.map((image) => (
+                    <div key={image.public_id} className="image-container">
+                      <button onClick={() => openImage(image)}>View Image</button>
+                    </div>
+                  ))}
+                </div>
+              </td>
               {/* Display in IST */}
               <td>
                 <button
@@ -180,6 +204,20 @@ function AdminDeposit() {
       </tbody>
     </table>
   </div>
+  {showModal && showImage && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="close" onClick={closeImage}>&times;</div>
+            <img
+              src={`https://res.cloudinary.com/your-cloud-name/image/upload/${showImage.public_id}.jpg`}
+              alt="Selected"
+              height='400px'
+              width='300px'
+              className="centered-image"
+            />
+          </div>
+        </div>
+      )}
 
   {/* Add pagination controls */}
   <div className="pagination">

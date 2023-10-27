@@ -611,7 +611,6 @@ import { BsWhatsapp } from "react-icons/bs";
 import Modal from "react-modal";
 import "./Dashboard.css";
 import logo from "../assets/PI1.png";
-import QRCODE from "../assets/QRCODE2.jpg";
 import spinner from "../assets/spinner2.gif";
 import { MdOutlineTransferWithinAStation, MdEmail } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
@@ -663,12 +662,6 @@ const Dashboard = () => {
   const [message, setMessage] = useState("");
   // For deposit
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    transactionId: "",
-    userID: "",
-    depositAmount: "",
-  });
   // const [activeUserData, setActiveUserData] = useState([]);
 
   // For fetch direct sponsorID
@@ -898,34 +891,7 @@ const Dashboard = () => {
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      console.log(formData);
-      // const response = await axios.post('https://mlm-production.up.railway.app/api/deposit/upload', formData);
-      const response = await axios.post(
-        "https://mlm-production.up.railway.app/api/deposit/userAmount",
-        //  "http://localhost:5000/api/deposit/userAmount",
-        formData
-      );
-      const data = response.data;
-
-      console.log(data);
-      alert("Deposited!");
-      window.location.href = "/dashboard";
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert("Transaction Id already exists");
-      }
-      console.error(error);
-      alert("Not Deposited!");
-    }
-  };
+ 
 
   //Fund move API and Function start
   const handleAmountChange = (event) => {
@@ -1906,138 +1872,7 @@ const Dashboard = () => {
 
               {/* Team Structure End */}
               {/* Withdrawal */}
-              <Modal isOpen={isModalOpen} style={customModalStyles}>
-                <div className="content_container">
-                  <span
-                    style={{
-                      color: "gray",
-                      textDecoration: "underline",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Deposit
-                  </span>
-                  <h4
-                    style={{
-                      color: "red",
-                      fontWeight: "bold",
-                      position: "absolute",
-                      cursor: "pointer",
-                      right: "15px",
-                    }}
-                    onClick={() => setIsModalOpen(false)}
-                  >
-                    X
-                  </h4>
-                  <h6>Recharge Amount</h6>
-                  <h6>Rs 850/-</h6>
-                  <div
-                    className="image"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <img
-                      src={QRCODE}
-                      height="200px"
-                      width="200px"
-                      alt=""
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        border: "1px solid black",
-                      }}
-                    />
-                  </div>
-                  <hr />
-                  <div
-                    className="account"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <table className="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col">IFSC CODE</th>
-                          <th scope="col">Account Number</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>UTIB0002620</td>
-                          <td>923010046330302</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div
-                    className="account"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <table className="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col">UPI</th>
-                          <td>kumaromprakashhdhdksks@axl</td>
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </div>
-                <div className="form_container" style={{ marginTop: "-30px" }}>
-                  <form onSubmit={handleSubmit}>
-                    <div className="formInput">
-                      <label htmlFor="name">Name:</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                      />
-
-                      <label htmlFor="transactionId">UTR No:</label>
-                      <input
-                        type="text"
-                        id="transactionId"
-                        name="transactionId"
-                        value={formData.transactionId}
-                        onChange={handleChange}
-                        required
-                      />
-                      <label htmlFor="userID">User ID:</label>
-                      <input
-                        type="text"
-                        id="userID"
-                        name="userID"
-                        value={formData.userID}
-                        onChange={handleChange}
-                        required
-                      />
-                      <label htmlFor="userID">Amount</label>
-                      <input
-                        type="number"
-                        id="depositAmount"
-                        name="depositAmount"
-                        value={formData.depositAmount}
-                        onChange={handleChange}
-                        minLength={0}
-                        // required
-                      />
-                      {/* <label htmlFor="image">Image:</label>
-                      <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        accept="image/png,image/jpg, image/jpeg"
-                        // onChange={handleChangeImage}
-                        // required
-                      /> */}
-                      <button className="form_button" type="submit">
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </Modal>
+              
               <div
                 className="modal fade "
                 id="staticBackdrop1"
