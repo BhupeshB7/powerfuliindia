@@ -46,7 +46,9 @@ function Topup() {
   // Calculate the index of the first item on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // Get the current items for the current page
-  const currentItems = userData.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = userData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = Array.isArray(userData) ? userData.slice(indexOfFirstItem, indexOfLastItem) : [];
+
 
   // Change page
   const handlePageChange = (pageNumber) => {
