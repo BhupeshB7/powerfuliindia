@@ -38,9 +38,9 @@ function Topup() {
         .get(
           `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
         )
-        const { topUpdata, currentPage, totalPages } = response.data;
+        const { data, currentPage, totalPages } = response.data;
 
-        settopUpData(topUpdata);
+        settopUpData(data);
         setCurrentPage(currentPage);
         setTotalPages(totalPages);
       } catch (error) {
