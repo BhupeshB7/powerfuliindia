@@ -169,11 +169,7 @@ function AdminDeposit() {
               <td>{user.transactionId}</td>
               <td>{user.depositAmount}</td>
               <td>{user.isApproved ? "Approved" : "Pending"}</td>
-              <td>
-                {istTimestamp.toLocaleString("en-IN", {
-                  timeZone: "Asia/Kolkata",
-                })}
-              </td>{" "}
+              
               <td>
                 <div className="image-list m-5">
                   {user.images.map((image) => (
@@ -183,6 +179,11 @@ function AdminDeposit() {
                   ))}
                 </div>
               </td>
+              <td>
+                {istTimestamp.toLocaleString("en-IN", {
+                  timeZone: "Asia/Kolkata",
+                })}
+              </td>{" "}
               {/* Display in IST */}
               <td>
                 <button
@@ -209,7 +210,7 @@ function AdminDeposit() {
           <div className="modal-content">
             <div className="close" onClick={closeImage}>&times;</div>
             <img
-              src={`https://res.cloudinary.com/your-cloud-name/image/upload/${showImage.public_id}.jpg`}
+              src={`https://res.cloudinary.com/dmoukvc5o/image/upload/${showImage.public_id}.jpg`}
               alt="Selected"
               height='400px'
               width='300px'

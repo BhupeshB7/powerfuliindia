@@ -991,3 +991,32 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   border-radius: 3px;
   padding: 12px;
 }
+
+.modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  width: 100%;
+}
+.modal-content{
+  height:420px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content .close{
+display: flex;
+margin-left: 60px;
+width:100%;
+font-weight: bold;
+font-size: 26px;
+height: 30px;
+color: red;
+margin-right: 30px;
+cursor: pointer;
+}
