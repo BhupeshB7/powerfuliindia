@@ -62,7 +62,7 @@ const TransferForm = ({ sourceUserId }) => {
       // Reset the form
       setTargetUserId("");
       setAmount("");
-      setMessage("");
+      // setMessage("");
       // Reload the page
       // window.location.reload();
     } catch (error) {
