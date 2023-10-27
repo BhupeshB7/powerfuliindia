@@ -29,8 +29,6 @@ function Topup() {
     fetchData();
   }, [token]);
   useEffect(() => {
-    const user =data.userId;
-    alert(user);
     // Fetch data based on userID
     axios.get(`https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`)
       .then(response => {
