@@ -24,7 +24,7 @@ function Topup() {
         }
       );
       const result = await response.json();
-      console.log(result); // Check the response data
+      // console.log(result); // Check the response data
       setData(result);
       setIsLoading(false);
     };
