@@ -29,8 +29,10 @@ function Topup() {
     fetchData();
   }, [token]);
   useEffect(() => {
+    const user =data.userId;
+    alert(user);
     // Fetch data based on userID
-    axios.get(`https://mlm-production.up.railway.app/api/topupHistory${data.userId}`)
+    axios.get(`https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`)
       .then(response => {
         setUserData(response.data);
       })
@@ -83,7 +85,7 @@ function Topup() {
     <div>
       {token ? (
     <div className='topUPBg'>
-      <h4 className='text-center text-primary p-4'>TopUp History: {data.userId}</h4>
+      <h4 className='text-center text-success p-4'>TopUp History: {data.userId}</h4>
       <div className='table-responsive'>
         <Container>
         <Table striped bordered hover  style={{
