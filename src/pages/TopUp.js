@@ -5,7 +5,6 @@ import spinner from "../assets/spinner2.gif";
 import { Link } from "react-router-dom";
 
 function Topup() {
-  
   const [data, setData] = useState([]);
   const [topUpdata, settopUpData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -34,15 +33,13 @@ function Topup() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       try {
-        const response = await  axios
-        .get(
+        const response = await axios.get(
           // `http://localhost:5000/api/topupHistory/${userId}`
-         `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
-        )
+          `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
+        );
         const { topUpdata, currentPage, totalPages } = response.data;
-      console.log(topUpdata);
+        console.log(topUpdata);
         settopUpData(topUpdata);
         setCurrentPage(currentPage);
         setTotalPages(totalPages);
@@ -95,7 +92,12 @@ function Topup() {
                           <td>{item.amount}</td>
                           <td>{item.userId}</td>
                           <td>{item.targetUserId}</td>
-                          <td>{item.createdAt}</td>
+                          {/* <td>{item.createdAt}</td> */}
+                          <td>
+                            {new Date(item.createdAt).toLocaleString("en-IN", {
+                              timeZone: "Asia/Kolkata",
+                            })}
+                          </td>
                           {/* Add more table cells for additional fields */}
                         </tr>
                       ))}
