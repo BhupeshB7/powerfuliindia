@@ -16,7 +16,7 @@ function Topup() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-production.up.railway.appp/api/users/profile",
+        "https://mlm-production.up.railway.app/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -24,7 +24,7 @@ function Topup() {
         }
       );
       const result = await response.json();
-      // console.log(result); // Check the response data
+      // console.log(result); // check the response data
       setData(result);
       setIsLoading(false);
     };
@@ -62,9 +62,10 @@ function Topup() {
     <div>
       {token ? (
         <div className="topUPBg">
-          <h4 className="text-center text-success p-4">
-            TopUp History: {data.userId}
+          <h4 className="text-center text-warning p-4">
+            Hello, {data.name}
           </h4>
+          <h6 className="text-center text-light">TopUp History...</h6>
           <div className="table-responsive">
             <Container>
               <div className="table-responsive">
