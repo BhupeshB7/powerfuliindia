@@ -1206,7 +1206,7 @@ const Dashboard = () => {
     }
   }
   const depositFormPage = () => {
-    window.location.href = '/depositform';
+    window.location.href = '/login';
   };
   return (
     <div>

@@ -207,8 +207,8 @@ function AdminDeposit() {
     </table>
   </div>
   {showModal && showImage && (
-        <div className="modalImage">
-          <div className="modal-contentImage">
+        <div className="modal modalImage">
+          <div className="modal-content modal-contentImage">
             <div className="close" onClick={closeImage}>&times;</div>
             <img
               src={`https://res.cloudinary.com/dmoukvc5o/image/upload/${showImage.public_id}.jpg`}
