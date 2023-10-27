@@ -992,14 +992,14 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   padding: 12px;
 }
 
-.modal{
+.modalImage{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 450px;
   width: 100%;
 }
-.modal-content{
+.modal-contentImage{
   height:420px;
   width: 400px;
   display: flex;

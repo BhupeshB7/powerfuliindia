@@ -174,7 +174,7 @@ function AdminDeposit() {
                 <div className="image-list m-5">
                   {user.images.map((image) => (
                     <div key={image.public_id} className="image-container">
-                      <button onClick={() => openImage(image)}>View Image</button>
+                      <h6 onClick={() => openImage(image)}>View Image</h6>
                     </div>
                   ))}
                 </div>
@@ -206,8 +206,8 @@ function AdminDeposit() {
     </table>
   </div>
   {showModal && showImage && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="modalImage">
+          <div className="modal-contentImage">
             <div className="close" onClick={closeImage}>&times;</div>
             <img
               src={`https://res.cloudinary.com/dmoukvc5o/image/upload/${showImage.public_id}.jpg`}
