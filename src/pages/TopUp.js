@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Pagination, Container } from "react-bootstrap";
+import { Table, Pagination, Container, Button } from "react-bootstrap";
 import spinner from "../assets/spinner2.gif";
 import { Link } from "react-router-dom";
 
 function Topup() {
-  const [userData, setUserData] = useState([]);
+  const [topUpdata, settopUpData] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem("token");
@@ -31,36 +31,25 @@ function Topup() {
     fetchData();
   }, [token]);
 
-  // Fetch top-up history based on userID
   useEffect(() => {
-    if (data.userId) {
-      axios
+    const fetchData = async () => {
+      try {
+        const response = await  axios
         .get(
           `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
         )
-        .then((response) => {
-          setUserData(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [data.userId]);
+        const { topUpdata, currentPage, totalPages } = response.data;
 
-  // Calculate the index of the last item on the current page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  // Calculate the index of the first item on the current page
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // Get the current items for the current page
-  const currentItems = Array.isArray(userData)
-    ? userData.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
+        settopUpData(topUpdata);
+        setCurrentPage(currentPage);
+        setTotalPages(totalPages);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  // Change page
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
+    fetchData();
+  }, [data.userId, currentPage]);
   if (isLoading) {
     return (
       <div className="text-center" style={{ marginTop: "70px" }}>
@@ -97,7 +86,7 @@ function Topup() {
                       </tr>
                     </thead>
                     <tbody>
-                      {currentItems.map((item) => (
+                      {topUpdata.map((item) => (
                         <tr key={item._id} className="text-dark">
                           <td>{item.name}</td>
                           <td>{item.amount}</td>
@@ -114,20 +103,23 @@ function Topup() {
             </Container>
           </div>
 
-          <Pagination>
-            {Array.from(
-              { length: Math.ceil(userData.length / itemsPerPage) },
-              (_, index) => (
-                <Pagination.Item
-                  key={index + 1}
-                  active={index + 1 === currentPage}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </Pagination.Item>
-              )
-            )}
-          </Pagination>
+          <div>
+            <Button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              Previous Page
+            </Button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next Page
+            </Button>
+          </div>
         </div>
       ) : (
         <>
