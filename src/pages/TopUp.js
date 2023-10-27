@@ -5,10 +5,11 @@ import spinner from "../assets/spinner2.gif";
 import { Link } from "react-router-dom";
 
 function Topup() {
+  
+  const [data, setData] = useState([]);
   const [topUpdata, settopUpData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem("token");
 
