@@ -175,7 +175,7 @@ function AdminDeposit() {
                 <div className="image-list m-5">
                   {user.images.map((image) => (
                     <div key={image.public_id} className="image-container">
-                      <Button variant="outline-warning" onClick={() => openImage(image)}>View Image</Button>
+                      <Button variant="primary" onClick={() => openImage(image)}>View Image</Button>
                     </div>
                   ))}
                 </div>

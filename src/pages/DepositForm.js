@@ -48,6 +48,7 @@ const DepositForm = () => {
       if (response.status === 201) {
         // Successfully uploaded the deposit
         alert("Deposit successful");
+        window.location.href='/dashboard';
       } else {
         // Handle the error response
         const data = await response.json();
