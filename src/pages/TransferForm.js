@@ -64,7 +64,7 @@ const TransferForm = ({ sourceUserId }) => {
       setAmount("");
       setMessage("");
       // Reload the page
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       // Display an error message if the transfer fails
       setMessage("");
