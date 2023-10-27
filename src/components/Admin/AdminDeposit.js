@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 
 function AdminDeposit() {
   const [depositUsers, setDepositUsers] = useState([]);
@@ -174,7 +175,7 @@ function AdminDeposit() {
                 <div className="image-list m-5">
                   {user.images.map((image) => (
                     <div key={image.public_id} className="image-container">
-                      <h6 onClick={() => openImage(image)}>View Image</h6>
+                      <Button variant="outline-warning" onClick={() => openImage(image)}>View Image</Button>
                     </div>
                   ))}
                 </div>

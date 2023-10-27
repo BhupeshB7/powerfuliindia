@@ -139,13 +139,13 @@ const RegisterForm = () => {
 
           <div
             className="form_container"
-            style={{
-              // backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
-               backgroundImage: `url(${registerImage})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100vh",
+            // style={{
+            //   // backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
+            //    backgroundImage: `url(${registerImage})`,
+            //   backgroundRepeat: "no-repeat",
+            //   backgroundSize: "100% 100vh",
              
-            }}
+            // }}
           >
             <div className="form_data">
               <form className="register_img mt-3" onSubmit={handleSubmit}>
