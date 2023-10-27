@@ -109,18 +109,18 @@ function Topup() {
 
           <div>
             <Button
-              variant="outline-warning"
+              variant="warning"
               className="m-1"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
             >
               Previous
             </Button>
-            <label>
+            <label text-light>
               Page {currentPage} of {totalPages}
             </label>
             <Button
-              variant="outline-warning"
+              variant="warning"
               className="m-1"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
