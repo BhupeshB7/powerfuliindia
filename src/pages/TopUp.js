@@ -57,13 +57,27 @@ function Topup() {
       </div>
     );
   }
-
+  const dashboard = () => {
+    window.location.href = "/dashboard";
+  };
   return (
     <div>
       {token ? (
         <div className="topUPBg">
           <h4 className="text-center text-warning pt-4">Hello, {data.name}</h4>
           <h6 className="text-center text-light">TopUp History...</h6>
+          <div
+            className="d-flex justify-content-end"
+            style={{ position: "absolute", right: "20px", top: "30px" }}
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/189/189254.png"
+              height="40px"
+              width="40px"
+              onClick={dashboard}
+              alt="back"
+            />
+          </div>
           <div className="table-responsive">
             <Container>
               <div className="table-responsive">
@@ -88,7 +102,7 @@ function Topup() {
                     <tbody>
                       {topUpdata.map((item, index) => (
                         <tr key={item._id} className="text-light">
-                          <td>{index +1}</td>
+                          <td>{index + 1}</td>
                           <td>{item.amount}</td>
                           <td>{item.userId}</td>
                           <td>{item.name}</td>

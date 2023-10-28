@@ -1892,7 +1892,7 @@ const Dashboard = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog ">
-                  <div className="modal-content bg-primary">
+                  <div className="modal-content bg-warning">
                     <div className="modal-header">
                       <h5
                         className="modal-title text-dark"
@@ -1908,7 +1908,7 @@ const Dashboard = () => {
                       />
                     </div>
                     <div className="modal-body" style={{ overflowX: "auto" }}>
-                      <table className="table table-bordered">
+                      <table className="table table-bordered" >
                         <thead className="fw-300">
                           <tr className="text-light">
                             <th>S.No</th>
@@ -1923,18 +1923,18 @@ const Dashboard = () => {
                           {Object.keys(activeUsersByLevel).map(
                             (level, index) => (
                               <tr key={level}>
-                                <td className="text-dark">{index + 1}</td>
-                                <td className="text-dark">{level}</td>
-                                <td className="text-light">
+                                <td className="text-dark text-center">{index + 1}</td>
+                                <td className="text-dark text-center">{level}</td>
+                                <td className="text-success text-center">
                                   {activeUsersByLevel[level].active}
                                 </td>
-                                <td className="text-danger">
+                                <td className="text-danger text-center">
                                   {activeUsersByLevel[level].inactive}
                                 </td>
-                                <td className="text-warning">
+                                <td className="text-dark text-center">
                                   {levelCounts[index]}
                                 </td>
-                                <td className="text-dark">
+                                <td className="text-success text-center">
                                   {levelRanks[index]}
                                 </td>
                               </tr>

@@ -40,17 +40,20 @@ const DepositForm = () => {
     formDataToSend.append("image", image);
 
     try {
-      const response = await fetch("https://mlm-production.up.railway.app/api/deposit/userAmount", {
-    //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
-    //   const response = await fetch("https://mlm-production.up.railway.app/api/deposit/userAmount", {
-        method: "POST",
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        "https://mlm-production.up.railway.app/api/deposit/userAmount",
+        {
+          //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
+          //   const response = await fetch("https://mlm-production.up.railway.app/api/deposit/userAmount", {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
 
       if (response.status === 201) {
         // Successfully uploaded the deposit
         alert("Deposit successful");
-        window.location.href='/dashboard';
+        window.location.href = "/dashboard";
       } else {
         // Handle the error response
         const data = await response.json();
@@ -61,12 +64,26 @@ const DepositForm = () => {
       alert("Internal server error");
     }
   };
-
+  const dashboard = () => {
+    window.location.href = "/dashboard";
+  };
   return (
     <div className="topUPBg depositFormC">
       <h5 className="p-3 text-center text-warning">Deposit</h5>
       <h6 className="text-secondary p-2">Recharge Amount</h6>
       <h6 className="text-light p-2">Rs 850/-</h6>
+      <div
+        className="d-flex justify-content-end"
+        style={{ position: "absolute", right: "20px", top: "30px" }}
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/189/189254.png"
+          height="40px"
+          width="40px"
+          onClick={dashboard}
+          alt="back"
+        />
+      </div>
       <div
         className="image"
         style={{ display: "flex", justifyContent: "center" }}
@@ -85,7 +102,7 @@ const DepositForm = () => {
         />
       </div>
       <Container className="pt-3">
-        <Table striped bordered hover >
+        <Table striped bordered hover>
           <thead className="text-warning text-center">
             <tr>
               <th>Account Number</th>
@@ -99,7 +116,11 @@ const DepositForm = () => {
             </tr>
             <tr className="text-warning text-center">
               <td>UPI</td>
-              <td>kumaromprakash<br/>hdhdksks@axl</td>
+              <td>
+                kumaromprakash
+                <br />
+                hdhdksks@axl
+              </td>
             </tr>
           </tbody>
         </Table>
