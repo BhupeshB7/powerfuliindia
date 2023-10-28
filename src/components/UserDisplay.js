@@ -1508,6 +1508,23 @@ const Dashboard = () => {
                             <a
                               className="nav-link active"
                               aria-current="page"
+                              href="/deposithistory"
+                              style={{ color: "cyan", fontWeight: "600" }}
+                            >
+                              {" "}
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/128/1090/1090965.png"
+                                alt="Deposit History"
+                                height="23px"
+                                width="23px"
+                              />{" "}
+                              &nbsp; Deposit history{" "}
+                            </a>
+                          </li>
+                          <li className="nav-item">
+                            <a
+                              className="nav-link active"
+                              aria-current="page"
                               href="/fundHistory"
                               style={{ color: "cyan", fontWeight: "600" }}
                             >
