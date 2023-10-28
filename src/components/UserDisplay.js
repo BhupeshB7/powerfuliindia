@@ -1875,10 +1875,10 @@ const Dashboard = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog ">
-                  <div className="modal-content bg-dark">
+                  <div className="modal-content bg-primary">
                     <div className="modal-header">
                       <h5
-                        className="modal-title text-warning"
+                        className="modal-title text-dark"
                         id="exampleModalLabel"
                       >
                         TEAM STRUCTURE
@@ -1906,9 +1906,9 @@ const Dashboard = () => {
                           {Object.keys(activeUsersByLevel).map(
                             (level, index) => (
                               <tr key={level}>
-                                <td className="text-light">{index + 1}</td>
-                                <td className="text-info">{level}</td>
-                                <td className="text-warning">
+                                <td className="text-dark">{index + 1}</td>
+                                <td className="text-dark">{level}</td>
+                                <td className="text-light">
                                   {activeUsersByLevel[level].active}
                                 </td>
                                 <td className="text-danger">
@@ -1917,7 +1917,7 @@ const Dashboard = () => {
                                 <td className="text-warning">
                                   {levelCounts[index]}
                                 </td>
-                                <td className="text-info">
+                                <td className="text-dark">
                                   {levelRanks[index]}
                                 </td>
                               </tr>
