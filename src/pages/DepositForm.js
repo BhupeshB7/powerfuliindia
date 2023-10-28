@@ -41,6 +41,8 @@ const DepositForm = () => {
 
     try {
       const response = await fetch("https://mlm-production.up.railway.app/api/deposit/userAmount", {
+    //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
+    //   const response = await fetch("https://mlm-production.up.railway.app/api/deposit/userAmount", {
         method: "POST",
         body: formDataToSend,
       });

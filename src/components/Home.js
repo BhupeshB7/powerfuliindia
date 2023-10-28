@@ -215,7 +215,7 @@ const Home = () => {
                 </div>
                 <div className="contact-details col-10">
                   <a href="/" className="p-text">
-                    XXXXXXXXX 
+                    Patna 
                   </a>
                   {/* <a href="tel:+91 8581869783" className="p-text">+91 8581869783</a> */}
                 </div>

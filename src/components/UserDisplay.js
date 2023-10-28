@@ -891,8 +891,6 @@ const Dashboard = () => {
       });
   };
 
- 
-
   //Fund move API and Function start
   const handleAmountChange = (event) => {
     setAmount(event.target.value);
@@ -1167,10 +1165,48 @@ const Dashboard = () => {
   //     hour12: true,
   //   });
   // }
+  // let activationTime = "Unknown";
+  // let reactivationTime = "Unknown";
+  // let daysLeftForReactivation = "Unknown";
+
+  // if (data.activationTime) {
+  //   // Calculate the activation time
+  //   activationTime = new Date(data.activationTime).toLocaleString("en-IN", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "2-digit",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   });
+
+  //   // Calculate the reactivation time (1 year from activation time)
+  //   const oneYearFromActivation = new Date(data.activationTime);
+  //   oneYearFromActivation.setFullYear(oneYearFromActivation.getFullYear() + 1);
+  //   reactivationTime = oneYearFromActivation.toLocaleString("en-IN", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "2-digit",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   });
+
+  //   // Calculate the number of days left for reactivation
+  //   const currentDate = new Date();
+  //   const daysRemaining = Math.ceil(
+  //     (oneYearFromActivation - currentDate) / (1000 * 60 * 60 * 24)
+  //   );
+  //   if (daysRemaining > 0) {
+  //     daysLeftForReactivation = `Reactivate in ${daysRemaining} days`;
+  //   } else {
+  //     daysLeftForReactivation = `Account has been reactivated`;
+  //   }
+  // }
   let activationTime = "Unknown";
   let reactivationTime = "Unknown";
   let daysLeftForReactivation = "Unknown";
-  
+
   if (data.activationTime) {
     // Calculate the activation time
     activationTime = new Date(data.activationTime).toLocaleString("en-IN", {
@@ -1181,11 +1217,13 @@ const Dashboard = () => {
       minute: "2-digit",
       hour12: true,
     });
-  
-    // Calculate the reactivation time (1 year from activation time)
-    const oneYearFromActivation = new Date(data.activationTime);
-    oneYearFromActivation.setFullYear(oneYearFromActivation.getFullYear() + 1);
-    reactivationTime = oneYearFromActivation.toLocaleString("en-IN", {
+
+    // Calculate the reactivation time (3 months from activation time)
+    const threeMonthsFromActivation = new Date(data.activationTime);
+    threeMonthsFromActivation.setMonth(
+      threeMonthsFromActivation.getMonth() + 3
+    );
+    reactivationTime = threeMonthsFromActivation.toLocaleString("en-IN", {
       year: "numeric",
       month: "long",
       day: "2-digit",
@@ -1193,11 +1231,11 @@ const Dashboard = () => {
       minute: "2-digit",
       hour12: true,
     });
-  
+
     // Calculate the number of days left for reactivation
     const currentDate = new Date();
     const daysRemaining = Math.ceil(
-      (oneYearFromActivation - currentDate) / (1000 * 60 * 60 * 24)
+      (threeMonthsFromActivation - currentDate) / (1000 * 60 * 60 * 24)
     );
     if (daysRemaining > 0) {
       daysLeftForReactivation = `Reactivate in ${daysRemaining} days`;
@@ -1205,8 +1243,9 @@ const Dashboard = () => {
       daysLeftForReactivation = `Account has been reactivated`;
     }
   }
+
   const depositFormPage = () => {
-    window.location.href = '/depositform';
+    window.location.href = "/depositform";
   };
   return (
     <div>
@@ -1323,7 +1362,10 @@ const Dashboard = () => {
                                 <>
                                   <div>
                                     <Link to={"/admin/dashboard"}>
-                                      <h6 className="text-center text-light" style={{textDecoration:'underline'}}>
+                                      <h6
+                                        className="text-center text-light"
+                                        style={{ textDecoration: "underline" }}
+                                      >
                                         Admin Dashboard
                                       </h6>
                                     </Link>
@@ -1335,26 +1377,41 @@ const Dashboard = () => {
                             </>
                           </li>
                           <div
-                                className="notification-text"
-                                style={{ color: "cyan" }}
-                              >
-                          <img src="https://cdn-icons-png.flaticon.com/128/11243/11243068.png" height='30px' width='30px' alt="reactivation"/>
-                          
-                               
-                                &nbsp; &nbsp; Reactivation due on: <br/>
-                                {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-                                &nbsp; &nbsp;&nbsp; &nbsp;
-                          <img src="https://cdn-icons-png.flaticon.com/128/556/556690.png" height='25px' width='25px' alt="reactivation"/>
-                                 {reactivationTime}
-                              </div>
+                            className="notification-text"
+                            style={{ color: "cyan" }}
+                          >
+                            <img
+                              src="https://cdn-icons-png.flaticon.com/128/11243/11243068.png"
+                              height="30px"
+                              width="30px"
+                              alt="reactivation"
+                            />
+                            &nbsp; &nbsp; Reactivation due on: <br />
+                            {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
+                            &nbsp; &nbsp;&nbsp; &nbsp;
+                            <img
+                              src="https://cdn-icons-png.flaticon.com/128/556/556690.png"
+                              height="25px"
+                              width="25px"
+                              alt="reactivation"
+                            />
+                            {reactivationTime}
+                          </div>
 
-                              <div
-                                className="notification-text"
-                                style={{ color: "cyan", fontSize:'17px' }}
-                              ><br/>
-                                <img src="https://cdn-icons-png.flaticon.com/128/2268/2268536.png" height='30px' width='25px' alt="reactivation" style={{marginTop:'-15px'}}/>
-                                &nbsp; &nbsp;  {daysLeftForReactivation}
-                              </div>
+                          <div
+                            className="notification-text"
+                            style={{ color: "cyan", fontSize: "17px" }}
+                          >
+                            <br />
+                            <img
+                              src="https://cdn-icons-png.flaticon.com/128/2268/2268536.png"
+                              height="30px"
+                              width="25px"
+                              alt="reactivation"
+                              style={{ marginTop: "-15px" }}
+                            />
+                            &nbsp; &nbsp; {daysLeftForReactivation}
+                          </div>
                           <li>
                             <div className="notification-container">
                               {/* <IoNotificationsCircle style={{ color: 'yellow', backgroundColor: 'red', borderRadius: '50%' }} className="notification-icon" /> */}
@@ -1377,7 +1434,6 @@ const Dashboard = () => {
                                   : "unknown"} */}
                                 {activationTime}
                               </div>
-                              
                             </div>
                           </li>
                           <li className="nav-item">
@@ -1428,7 +1484,7 @@ const Dashboard = () => {
                                 height="23px"
                                 width="23px"
                               />{" "}
-                              &nbsp; Withdrawal{" "}
+                              &nbsp; Withdrawal History{" "}
                             </a>
                           </li>
                           <li className="nav-item">
@@ -1506,7 +1562,7 @@ const Dashboard = () => {
                               className="dropdown-menu"
                               aria-labelledby="navbarDropdown"
                             >
-                              <li>
+                              <li style={{border:'none !important'}}>
                                 <div className="dropdown-item">
                                   <h6
                                     onClick={() => setIsDirectModelOpen(true)}
@@ -1573,12 +1629,6 @@ const Dashboard = () => {
                                   </Modal>
                                 </div>
                               </li>{" "}
-                              <hr />
-                              <hr />
-                              <li>
-                                {" "}
-                                <div className="dropdown-item"></div>
-                              </li>
                             </ul>
                           </li>
                           {/*  */}
@@ -1660,8 +1710,16 @@ const Dashboard = () => {
                 </div>
               ) : (
                 <>
-                <h6 className="text-center text-secondary">Re login to continue...</h6>
-                <Link to="/login" className="text-center text-primary" style={{textDecoration:'underline'}}>Login</Link>
+                  <h6 className="text-center text-secondary">
+                    Re login to continue...
+                  </h6>
+                  <Link
+                    to="/login"
+                    className="text-center text-primary"
+                    style={{ textDecoration: "underline" }}
+                  >
+                    Login
+                  </Link>
                 </>
               )}
 
@@ -1735,9 +1793,10 @@ const Dashboard = () => {
                   <p>WITHDRAWAL WALLET</p>
                   <h6>{data.withdrawal} Rs</h6>
                 </div> */}
-                <Link to='/depositform'
+                <Link
+                  to="/depositform"
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
-                  onClick={()=>depositFormPage}
+                  onClick={() => depositFormPage}
                   style={{ paddingLeft: "40px" }}
                 >
                   <AiOutlinePlusCircle className="dashboard-icon m-1" />
@@ -1874,7 +1933,7 @@ const Dashboard = () => {
 
               {/* Team Structure End */}
               {/* Withdrawal */}
-              
+
               <div
                 className="modal fade "
                 id="staticBackdrop1"
