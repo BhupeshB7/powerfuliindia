@@ -238,7 +238,7 @@ function Withdrawal() {
                       <td>Transaction No</td>
                       <td>Account No</td>
                       <td>ifscCode</td>
-                      <td>Google Pay</td>
+                      {/* <td>Google Pay</td> */}
                       <td>Status</td>
                       <td>Date</td>
                     </tr>
@@ -252,7 +252,7 @@ function Withdrawal() {
                         <td>{request.transactionNumber}</td>
                         <td>{request.accountNo}</td>
                         <td>{request.ifscCode}</td>
-                        <td>{request.GPay}</td>
+                        {/* <td>{request.GPay}</td> */}
                         <td>{request.status}</td>
                         <td>{request.createdAt ? new Date(request.createdAt).toLocaleString() : 'unknown'}</td>
                       </tr>

@@ -152,7 +152,7 @@ function ChangePassword() {
               />
             </div>
             <Row>
-              <h6 className="text-center text-secondary">Change Password</h6>
+              <h6 className="text-center text-light">Change Password</h6>
 
               <Col xs={12} sm={12} md={12}>
                 <div className="changePassword">

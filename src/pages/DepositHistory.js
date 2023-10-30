@@ -208,7 +208,7 @@ function DepositHistory() {
 
   if (isLoading) {
     return (
-      <div className="text-center d-flex align-items-center" style={{ marginTop: "70px" }}>
+      <div className="text-center d-flex align-items-center justify-content-center" style={{ marginTop: "70px" }}>
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
         </Spinner>

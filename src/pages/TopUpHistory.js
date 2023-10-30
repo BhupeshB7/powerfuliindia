@@ -89,12 +89,12 @@ function TopUpHistory() {
                     style={{ border: "2px solid white" }}
                   >
                     <thead>
-                      <tr style={{ color: "yellow" }}>
+                      <tr text-warning>
                         <th className="text-center">#</th>
-                        <th className="text-center">Amount</th>
                         <th className="text-center">UserId</th>
                         {/* <th className="text-center">Name</th> */}
                         <th className="text-center">Transfer Id</th>
+                        <th className="text-center">Amount</th>
                         <th>Date</th>
                         {/* Add more table headers for additional fields */}
                       </tr>
@@ -103,10 +103,10 @@ function TopUpHistory() {
                       {topUpdata.map((item, index) => (
                         <tr key={item._id} className="text-light">
                           <td>{index + 1}</td>
-                          <td>{item.amount}</td>
                           <td>{item.userId}</td>
                           {/* <td>{item.name}</td> */}
                           <td>{item.targetUserId}</td>
+                          <td>{item.amount}</td>
                           {/* <td>{item.createdAt}</td> */}
                           <td>
                             {new Date(item.createdAt).toLocaleString("en-IN", {
