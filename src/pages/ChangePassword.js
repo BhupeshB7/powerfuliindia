@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import spinner from "../assets/spinner2.gif";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-function Profile() {
+function ChangePassword() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
     const token = localStorage.getItem("token");
@@ -34,66 +34,76 @@ function Profile() {
   }, [token]);
   const userId = "abcd";
   const handleChangePassword = async () => {
-    // e.preventDefault();
     setOldPasswordError("");
     setNewPasswordError("");
     setConfirmPasswordError("");
     setSuccessMessage('');
     setErrorMessage('');
     let hasError = false;
-
+  
     if (!oldPassword) {
       setOldPasswordError("Please enter Old Password");
       hasError = true;
     }
-
+    
     if (!newPassword) {
       setNewPasswordError("Please enter New Password");
       hasError = true;
     }
-
+  
     if (!confirmPassword) {
       setConfirmPasswordError("Please enter Confirm Password");
       hasError = true;
     }
-
+    if (newPassword === oldPassword) {
+        if (!newPassword) {
+            setNewPasswordError("Please enter New Password");
+            hasError = true;
+            return
+          }
+        setNewPasswordError("New Password must be different from Old Password");
+        hasError = true;
+      }
     if (newPassword !== confirmPassword) {
-    setConfirmPasswordError("New Password and Confirm Password must match");
+      setConfirmPasswordError("New Password and Confirm Password must match");
       hasError = true;
     }
+  
     if (!hasError) {
-        try {
-          const response = await fetch(
-            "https://mlm-production.up.railway.app/api/change-password",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                userId: data.userId,
-                oldPassword,
-                newPassword,
-                confirmPassword,
-              }),
-            }
-          );
-  
-          const data = await response.json();
-  
-          if (response.status === 200) {
-            // Password changed successfully, set the success message
-            setSuccessMessage(data.message);
-          } else {
-            // Handle the error and set the error message
-            setErrorMessage(data.message);
+      try {
+        const response = await fetch(
+          "https://mlm-production.up.railway.app/api/change-password",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: data.userId, // Move the data.userId here
+              oldPassword,
+              newPassword,
+              confirmPassword,
+            }),
           }
-        } catch (error) {
-          // Handle network or other errors and set the error message
-          setErrorMessage("An error occurred while updating the password.");
+        );
+  
+        const responseData = await response.json();
+  
+        if (response.status === 200) {
+          // Password changed successfully, set the success message
+          setSuccessMessage(responseData.message);
+        } else {
+          // Handle the error and set the error message
+          setErrorMessage(responseData.message);
         }
+      } catch (error) {
+        console.log(error);
+        // Handle network or other errors and set the error message
+        setErrorMessage("An error occurred while updating the password.");
       }
-    };
+    }
+  };
+  
   if (isLoading) {
     return (
       <h6
@@ -134,7 +144,7 @@ function Profile() {
                 {successMessage && <Alert variant="success">{successMessage}</Alert>}
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
                   <div>
-                    <label>Old Password</label>
+                    <label>Old Password</label> <br/>
                     <input
                       type="password"
                       value={oldPassword}
@@ -142,29 +152,30 @@ function Profile() {
                       required
                     />
                     {oldPasswordError && (
-                      <Alert variant="danger">{oldPasswordError}</Alert>
+                      <Alert variant="danger" style={{width:'300px'}}>{oldPasswordError}</Alert>
                     )}
                   </div>
                   <div>
-                    <label>New Password</label>
+                    <label>New Password</label><br/>
                     <input
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
                     {newPasswordError && (
-                      <Alert variant="danger">{newPasswordError}</Alert>
+                      <Alert variant="danger"style={{width:'300px'}}>{newPasswordError}</Alert>
                     )}
                   </div>
+                 
                   <div>
-                    <label>Confirm Password</label>
+                    <label>Confirm Password</label> <br/>
                     <input
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {confirmPasswordError && (
-                      <Alert variant="danger">{confirmPasswordError}</Alert>
+                      <Alert variant="danger"style={{width:'300px'}}>{confirmPasswordError}</Alert>
                     )}
                   </div>
                   <Button
@@ -200,4 +211,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ChangePassword;
