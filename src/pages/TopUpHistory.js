@@ -65,7 +65,7 @@ function TopUpHistory() {
       {token ? (
         <div className="topUPBg">
           <h4 className="text-center text-warning pt-4">Hello, {data.name}</h4>
-          <h6 className="text-center text-light">TopUp History...</h6>
+          <h6 className="text-center text-light">Wallet Transfer History...</h6>
           <div
             className="d-flex justify-content-end"
             style={{ position: "absolute", right: "20px", top: "30px" }}

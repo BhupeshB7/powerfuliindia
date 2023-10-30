@@ -225,8 +225,8 @@ function Withdrawal() {
         <div className='topUPBg'>
           <div className='container'>
             <div>
-              <h6 className='text-secondary m-3'>Welcome, {data.name}</h6>
-              <h6 className='text-center fw-bold'>Withdrawal History...</h6>
+              <h6 className='text-secondary p-3'>Welcome, {data.name}</h6>
+              <h6 className='text-center fw-bold text-light'>Withdrawal History...</h6>
               <div className='container'>
               <div className="table-responsive">
                 <table className='table table-bordered ' style={{border:'1px solid white'}}>
@@ -269,7 +269,7 @@ function Withdrawal() {
                 
               </div>
               <div className="container ">
-                <button className='btn btn-outline-primary m-3' onClick={handleDashBoard}>DashBoard</button>
+                <button className='btn btn-outline-warning m-3' onClick={handleDashBoard}>DashBoard</button>
               </div>
               </div>
              

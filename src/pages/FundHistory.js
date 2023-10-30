@@ -67,7 +67,7 @@ const handleDashBoard = ()=>{
     {token ?(
         <div className="container pt-3 topUPBg">
         <div className="table-responsive">
-        <h6 className="m-1">Hey, {data.name}</h6>
+        <h6 className="m-1 text-light">Hey, {data.name}</h6>
         <h4 className="fw-bold text-center text-secondary">Fund History</h4>
         <div className="table-responsive">
 
@@ -101,14 +101,14 @@ const handleDashBoard = ()=>{
         </div>
         <div className="pagination">
           {Array.from({ length: Math.ceil(allTransfers.length / transfersPerPage) }, (_, index) => (
-            <button className="btn btn-outline-primary m-1" key={index} onClick={() => handlePageChange(index + 1)}>
+            <button className="btn btn-outline-warning m-1" key={index} onClick={() => handlePageChange(index + 1)}>
               {index + 1}
             </button>
           ))}
         </div>
       </div>
       <div className="container mb-5" style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-    <button className='btn btn-outline-success m-1' onClick={handleDashBoard}>DashBoard</button>
+    <button className='btn btn-outline-light m-1' onClick={handleDashBoard}>DashBoard</button>
     </div>
         </div>
     ):(<>

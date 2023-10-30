@@ -172,7 +172,7 @@ function Setting() {
                         height="23px"
                         width="23px"
                       />{" "}
-                      &nbsp; forgot password{" "}
+                      &nbsp; Change password{" "}
                     </a>
                   </li>
                 </div>
