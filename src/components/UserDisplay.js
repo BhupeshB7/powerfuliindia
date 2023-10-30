@@ -1653,7 +1653,7 @@ const Dashboard = () => {
                             <a
                               className="nav-link active"
                               aria-current="page"
-                              href="/password-reset"
+                              href="/change-password"
                               style={{ color: "cyan", fontWeight: "600" }}
                             >
                               {" "}

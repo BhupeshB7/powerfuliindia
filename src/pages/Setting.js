@@ -162,7 +162,7 @@ function Setting() {
                     <a
                       className="nav-link active"
                       aria-current="page"
-                      href="/password-reset"
+                      href="/change-passwords"
                       style={{ color: "cyan", fontWeight: "600" }}
                     >
                       {" "}
