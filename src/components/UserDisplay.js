@@ -1864,7 +1864,8 @@ const Dashboard = () => {
                       className="card-text text-light"
                       style={{ marginLeft: "15px" }}
                     >
-                      Your Total Income: {data.income} Rs
+                      {/* Your Total Income: {data.income} Rs */}
+                      Total Income = {data.selfIncome} + {data.teamIncome} + {data.rewards} Rs
                     </div>
                     <div className="col">
                       <div className="d-flex flex-row">
