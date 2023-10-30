@@ -65,16 +65,16 @@ const handleDashBoard = ()=>{
   return (
     <>
     {token ?(
-        <div className="container mt-3">
+        <div className="container pt-3 topUPBg">
         <div className="table-responsive">
         <h6 className="m-1">Hey, {data.name}</h6>
         <h4 className="fw-bold text-center text-secondary">Fund History</h4>
         <div className="table-responsive">
 
        
-        <table className="table table-bordered table-striped">
-          <thead>
-            <tr>
+        <table className="table table-bordered table-striped" style={{border:'1px solid white'}}>
+          <thead className="text-warning">
+            <tr className="text-warning">
               <th>#</th>
               <th>Total</th>
               <th>TopUp</th>
@@ -84,9 +84,9 @@ const handleDashBoard = ()=>{
               {/* Add other table headers for additional transfer details */}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-light">
             {currentTransfers.map((transfer,index) => (
-              <tr key={transfer._id}>
+              <tr key={transfer._id} className="text-light">
                 <td>{index +1}</td>
                 <td>{transfer.total}</td>
                 <td>{transfer.amount}</td>

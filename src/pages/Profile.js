@@ -74,15 +74,15 @@ function Profile() {
           <div className="login_Image ">
             <Container>
               <Row>
-                <Col xs={10} md={12} >
+                <Col xs={12} md={12}>
+                  <h5 className="text-center text-secondary">
+                    Welcome, {data.name}
+                  </h5>
                   <div
                     className="table-responsive"
-                    style={{ marginTop: "20px" }}
+                    style={{ marginTop: "20px", color: "white" }}
                   >
-                    <h5 className="text-center text-secondary">
-                      Welcome, {data.name}
-                    </h5>
-                    <table className="table table-bordered">
+                    <table className="table table-bordered text-white">
                       <thead>
                         <tr>
                           <th scope="col">Name</th>
@@ -125,16 +125,22 @@ function Profile() {
                         </tr>
                       </tbody>
                     </table>
-                    <div className="container ">
-                      <Button className="m-1 changePasswordButton" onClick={handleDashBoard}>
-                        DashBoard
-                      </Button>
-                      <Button className="m-1 changePasswordButton" onClick={handleProfile}>
-                        ProfileUpdate
-                      </Button>
-                    </div>
                   </div>
                 </Col>
+                <div className="container ">
+                  <Button
+                    className="m-1 changePasswordButton"
+                    onClick={handleDashBoard}
+                  >
+                    DashBoard
+                  </Button>
+                  <Button
+                    className="m-1 changePasswordButton"
+                    onClick={handleProfile}
+                  >
+                    ProfileUpdate
+                  </Button>
+                </div>
               </Row>
             </Container>
           </div>

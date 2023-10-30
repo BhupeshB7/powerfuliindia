@@ -4,7 +4,7 @@ import { Table, Container, Button } from "react-bootstrap";
 import spinner from "../assets/spinner2.gif";
 import { Link } from "react-router-dom";
 
-function Topup() {
+function TopUpHistory() {
   const [data, setData] = useState([]);
   const [topUpdata, settopUpData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -36,7 +36,7 @@ function Topup() {
       try {
         const response = await axios.get(
           // `http://localhost:5000/api/topupHistory/${userId}`
-          `https://mlm-production.up.railway.app/api/topupUser/${data.userId}`
+          `https://mlm-production.up.railway.app/api/topupHistory/${data.userId}`
         );
         const { topUpdata, currentPage, totalPages } = response.data;
         // console.log(topUpdata);
@@ -91,10 +91,10 @@ function Topup() {
                     <thead>
                       <tr style={{ color: "yellow" }}>
                         <th className="text-center">#</th>
-                        {/* <th className="text-center">Amount</th> */}
+                        <th className="text-center">Amount</th>
                         <th className="text-center">UserId</th>
                         {/* <th className="text-center">Name</th> */}
-                        <th className="text-center">TopUp Id</th>
+                        <th className="text-center">Transfer Id</th>
                         <th>Date</th>
                         {/* Add more table headers for additional fields */}
                       </tr>
@@ -103,7 +103,7 @@ function Topup() {
                       {topUpdata.map((item, index) => (
                         <tr key={item._id} className="text-light">
                           <td>{index + 1}</td>
-                          {/* <td>{item.amount}</td> */}
+                          <td>{item.amount}</td>
                           <td>{item.userId}</td>
                           {/* <td>{item.name}</td> */}
                           <td>{item.targetUserId}</td>
@@ -159,4 +159,4 @@ function Topup() {
   );
 }
 
-export default Topup;
+export default TopUpHistory;

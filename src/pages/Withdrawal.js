@@ -220,18 +220,18 @@ function Withdrawal() {
   }
 
   return (
-    <div>
+    <div >
       {token ? (
-        <div >
+        <div className='topUPBg'>
           <div className='container'>
             <div>
               <h6 className='text-secondary m-3'>Welcome, {data.name}</h6>
               <h6 className='text-center fw-bold'>Withdrawal History...</h6>
               <div className='container'>
               <div className="table-responsive">
-                <table className='table table-bordered '>
+                <table className='table table-bordered ' style={{border:'1px solid white'}}>
                   <thead>
-                    <tr>
+                    <tr className='text-warning'>
                       <th>S.No.</th>
                       <td>User ID</td>
                       <td>Amount</td>
@@ -243,9 +243,9 @@ function Withdrawal() {
                       <td>Date</td>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className='text-light'>
                     {currentWithdrawals.map((request, index) => (
-                      <tr key={index}>
+                      <tr key={index} className='text-light'>
                         <td>{index + 1}</td>
                         <td>{request.userId}</td>
                         <td>{request.amount}</td>

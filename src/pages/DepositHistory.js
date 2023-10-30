@@ -264,7 +264,7 @@ const dashboard =()=>{
                 </tbody>
               </Table>
             ) : (
-              <div className="text-center">No deposit history available.</div>
+              <div className="text-center text-light">No deposit history available.</div>
             )}
             </Container>
             <div className="text-center">

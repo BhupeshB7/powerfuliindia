@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 function ChangePassword() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [oldPasswordError, setOldPasswordError] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -37,38 +37,38 @@ function ChangePassword() {
     setOldPasswordError("");
     setNewPasswordError("");
     setConfirmPasswordError("");
-    setSuccessMessage('');
-    setErrorMessage('');
+    setSuccessMessage("");
+    setErrorMessage("");
     let hasError = false;
-  
+
     if (!oldPassword) {
       setOldPasswordError("Please enter Old Password");
       hasError = true;
     }
-    
+
     if (!newPassword) {
       setNewPasswordError("Please enter New Password");
       hasError = true;
     }
-  
+
     if (!confirmPassword) {
       setConfirmPasswordError("Please enter Confirm Password");
       hasError = true;
     }
     if (newPassword === oldPassword) {
-        if (!newPassword) {
-            setNewPasswordError("Please enter New Password");
-            hasError = true;
-            return
-          }
-        setNewPasswordError("New Password must be different from Old Password");
+      if (!newPassword) {
+        setNewPasswordError("Please enter New Password");
         hasError = true;
+        return;
       }
+      setNewPasswordError("New Password must be different from Old Password");
+      hasError = true;
+    }
     if (newPassword !== confirmPassword) {
       setConfirmPasswordError("New Password and Confirm Password must match");
       hasError = true;
     }
-  
+
     if (!hasError) {
       try {
         const response = await fetch(
@@ -86,9 +86,9 @@ function ChangePassword() {
             }),
           }
         );
-  
+
         const responseData = await response.json();
-  
+
         if (response.status === 200) {
           // Password changed successfully, set the success message
           setSuccessMessage(responseData.message);
@@ -103,7 +103,7 @@ function ChangePassword() {
       }
     }
   };
-  
+
   if (isLoading) {
     return (
       <h6
@@ -131,20 +131,39 @@ function ChangePassword() {
       </h6>
     );
   }
+  const dashboard = () => {
+    window.location.href = "/dashboard";
+  };
   return (
     <div>
       {token ? (
         <div className="topUPBg">
           <Container className="login_Image ">
+            <div
+              className="d-flex justify-content-end"
+              style={{ position: "absolute", right: "20px", top: "30px" }}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/189/189254.png"
+                height="40px"
+                width="40px"
+                onClick={dashboard}
+                alt="back"
+              />
+            </div>
             <Row>
               <h6 className="text-center text-secondary">Change Password</h6>
 
               <Col xs={12} sm={12} md={12}>
                 <div className="changePassword">
-                {successMessage && <Alert variant="success">{successMessage}</Alert>}
-                {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+                  {successMessage && (
+                    <Alert variant="success">{successMessage}</Alert>
+                  )}
+                  {errorMessage && (
+                    <Alert variant="danger">{errorMessage}</Alert>
+                  )}
                   <div>
-                    <label>Old Password</label> <br/>
+                    <label>Old Password</label> <br />
                     <input
                       type="password"
                       value={oldPassword}
@@ -152,30 +171,37 @@ function ChangePassword() {
                       required
                     />
                     {oldPasswordError && (
-                      <Alert variant="danger" style={{width:'300px'}}>{oldPasswordError}</Alert>
+                      <Alert variant="danger" style={{ width: "300px" }}>
+                        {oldPasswordError}
+                      </Alert>
                     )}
                   </div>
                   <div>
-                    <label>New Password</label><br/>
+                    <label>New Password</label>
+                    <br />
                     <input
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
                     {newPasswordError && (
-                      <Alert variant="danger"style={{width:'300px'}}>{newPasswordError}</Alert>
+                      <Alert variant="danger" style={{ width: "300px" }}>
+                        {newPasswordError}
+                      </Alert>
                     )}
                   </div>
-                 
+
                   <div>
-                    <label>Confirm Password</label> <br/>
+                    <label>Confirm Password</label> <br />
                     <input
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {confirmPasswordError && (
-                      <Alert variant="danger"style={{width:'300px'}}>{confirmPasswordError}</Alert>
+                      <Alert variant="danger" style={{ width: "300px" }}>
+                        {confirmPasswordError}
+                      </Alert>
                     )}
                   </div>
                   <Button
@@ -196,15 +222,14 @@ function ChangePassword() {
             Re login to continue...
           </h6>
           <div className="text-center">
-          <Link
-            to="/login"
-            className="text-center text-primary"
-            style={{ textDecoration: "underline" }}
-          >
-            Login
-          </Link>
+            <Link
+              to="/login"
+              className="text-center text-primary"
+              style={{ textDecoration: "underline" }}
+            >
+              Login
+            </Link>
           </div>
-          
         </>
       )}
     </div>

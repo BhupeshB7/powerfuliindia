@@ -37,6 +37,7 @@ import UserWallet from './components/Admin/UserWallet';
 import DepositForm from './pages/DepositForm';
 import DepsoitHistory from './pages/DepositHistory';
 import ChangePassword from './pages/ChangePassword';
+import TopUpHistory from './pages/TopUpHistory';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -102,6 +103,7 @@ function App() {
           <Route path='/game/spinWheel' element={<SpinGame/>} />
           <Route path='/withdrawal' element={<Withdrawal/>} token={token}/>
           <Route path='/topUp' element={<TopUp/>}/>
+          <Route path='/topUp-history' element={<TopUpHistory/>}/>
           <Route path='/profile-update' element={<ProfileUpdate/>} />
 
           <Route  path="/forgotpassword/:id/:token" element={<ForgotPassword/>} />
