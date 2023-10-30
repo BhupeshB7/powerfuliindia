@@ -1247,6 +1247,7 @@ const Dashboard = () => {
   const depositFormPage = () => {
     window.location.href = "/depositform";
   };
+  const totalIncome =  data.selfIncome + data.teamIncome +data.rewards;
   return (
     <div>
       {/* <div style={{ background: "#000428" }}> */}
@@ -1865,7 +1866,7 @@ const Dashboard = () => {
                       style={{ marginLeft: "15px" }}
                     >
                       {/* Your Total Income: {data.income} Rs */}
-                      Total Income = {data.selfIncome} + {data.teamIncome} + {data.rewards} Rs
+                      Total Income ={totalIncome} Rs
                     </div>
                     <div className="col">
                       <div className="d-flex flex-row">

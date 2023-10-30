@@ -52,6 +52,8 @@ function Setting() {
       </h6>
     );
   }
+  const totalIncome =  data.selfIncome + data.teamIncome +data.rewards;
+ 
   return (
     <div>
       {token ? (
@@ -106,7 +108,7 @@ function Setting() {
                     className="card-text text-light"
                     style={{ marginLeft: "15px" }}
                   >
-                    Your Total Income: {data.income} Rs
+                    Your Total Income: {totalIncome} Rs
                   </div>
                   <div className="col">
                     <div className="d-flex flex-row">
