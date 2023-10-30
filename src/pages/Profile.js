@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner2.gif";
-import { Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 function Profile() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,67 +70,73 @@ function Profile() {
   return (
     <div>
       {token ? (
-        <div className="dashboard-profile-center">
-          <div className="user-profile">
+        <div className="topUPBg">
+          <div className="login_Image ">
             <Container>
-            <div className="container table-responsive" style={{ marginTop: "20px" }}>
-              <h5 className="text-center text-secondary">
-                Welcome, {data.name}
-              </h5>
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">{data.name}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Email:</td>
-                    <td>{data.email}</td>
-                  </tr>
-                  <tr>
-                    <td>Mobile:</td>
-                    <td>{data.mobile}</td>
-                  </tr>
-                  <tr>
-                    <td>SponsorId:</td>
-                    <td>{data.sponsorId}</td>
-                  </tr>
-                  <tr>
-                    <td>UserId:</td>
-                    <td>{data.userId}</td>
-                  </tr>
-                  <tr>
-                    <td>Address:</td>
-                    <td>{data.address}</td>
-                  </tr>
-                  <tr>
-                    <td>Account No:</td>
-                    <td>{data.accountNo}</td>
-                  </tr>
-                  <tr>
-                    <td>IFSC CODE:</td>
-                    <td>{data.ifscCode}</td>
-                  </tr>
+              <Row>
+                <Col xs={10} md={12} >
+                  <div
+                    className="table-responsive"
+                    style={{ marginTop: "20px" }}
+                  >
+                    <h5 className="text-center text-secondary">
+                      Welcome, {data.name}
+                    </h5>
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">{data.name}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Email:</td>
+                          <td>{data.email}</td>
+                        </tr>
+                        <tr>
+                          <td>Mobile:</td>
+                          <td>{data.mobile}</td>
+                        </tr>
+                        <tr>
+                          <td>SponsorId:</td>
+                          <td>{data.sponsorId}</td>
+                        </tr>
+                        <tr>
+                          <td>UserId:</td>
+                          <td>{data.userId}</td>
+                        </tr>
+                        <tr>
+                          <td>Address:</td>
+                          <td>{data.address}</td>
+                        </tr>
+                        <tr>
+                          <td>Account No:</td>
+                          <td>{data.accountNo}</td>
+                        </tr>
+                        <tr>
+                          <td>IFSC CODE:</td>
+                          <td>{data.ifscCode}</td>
+                        </tr>
 
-                  <tr>
-                    <td>Profile Created:</td>
-                    <td>{data.createdAt}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="container ">
-                <button className="form_button" onClick={handleDashBoard}>
-                  DashBoard
-                </button>
-                <button className="form_button" onClick={handleProfile}>
-                  ProfileUpdate
-                </button>
-              </div>
-            </div>
+                        <tr>
+                          <td>Profile Created:</td>
+                          <td>{data.createdAt}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div className="container ">
+                      <Button className="m-1 changePasswordButton" onClick={handleDashBoard}>
+                        DashBoard
+                      </Button>
+                      <Button className="m-1 changePasswordButton" onClick={handleProfile}>
+                        ProfileUpdate
+                      </Button>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
             </Container>
-            
           </div>
         </div>
       ) : (

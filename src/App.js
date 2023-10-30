@@ -36,6 +36,7 @@ import SpinGame from './pages/SpinGame';
 import UserWallet from './components/Admin/UserWallet';
 import DepositForm from './pages/DepositForm';
 import DepsoitHistory from './pages/DepositHistory';
+import ChangePassword from './pages/ChangePassword';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
 
           <Route  path="/forgotpassword/:id/:token" element={<ForgotPassword/>} />
           <Route  path="/password-reset" element={<PasswordReset/>} />
+          <Route  path="/change-password" element={<ChangePassword/>} />
           {/* <Route  path="/userTask" element={<UserTask/>} /> */}
           <Route path='/tasks' element={<TaskList/>}/>
           <Route path='/fundHistory' element={<FundHistory/>}/>
