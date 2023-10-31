@@ -1866,7 +1866,7 @@ const Dashboard = () => {
                       style={{ marginLeft: "15px" }}
                     >
                       {/* Your Total Income: {data.income} Rs */}
-                      Total Income ={totalIncome} Rs
+                      Total Income :{totalIncome} Rs
                     </div>
                     <div className="col">
                       <div className="d-flex flex-row">

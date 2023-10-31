@@ -89,7 +89,7 @@ function TopUpHistory() {
                     style={{ border: "2px solid white" }}
                   >
                     <thead>
-                      <tr text-warning>
+                      <tr className="text-warning">
                         <th className="text-center">#</th>
                         <th className="text-center">UserId</th>
                         {/* <th className="text-center">Name</th> */}
