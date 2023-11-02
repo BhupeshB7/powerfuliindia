@@ -38,32 +38,32 @@ const AllFundTransfer = () => {
     }
   };
 
-  const handleFundApprove = async (userId) => {
-    if (window.confirm("Are You Sure For Approve Fund?")) {
-      try {
-        await axios.post(
-          `https://mlm-production.up.railway.app/api/transfer/approve/${userId}`
-        );
-        fetchTransferDetail(); // Refresh the list of transfers after approving
-      } catch (error) {
-        console.error("Error approving transfer:", error);
-      }
-    }
-  };
+  // const handleFundApprove = async (userId) => {
+  //   if (window.confirm("Are You Sure For Approve Fund?")) {
+  //     try {
+  //       await axios.post(
+  //         `https://mlm-production.up.railway.app/api/transfer/approve/${userId}`
+  //       );
+  //       fetchTransferDetail(); // Refresh the list of transfers after approving
+  //     } catch (error) {
+  //       console.error("Error approving transfer:", error);
+  //     }
+  //   }
+  // };
 
-  const handleFundReject = async (userId) => {
-    if (window.confirm("Are you sure?")) {
-      try {
-        await axios.post(
-          `https://mlm-production.up.railway.app/api/transfer/reject/${userId}`
-        );
-        fetchTransferDetail(); // Refresh the list of transfers after rejecting
-        alert("Fund Rejected!");
-      } catch (error) {
-        console.error("Error rejecting transfer:", error);
-      }
-    }
-  };
+  // const handleFundReject = async (userId) => {
+  //   if (window.confirm("Are you sure?")) {
+  //     try {
+  //       await axios.post(
+  //         `https://mlm-production.up.railway.app/api/transfer/reject/${userId}`
+  //       );
+  //       fetchTransferDetail(); // Refresh the list of transfers after rejecting
+  //       alert("Fund Rejected!");
+  //     } catch (error) {
+  //       console.error("Error rejecting transfer:", error);
+  //     }
+  //   }
+  // };
   // Calculate current transfers for the current page
   const indexOfLastTransfer = currentPage * transfersPerPage;
   const indexOfFirstTransfer = indexOfLastTransfer - transfersPerPage;
@@ -84,8 +84,8 @@ const AllFundTransfer = () => {
                             <th>User Name</th>
                             <th>Transfer Amount</th>
                             <th>Deduction</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            {/* <th>Status</th> */}
+                            {/* <th>Actions</th> */}
                           </tr>
                         </thead>
                         <tbody>
@@ -114,27 +114,27 @@ const AllFundTransfer = () => {
                                     ) : null}
                                     <td>{transferDetail.amount}</td>
                                     <td>{transferDetail.deduction}</td>
-                                    <td>{transferDetail.status}</td>
+                                    {/* <td>{transferDetail.status}</td> */}
                                     <td>
                                     {/* {console.log("*-----TransferId----*")}
                                       {console.log(transfer.id)}
                                       {console.log("*------------*")} */}
-                                      <button
+                                      {/* <button
                                         className="btn btn-success sm m-1"
                                         onClick={() =>
                                           handleFundApprove(transfer.id)
                                         }
                                       >
                                         Approve
-                                      </button>
-                                      <button
+                                      </button> */}
+                                      {/* <button
                                         className="btn btn-danger sm m-1"
                                         onClick={() =>
                                           handleFundReject(transfer.id)
                                         }
                                       >
                                         Reject
-                                      </button>
+                                      </button> */}
                                     </td>
                                   </tr>
                                 )

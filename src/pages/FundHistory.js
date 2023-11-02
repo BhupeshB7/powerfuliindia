@@ -79,7 +79,7 @@ const handleDashBoard = ()=>{
               <th>Total</th>
               <th>TopUp</th>
               <th>Deduct Amount</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
               <th>Date</th>
               {/* Add other table headers for additional transfer details */}
             </tr>
@@ -91,7 +91,7 @@ const handleDashBoard = ()=>{
                 <td>{transfer.total}</td>
                 <td>{transfer.amount}</td>
                 <td>{transfer.deduction}</td>
-                <td>{transfer.status}</td>
+                {/* <td>{transfer.status}</td> */}
                 <td> {transfer.createdAt ? new Date(transfer.createdAt).toLocaleString() : 'unknown'}</td>
                 {/* Add other table data cells for additional transfer details */}
               </tr>
