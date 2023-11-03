@@ -610,20 +610,7 @@ ul li:nth-child(3) {
   list-style: none !important;
 }
 
-.game_account {
-  /* position: absolute; */
-  position: fixed;
-  top: 2%;
-  /* right: 1%; */
 
-  width: 100%;
-  right: 2%;
-  display: flex;
-  justify-content: flex-end;
-}
-.game_balance h6 {
-  font-size: 20px !important;
-}
 .color-options {
   display: flex;
   justify-content: space-between;
@@ -728,24 +715,41 @@ ul li:nth-child(3) {
   font-size: 14px;
   font-weight: 600;
 }
+.colorbackGround .logo{
+  background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .game_box {
-  height: 200px;
+  height: 300px;
   width: 100%;
   /* background: rgb(237, 202, 75); */
-  background: #fdc830; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f37335,
-    #fdc830
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f37335,
-    #fdc830
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background-blend-mode: multiply;
+  border-bottom-left-radius: 25px !important;
+ border-bottom-right-radius: 25px !important;
+  display: flex;
+  flex-direction: row;
+}
+.game_box .wallet{
+  display: flex;
+  height: 150px;
+  background-image: linear-gradient(to left, #434343 0%, rgb(15, 14, 14) 100%); border-radius: 10px;
 
-  border-radius: 25px;
-  margin-top: -30px;
+  width: 100%;
+margin: 30px;
+flex-direction: column;
+}
+.wallet .content{
+  width: 200px;
+display: flex;
+padding-left: 40px;
+padding-top: 20px;
+justify-content: space-around;
+  
 }
 .game_welcome {
   display: flex;
@@ -824,7 +828,7 @@ ul li:nth-child(3) {
 }
 .colorbackGround {
   /* background-image: url("https://img.freepik.com/free-vector/smooth-golden-wave-background_23-2148804707.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais"); */
-  background-image: url("https://img.freepik.com/free-vector/neon-lights-background-theme_52683-44625.jpg?w=996&t=st=1697444236~exp=1697444836~hmac=3c95d83d49b494cd252e0f15b10f3ef594cd76a1b1339f4d2df1bb5c46c50632");
+  background-image: url("https://img.freepik.com/premium-vector/red-background-design_802494-5.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais");
   /* background-repeat: no-repeat; */
   background-size: contain;
 }
@@ -832,7 +836,44 @@ ul li:nth-child(3) {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
+  background-image:url('https://img.freepik.com/free-vector/gradient-hexagonal-background_52683-62359.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.bg-spin .balanceCard, .bg-spin .game{
+  animation: fadeInAnimation ease-in 3s;
+  animation-iteration-count:1;
+  transition: all 0.3s ease-in-out;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+.bg-spin .container{
+  background: transparent;
+  border: 1px solid gray;
+  box-shadow: 2px 4px  6px rgba(246, 238, 238, 0.25);
+  animation: fadeInAnimation ease-in 2s;
+  animation-iteration-count:1;
+  transition: all 0.3s ease-in-out;
+}
+.bg-spin .container .box{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(245, 245, 195);
+  height: 160px;
+  margin: auto;
+  border-radius: 8px;
+  background-image: linear-gradient(to left, #424242 0%, rgb(9, 9, 9) 100%);
 }
 .password_Form {
   display: flex;

@@ -200,6 +200,7 @@ import { Link } from "react-router-dom";
 import welcome from '../assets/gameWelcome.png'
 import spinner from '../assets/spinner2.gif'
 import QRCODE from "../assets/QRCODE2.jpg";
+import LOGO from "../assets/icon.png"
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -621,7 +622,23 @@ const NewGame = () => {
   {isTokenValid ?(
     <>
      <div className="colorbackGround">
-      <div className="game_box"></div>
+      <div className="logo">
+        <img src={LOGO} alt="logo" height='70px' width='100px'/>
+      </div>
+      <div className="game_box">
+
+        <div className="wallet">
+          <div className="content">
+          <img src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png" height='40px' width='50px' alt="wallet"/>
+          <b className="text-light">{profile.balance} ₹</b> <p className="text-secondary">wallet</p>
+          </div>
+          <div className="content">
+          <img src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png" height='40px' width='50px' alt="wallet"/>
+          <b className="text-light">{profile.totalwin} ₹</b> <p className="text-secondary">Income </p> 
+          </div>
+        </div>
+        
+      </div>
       <div className="game_welcome">
         <img
           src={welcome}
@@ -629,6 +646,7 @@ const NewGame = () => {
           width="130px"
           alt="welcome"
         />
+     
       </div>
       <Container className="pt-5">
         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -797,14 +815,12 @@ const NewGame = () => {
           </Col>
         </Row>
       </Container>
-      <Container>
-        <Row>
-          <Col>
+      
             <div
               className="table-responsive"
               style={{ borderRadius: "10px", marginTop: "10px" }}
             >
-              <table className="table table-bordered table-hover table-dark">
+              <table className="table  table-hover table-dark">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -877,28 +893,7 @@ const NewGame = () => {
                 Page {currentPage} of {totalPages}
               </div>
             </div>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <div className="row game_account">
-          <div className="col-5 col-sm-9 col-md-6 col-lg-4 game_balance">
-            <h6 className="text-secondary">
-              Balance <b style={{ color: "brown" }}> {profile.balance} ₹</b>
-              {/* UserId <b style={{ color: "brown" }}> {data.userId} ₹</b> */}
-            </h6>
-            <h5></h5>
-            <h6 className="text-secondary">
-              Total win <b style={{ color: "brown" }}> {profile.totalwin} ₹</b>
-            </h6>
-            <h5></h5>
-          </div>
-          {/* <div className="col-5 col-sm-9 col-md-6 col-lg-4 balanceCard">
-            <h6 className="text-info">Total win</h6>
-            <h5 style={{ color: "cyan" }}> {profile.totalwin} ₹</h5>
-          </div> */}
-        </div>
-      </Container>
+          
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}
