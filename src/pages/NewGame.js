@@ -915,18 +915,16 @@ const NewGame = () => {
         onHide={() => setShowModal(false)}
         className="modal-center"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Choose Bet Amount</Modal.Title>
+        <Modal.Header closeButton style={{ background: userChoice.toLowerCase(),color:'white'}}>
+          <Modal.Title >Choose Bet Amount</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h6>Choose Color</h6>
           <div
             style={{
               background: userChoice.toLowerCase(),
-              height: "35px",
-              width: "120px",
-              color: "#fff",
-              borderRadius: "6px",
+              height: "100px",
+              width: "100px",
+              clipPath:'polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)'
             }}
           >
             {/* {userChoice} */}
@@ -948,7 +946,7 @@ const NewGame = () => {
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleBet}>
+          <Button   onClick={handleBet} style={{background:userChoice.toLowerCase()}}>
             Place Bet
           </Button>
         </Modal.Footer>
