@@ -820,8 +820,8 @@ const NewGame = () => {
               className="table-responsive"
               style={{ borderRadius: "10px", marginTop: "10px" }}
             >
-              <table className="table  table-hover table-dark">
-                <thead>
+              <table className="table  table-hover " style={{ backgroundImage:'linear-gradient(60deg, #29323c 0%, #1d1f20 100%)'}}>
+                <thead className="text-warning">
                   <tr>
                     <th>#</th>
                     <th>Session</th>
@@ -830,7 +830,7 @@ const NewGame = () => {
                     <th>Date</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{color:'#FFD700'}}>
                   {gameHistory && gameHistory.length > 0 ? (
                     gameHistory.map((game, index) => (
                       <tr key={index}>
