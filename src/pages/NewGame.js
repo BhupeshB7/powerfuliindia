@@ -787,15 +787,7 @@ const NewGame = () => {
                       <div className="timer">
                         {time <= 15 ? (
                           <div className="blur-background">
-                            <div
-                              style={{
-                                background: "white",
-                                width: "300px",
-                                height: "300px",
-                                borderRadius: "50%",
-                                textAlign: "center",
-                              }}
-                            >
+                            <div className="remaining" >
                               <h1>{`=00:${time
                                 .toString()
                                 .padStart(2, "0")}`}</h1>
