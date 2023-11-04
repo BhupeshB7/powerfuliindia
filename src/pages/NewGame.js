@@ -788,7 +788,7 @@ const NewGame = () => {
                         {time <= 15 ? (
                           <div className="blur-background">
                             <div className="remaining" >
-                              <h1 className="text-center" style={{fontSize:'56px'}}>{`00:${time
+                              <h1 className="text-danger" style={{fontSize:'56px'}}>{`00:${time
                                 .toString()
                                 .padStart(2, "0")}`}</h1>
                             </div>

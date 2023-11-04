@@ -1223,21 +1223,12 @@ justify-content: space-around;
   background: #e2dcdc;
   height: 300px;
   width: 300px;
-  animation: remainInAnimation ease-in 5s;
-  animation-iteration-count:infinite;
-  animation-fill-mode:backwards;
+ transition: all 0.3s ease-in-out;
 }
-@keyframes remainInAnimation {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
+
 .modal-center{
   position: fixed;
-  top: 50% !important;
+  top: 40% !important;
   bottom: 0 !important;
   left: 0 !important;
   right: 0 !important;
