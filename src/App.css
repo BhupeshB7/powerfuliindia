@@ -763,6 +763,23 @@ padding-top: 20px;
 justify-content: space-around;
   
 }
+.time_box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 20px;
+  height: 125px;
+ 
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);}
+.time_box_2{
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  width: 80%;
+  height: 100%;
+  align-items: center;
+}
 .game_welcome {
   display: flex;
   justify-content: flex-start !important;
@@ -770,6 +787,7 @@ justify-content: space-around;
   margin-left: 20px;
   position: absolute;
   top: 30px;
+
 }
 .game_session {
   height: 115px;

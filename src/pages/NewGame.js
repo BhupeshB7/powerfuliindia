@@ -624,9 +624,9 @@ const NewGame = () => {
     return `${month}${day}-${hour}${minute}-${randomDigits}`;
   }
   const timerStyle = {
-    background: timerBlink && time <= 15 ? 'White':'',
-    height: timerBlink && time <= 15 ? '60px':'',
-    width: timerBlink && time <= 15 ? '60px':'',
+    background: timerBlink && time <= 15 ? "White" : "",
+    height: timerBlink && time <= 15 ? "60px" : "",
+    width: timerBlink && time <= 15 ? "60px" : "",
     color: timerBlink && time <= 15 ? "red" : "white",
     animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
   };
@@ -714,6 +714,37 @@ const NewGame = () => {
             <div className="game_welcome">
               <img src={welcome} height="100px" width="130px" alt="welcome" />
             </div>
+            <Container>
+              <Row>
+                <Col sm={12}>
+                  <div className="time_box">
+                    <div className="progress">
+                      <div
+                        className="progress"
+                        role="progressbar"
+                        aria-label="Basic example"
+                        aria-valuenow={0}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        <div className="progress-bar" style={{ width: "20%" }} />
+                      </div>
+                    </div>
+                    <div className="time_box_2">
+                      <div className="part1 p-3" >
+                       <img src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png" width='50px' height='50px' alt="time"/>
+                      
+                      <br/> <span >1 min</span>
+                      </div>
+                      <div className="part2">
+                       <img src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png" width='80px' height='70px' alt="time"/>
+                         
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
             <Container className="pt-5">
               <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
                 <Col sm={12} md={6} lg={6} className="game_session">
@@ -739,7 +770,10 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        <h4 >Remaining Time: <b style={timerStyle}> {time}</b>s &nbsp; </h4>
+                        <h4>
+                          Remaining Time: <b style={timerStyle}> {time}</b>s
+                          &nbsp;{" "}
+                        </h4>
                       </div>
                     </div>
                     <p className="text-info">Sessioin ID: {uniqueId}</p>
@@ -747,9 +781,7 @@ const NewGame = () => {
                 </Col>
                 <Col sm={12} md={6}>
                   <div>
-                    <h6 className="p-2 text-warning" >
-                      Have a Good Luck!
-                    </h6>
+                    <h6 className="p-2 text-warning">Have a Good Luck!</h6>
                   </div>
                 </Col>
               </Row>
@@ -789,15 +821,14 @@ const NewGame = () => {
                             ? "gray"
                             : color.toLowerCase(),
                           margin: "5px",
-                         border: contentDisabled
-                         ? "gray"
-                         : `1.5px solid ${color.toLowerCase()}` ,
+                          border: contentDisabled
+                            ? "gray"
+                            : `1.5px solid ${color.toLowerCase()}`,
                         }}
                         onClick={() => handleColorSelect(color)}
                         className="game_button"
                         disabled={gameResult !== ""}
-                      >
-                      </button>
+                      ></button>
                     ))}
                   </div>
 
@@ -812,7 +843,6 @@ const NewGame = () => {
             /> */}
                 </Col>
               </Row>
-              
             </Container>
 
             <div className="table-responsive" style={{ marginTop: "10px" }}>
@@ -961,7 +991,11 @@ const NewGame = () => {
               <Modal show={showMessageModal} onHide={closeMessageModal}>
                 <Modal.Header
                   closeButton
-                  style={{ background: "blueViolet", color: "white", border:'1.7px solid blueViolet' }}
+                  style={{
+                    background: "blueViolet",
+                    color: "white",
+                    border: "1.7px solid blueViolet",
+                  }}
                 >
                   <Modal.Title>Message</Modal.Title>
                 </Modal.Header>
