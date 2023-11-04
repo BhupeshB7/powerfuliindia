@@ -870,8 +870,8 @@ justify-content: space-around;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
-}
+  background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
+  }
 .bg-spin .gameLogo{
   width: 100%;
   background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
