@@ -671,7 +671,21 @@ const NewGame = () => {
 
   function WithLabelExample() {
     const now = 30;
-    return <ProgressBar now={now}  style={{background:'rgb(15, 14, 14)',color:'#434343', margin:'15px'}}/>;
+    const now1 = 100;
+    // Define custom styles for the progress bar and background
+    const progressBarStyle = {
+      backgroundColor: 'rgb(15, 14, 14)', // Change the background color
+    };
+  
+    const progressStyle = {
+      backgroundColor: '#434343', // Change the progress bar color
+    };
+  
+    return (
+      <ProgressBar now={now1} style={progressBarStyle}>
+        <ProgressBar now={now} style={progressStyle} />
+      </ProgressBar>
+    );
   }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
