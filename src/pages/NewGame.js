@@ -209,6 +209,7 @@ import welcome from "../assets/gameWelcome.png";
 import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -665,6 +666,13 @@ const NewGame = () => {
       </h6>
     );
   }
+
+
+function ProgressTime() {
+  const now = 30;
+  return <ProgressBar now={now} />;
+}
+
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
@@ -718,18 +726,7 @@ const NewGame = () => {
               <Row>
                 <Col sm={12}>
                   <div className="time_box">
-                    <div className="progress">
-                      <div
-                        className="progress"
-                        role="progressbar"
-                        aria-label="Basic example"
-                        aria-valuenow={0}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                      >
-                        <div className="progress-bar" style={{ width: "20%" }} />
-                      </div>
-                    </div>
+                    <ProgressTime/>
                     <div className="time_box_2">
                       <div className="part1 p-3" >
                        <img src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png" width='50px' height='50px' alt="time"/>
@@ -770,7 +767,7 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        <h4>
+                        <h4 style={{color:'#bbb'}}>
                           Remaining Time: <b style={timerStyle}> {time}</b>s
                           &nbsp;{" "}
                         </h4>
