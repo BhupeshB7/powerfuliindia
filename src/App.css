@@ -1216,10 +1216,11 @@ justify-content: space-around;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
-  color: red;
+  font-size: 56px !important;
+  color: red !important;
   border-radius: 10px;
-  background: #3b3b3b;
+  font-weight: bold !important;
+  background: #e2dcdc;
   height: 300px;
   width: 300px;
 }
