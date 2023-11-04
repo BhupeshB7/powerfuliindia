@@ -1028,7 +1028,7 @@ const NewGame = () => {
                 </Modal.Header>
                 <Modal.Body>No Message.</Modal.Body>
                 <Modal.Footer>
-                  <Button  onClick={closeModal} style={{background:'blueViolet'}}>
+                  <Button  onClick={closeMessageModal} style={{background:'blueViolet'}}>
                     Close
                   </Button>
                 </Modal.Footer>
