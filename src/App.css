@@ -1220,6 +1220,8 @@ justify-content: space-around;
   color: red;
   border-radius: 10px;
   background: #3b3b3b;
+  height: 300px;
+  width: 300px;
 }
 .modal-center{
   position: fixed;
