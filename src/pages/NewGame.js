@@ -671,7 +671,7 @@ const NewGame = () => {
 
   function WithLabelExample() {
     const now = 30;
-    return <ProgressBar now={now}  style={{background:'gray', margin:'10px'}}/>;
+    return <ProgressBar now={now}  style={{background:'rgb(15, 14, 14)',color:'#434343', margin:'15px'}}/>;
   }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
@@ -732,7 +732,7 @@ const NewGame = () => {
                       <div className="part1 p-3" >
                        <img src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png" width='50px' height='50px' alt="time"/>
                       
-                      <br/> <h6 >1 min</h6>
+                      <br/> <h6 className="text-warning">1 min</h6>
                       </div>
                       <div className="part2">
                        <img src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png" width='80px' height='70px' alt="time"/>
