@@ -195,12 +195,20 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Button, Form, Modal, Alert } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Row,
+  Button,
+  Form,
+  Modal,
+  Alert,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import welcome from '../assets/gameWelcome.png'
-import spinner from '../assets/spinner2.gif'
+import welcome from "../assets/gameWelcome.png";
+import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
-import LOGO from "../assets/icon.png"
+import LOGO from "../assets/icon.png";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -219,28 +227,37 @@ const NewGame = () => {
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showMessageModal, setShowMessageModal] = useState(false);
+
+  const openMessageModal = () => {
+    setShowMessageModal(true);
+  }
+
+  const closeMessageModal = () => {
+    setShowMessageModal(false);
+  }
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
   };
-  
+
   const isTokenExpired = () => {
     const expireTime = getTokenExpireTime();
     return expireTime ? expireTime < Date.now() : true;
   };
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   useEffect(() => {
     if (isTokenExpired()) {
       setIsTokenValid(false);
       // redirect to homepage
       window.location.href = "/login";
     }
-  }, []);  
+  }, []);
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
     amount: "",
-    UTR:"",
+    UTR: "",
   });
   const [formData1, setFormData1] = useState({
     userId: "",
@@ -277,13 +294,13 @@ const NewGame = () => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
-        if(result.role){
-          const userrole = result.role
+        if (result.role) {
+          const userrole = result.role;
           // console.log(userrole);
-          if(userrole === 'admin'){
-            localStorage.setItem('check','nfwnwen');
+          if (userrole === "admin") {
+            localStorage.setItem("check", "nfwnwen");
           }
-      }
+        }
         setData(result);
 
         setIsLoading(false);
@@ -295,7 +312,7 @@ const NewGame = () => {
   }, [token]);
   // const userId = "PI17218169";
   const handleSubmit = async (e) => {
-    if(formData.amount<100){
+    if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 200");
       return;
     }
@@ -323,7 +340,7 @@ const NewGame = () => {
     }
   };
   const handleSubmitWithdrawal = async (e) => {
-    if(formData1.amount<200){
+    if (formData1.amount < 200) {
       alert("Minimum Withdrawal Amount 200");
       return;
     }
@@ -374,12 +391,12 @@ const NewGame = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const pageSize = 20; // Set the page size (items per page)
   const handleAlert = (message) => {
     setAlertMessage(message);
     setShowAlert(true);
-  }
+  };
   const fetchGameHistory = async (page) => {
     try {
       const response = await axios.get(
@@ -516,7 +533,7 @@ const NewGame = () => {
       handleAlert("Insufficient Balance");
       setShowModal(false);
       return;
-    }else {
+    } else {
       // Close the modal after placing the bet
       setShowModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
@@ -619,61 +636,91 @@ const NewGame = () => {
     return array;
   }
   if (isLoading) {
-    return <h6 className='text-center' style={{marginTop:'-70px', display:'flex', alignItems:'center', justifyContent:'center', height:'100vh', width:'100%' }}><img src={spinner} alt="spinner" height="100px" width="100px"  style={{display:'flex', justifyContent:'center', alignItems:'center'}}/></h6>;
+    return (
+      <h6
+        className="text-center"
+        style={{
+          marginTop: "-70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          width: "100%",
+        }}
+      >
+        <img
+          src={spinner}
+          alt="spinner"
+          height="100px"
+          width="100px"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      </h6>
+    );
   }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
     <>
-   
-   
-  {isTokenValid ?(
-    <>
-     <div className="colorbackGround">
-      <div className="alert">
-     {showAlert && (
-        <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-          <Alert.Heading>Error</Alert.Heading>
-          <p>{alertMessage}</p>
-        </Alert>
-      )}
-      </div>
-      <div className="logo">
-        <img src={LOGO} alt="logo" height='70px' width='100px'/>
-      </div>
-      <div className="game_box">
-
-        <div className="wallet">
-          <div className="content">
-          <img src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png" height='40px' width='50px' alt="wallet"/>
-          <b className="text-light">{profile.balance} ₹</b> <p className="text-secondary">wallet</p>
-          </div>
-          <div className="content">
-          <img src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png" height='40px' width='50px' alt="wallet"/>
-          <b className="text-light">{profile.totalwin} ₹</b> <p className="text-secondary">Income </p> 
-          </div>
-        </div>
-        
-      </div>
-      <div className="game_welcome">
-        <img
-          src={welcome}
-          height="100px"
-          width="130px"
-          alt="welcome"
-        />
-     
-      </div>
-      <Container className="pt-5">
-        <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
-          <Col sm={12} md={6} lg={6} className="game_session">
-            <div>
-              <h6 className="text-light p-2" style={{ textAlign: "end" }}>
-                Game Session
-              </h6>
-              <div>
-                <style>
-                  {`
+      {isTokenValid ? (
+        <>
+          <div className="colorbackGround">
+            <div className="alert">
+              {showAlert && (
+                <Alert
+                  variant="danger"
+                  onClose={() => setShowAlert(false)}
+                  dismissible
+                >
+                  <Alert.Heading>Error</Alert.Heading>
+                  <p>{alertMessage}</p>
+                </Alert>
+              )}
+            </div>
+            <div className="logo">
+              <img src={LOGO} alt="logo" height="70px" width="100px" />
+            </div>
+            <div className="game_box">
+              <div className="wallet">
+                <div className="content">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png"
+                    height="40px"
+                    width="50px"
+                    alt="wallet"
+                  />
+                  <b className="text-light">{profile.balance} ₹</b>{" "}
+                  <p className="text-secondary">wallet</p>
+                </div>
+                <div className="content">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png"
+                    height="40px"
+                    width="50px"
+                    alt="wallet"
+                  />
+                  <b className="text-light">{profile.totalwin} ₹</b>{" "}
+                  <p className="text-secondary">Income </p>
+                </div>
+              </div>
+            </div>
+            <div className="game_welcome">
+              <img src={welcome} height="100px" width="130px" alt="welcome" />
+            </div>
+            <Container className="pt-5">
+              <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
+                <Col sm={12} md={6} lg={6} className="game_session">
+                  <div>
+                    <h6 className="text-light p-2" style={{ textAlign: "end" }}>
+                      Game Session
+                    </h6>
+                    <div>
+                      <style>
+                        {`
           @keyframes blink {
             0% {
               opacity: 1;
@@ -686,66 +733,70 @@ const NewGame = () => {
             }
           }
         `}
-                </style>
+                      </style>
 
-                <div className="timer">
-                  <h4 style={timerStyle}>Remaining Time: {time}s</h4>
-                </div>
-              </div>
-              <p className="text-info">Sessioin ID: {uniqueId}</p>
-            </div>
-          </Col>
-          <Col sm={12} md={6}>
-            <div>
-              <h6 className="p-2" style={{color:'#240b36'}}>Have a Good Luck!</h6>
-            </div>
-          </Col>
-        </Row>
-        {gameResult && (
-          <Row>
-            <Col sm={12} md={6} lg={6}>
-              <div className="text-center">
-                <h5 className="mt-3">{gameResult}</h5>
-                {gameResult === "You Win ₹ 0" ? (
-                  <p>You didn't place a bet.</p>
-                ) : (
-                  <p>Winning Amount: ₹ {winningAmount}</p>
-                )}
-              </div>
-            </Col>
-          </Row>
-        )}
-        <Row>
-          <Col
-            sm={12}
-            md={6}
-            lg={6}
-            className={`game_choice_color ${contentDisabled ? "disabled" : ""}`}
-            style={{
-              opacity: contentDisabled ? 0.7 : 1,
-              pointerEvents: contentDisabled ? "none" : "auto",
-            }}
-          >
-            <div className="color-options">
-              {predefinedColors.map((color) => (
-                <button
-                  key={color}
+                      <div className="timer">
+                        <h4 style={timerStyle}>Remaining Time: {time}s</h4>
+                      </div>
+                    </div>
+                    <p className="text-info">Sessioin ID: {uniqueId}</p>
+                  </div>
+                </Col>
+                <Col sm={12} md={6}>
+                  <div>
+                    <h6 className="p-2" style={{ color: "#240b36" }}>
+                      Have a Good Luck!
+                    </h6>
+                  </div>
+                </Col>
+              </Row>
+              {gameResult && (
+                <Row>
+                  <Col sm={12} md={6} lg={6}>
+                    <div className="text-center">
+                      <h5 className="mt-3">{gameResult}</h5>
+                      {gameResult === "You Win ₹ 0" ? (
+                        <p>You didn't place a bet.</p>
+                      ) : (
+                        <p>Winning Amount: ₹ {winningAmount}</p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+              )}
+              <Row>
+                <Col
+                  sm={12}
+                  md={6}
+                  lg={6}
+                  className={`game_choice_color ${
+                    contentDisabled ? "disabled" : ""
+                  }`}
                   style={{
-                    backgroundColor: contentDisabled
-                      ? "gray"
-                      : color.toLowerCase(),
-                    margin: "5px",
+                    opacity: contentDisabled ? 0.7 : 1,
+                    pointerEvents: contentDisabled ? "none" : "auto",
                   }}
-                  onClick={() => handleColorSelect(color)}
-                  className="game_button"
-                  disabled={gameResult !== ""}
                 >
-                  {color}
-                </button>
-              ))}
-            </div>
+                  <div className="color-options">
+                    {predefinedColors.map((color) => (
+                      <button
+                        key={color}
+                        style={{
+                          backgroundColor: contentDisabled
+                            ? "gray"
+                            : color.toLowerCase(),
+                          margin: "5px",
+                        }}
+                        onClick={() => handleColorSelect(color)}
+                        className="game_button"
+                        disabled={gameResult !== ""}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
 
-            {/* <div
+                  {/* <div
               style={{
                 backgroundColor: targetColor.toLowerCase(),
                 width: "50px",
@@ -754,89 +805,95 @@ const NewGame = () => {
                 margin: "5px",
               }}
             /> */}
-          </Col>
-        </Row>
-        <Row
-          className={`game_choice_color game_choice1 ${
-            contentDisabled ? "disabled" : ""
-          }`}
-        >
-          <Col
-            sm={12}
-            col={12}
-            md={6}
-            lg={6}
-            //  className={`game_choice_color ${contentDisabled ? "disabled" : ""}`}
-            style={{
-              opacity: contentDisabled ? 0.7 : 1,
-              pointerEvents: contentDisabled ? "none" : "auto",
-              marginTop: "10px",
-            }}
-          >
-            <div className=" color-options">
-              {gameColors.map((color, index) => (
-                <button
-                  key={color}
+                </Col>
+              </Row>
+              <Row
+                className={`game_choice_color game_choice1 ${
+                  contentDisabled ? "disabled" : ""
+                }`}
+              >
+                <Col
+                  sm={12}
+                  col={12}
+                  md={6}
+                  lg={6}
+                  //  className={`game_choice_color ${contentDisabled ? "disabled" : ""}`}
                   style={{
-                    backgroundColor: contentDisabled
-                      ? "gray"
-                      : color.toLowerCase(),
-                    margin: "5px",
-                    // minWidth:'100px'
+                    opacity: contentDisabled ? 0.7 : 1,
+                    pointerEvents: contentDisabled ? "none" : "auto",
+                    marginTop: "10px",
                   }}
-                  onClick={() => handleColorSelect(color)}
-                  className="game_button"
-                  disabled={gameResult !== ""}
                 >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
-            <div className=" color-options">
-              {gameColors.slice(0, 2).map((color, index) => (
-                <button
-                  key={color}
-                  style={{
-                    backgroundColor: contentDisabled
-                      ? "gray"
-                      : color.toLowerCase(),
-                    margin: "5px",
-                  }}
-                  onClick={() => handleColorSelect(color)}
-                  className="game_button"
-                  disabled={gameResult !== ""}
-                >
-                  {index + 4}
-                </button>
-              ))}
-            </div>
-            <div className="color-options">
-              {gameColors.map((color, index) => (
-                <button
-                  key={color}
-                  style={{
-                    backgroundColor: contentDisabled
-                      ? "gray"
-                      : color.toLowerCase(),
-                    margin: "5px",
-                  }}
-                  onClick={() => handleColorSelect(color)}
-                  className="game_button"
-                  disabled={gameResult !== ""}
-                >
-                  {index + 6}
-                </button>
-              ))}
-            </div>
-          </Col>
-        </Row>
-      </Container>
-      
+                  <div className=" color-options">
+                    {gameColors.map((color, index) => (
+                      <button
+                        key={color}
+                        style={{
+                          backgroundColor: contentDisabled
+                            ? "gray"
+                            : color.toLowerCase(),
+                          margin: "5px",
+                          // minWidth:'100px'
+                        }}
+                        onClick={() => handleColorSelect(color)}
+                        className="game_button"
+                        disabled={gameResult !== ""}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                  <div className=" color-options">
+                    {gameColors.slice(0, 2).map((color, index) => (
+                      <button
+                        key={color}
+                        style={{
+                          backgroundColor: contentDisabled
+                            ? "gray"
+                            : color.toLowerCase(),
+                          margin: "5px",
+                        }}
+                        onClick={() => handleColorSelect(color)}
+                        className="game_button"
+                        disabled={gameResult !== ""}
+                      >
+                        {index + 4}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="color-options">
+                    {gameColors.map((color, index) => (
+                      <button
+                        key={color}
+                        style={{
+                          backgroundColor: contentDisabled
+                            ? "gray"
+                            : color.toLowerCase(),
+                          margin: "5px",
+                        }}
+                        onClick={() => handleColorSelect(color)}
+                        className="game_button"
+                        disabled={gameResult !== ""}
+                      >
+                        {index + 6}
+                      </button>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+
             <div
               className="table-responsive"
               style={{ borderRadius: "10px", marginTop: "10px" }}
             >
-              <table className="table  table-hover " style={{ backgroundImage:'linear-gradient(60deg, #29323c 0%, #1d1f20 100%)'}}>
+              <table
+                className="table  table-hover "
+                style={{
+                  backgroundImage:
+                    "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
+                }}
+              >
                 <thead className="text-warning">
                   <tr>
                     <th>#</th>
@@ -846,7 +903,7 @@ const NewGame = () => {
                     <th>Date</th>
                   </tr>
                 </thead>
-                <tbody style={{color:'#FFD700'}}>
+                <tbody style={{ color: "#FFD700" }}>
                   {gameHistory && gameHistory.length > 0 ? (
                     gameHistory.map((game, index) => (
                       <tr key={index}>
@@ -907,19 +964,25 @@ const NewGame = () => {
               {/* Display page number and items per page information */}
               <div className="text-light">
                 Page {currentPage} of {totalPages}
+                
               </div>
+              <img src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png" height='35px' width='40px' alt="notification"  onClick={openMessageModal}/>
+
             </div>
-          
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        className="modal-center"
-      >
-        <Modal.Header closeButton style={{ background: userChoice.toLowerCase(),color:'white'}}>
-          <Modal.Title >Choose Bet Amount</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div
+
+            <Modal
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              className="modal-center"
+            >
+              <Modal.Header
+                closeButton
+                style={{ background: userChoice.toLowerCase(), color: "white" }}
+              >
+                <Modal.Title>Choose Bet Amount</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* <div
             style={{
               background: userChoice.toLowerCase(),
               height: "100px",
@@ -927,496 +990,543 @@ const NewGame = () => {
               clipPath:'polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)'
             }}
           >
-            {/* {userChoice} */}
-          </div>
-          <Form>
-            <Form.Group controlId="betAmount">
-              <h6 className="m-2">Balance: {profile.balance}</h6>
-              <Form.Label>Enter Bet Amount</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter amount"
-                value={betAmount}
-                onChange={(e) => setBetAmount(e.target.value)}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-          <Button   onClick={handleBet} style={{background:userChoice.toLowerCase()}}>
-            Place Bet
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <div>
-        <div className="bottom_section " style={{ marginTop: "100px" }}>
-          <div
-            className="row footer_row_content"
-            style={{ height: "90px", color: "cyan", background: "#000427" }}
-          >
-            <div className="col-12">
-              <div className="footer_container">
-                <div className="footer_content">
-                  <Link
-                    to="/dashboard"
-                    className="footer_icon"
-                    style={{ color: "cyan" }}
-                  >
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/9187/9187555.png"
-                      alt="account Activation"
-                      height="35px"
-                      width="35px"
+            {userChoice}
+          </div> */}
+                <Form>
+                  <Form.Group controlId="betAmount">
+                    <h6 className="m-2">Balance: {profile.balance}</h6>
+                    <Form.Label>Enter Bet Amount</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter amount"
+                      value={betAmount}
+                      onChange={(e) => setBetAmount(e.target.value)}
                     />
-                    <h6 className=" mt-1">Home</h6>
-                  </Link>
-                  <div className="footer_icon">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/10701/10701014.png"
-                      alt="wallet"
-                      height="40px"
-                      width="40px"
-                      className="dropdown-toggle"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    />
-                    <h6
-                      className="mt-1 dropdown-toggle"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Menu
-                    </h6>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <h6
-                          className="dropdown-item"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop"
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                  Close
+                </Button>
+                <Button
+                  onClick={handleBet}
+                  style={{
+                    background: userChoice.toLowerCase(),
+                    border: `1.5px solid ${userChoice.toLowerCase()}`,
+                  }}
+                >
+                  Place Bet
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            <div>
+              
+              <Modal show={showMessageModal} onHide={closeMessageModal}>
+                <Modal.Header closeButton style={{background:'blueViolet', color:'white'}}>
+                  <Modal.Title>Message</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>No Message.</Modal.Body>
+                <Modal.Footer>
+                  <Button  onClick={closeModal} style={{background:'blueViolet'}}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+            <div>
+              <div className="bottom_section " style={{ marginTop: "100px" }}>
+                <div
+                  className="row footer_row_content"
+                  style={{
+                    height: "90px",
+                    color: "cyan",
+                    background: "#000427",
+                  }}
+                >
+                  <div className="col-12">
+                    <div className="footer_container">
+                      <div className="footer_content">
+                        <Link
+                          to="/dashboard"
+                          className="footer_icon"
+                          style={{ color: "cyan" }}
                         >
-                          Deposit
-                        </h6>
-                      </li>
-                      <li>
-                        <h6
-                          className="dropdown-item"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop2"
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/9187/9187555.png"
+                            alt="account Activation"
+                            height="35px"
+                            width="35px"
+                          />
+                          <h6 className=" mt-1">Home</h6>
+                        </Link>
+                        <div className="footer_icon">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/10701/10701014.png"
+                            alt="wallet"
+                            height="40px"
+                            width="40px"
+                            className="dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          />
+                          <h6
+                            className="mt-1 dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            Menu
+                          </h6>
+                          <ul className="dropdown-menu">
+                            <li>
+                              <h6
+                                className="dropdown-item"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                              >
+                                Deposit
+                              </h6>
+                            </li>
+                            <li>
+                              <h6
+                                className="dropdown-item"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop2"
+                              >
+                                Withdrawal
+                              </h6>
+                            </li>
+                            <li>
+                              <h6
+                                className="dropdown-item"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop3"
+                              >
+                                Withdrawal History
+                              </h6>
+                            </li>
+                            <li>
+                              <h6
+                                className="dropdown-item"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop4"
+                              >
+                                Deposit History
+                              </h6>
+                            </li>
+                          </ul>
+                        </div>
+                        <Link
+                          to="/game"
+                          className="footer_icon"
+                          style={{ color: "cyan" }}
                         >
-                          Withdrawal
-                        </h6>
-                      </li>
-                      <li>
-                        <h6
-                          className="dropdown-item"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop3"
-                        >
-                          Withdrawal History
-                        </h6>
-                      </li>
-                      <li>
-                        <h6
-                          className="dropdown-item"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop4"
-                        >
-                          Deposit History
-                        </h6>
-                      </li>
-                    </ul>
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/8002/8002123.png"
+                            alt="fund"
+                            height="35px"
+                            width="35px"
+                          />
+                          <h6 className="mt-1">Game</h6>
+                        </Link>
+                        <Link to="/setting" className="footer_icon">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/3953/3953226.png"
+                            alt="account Activation"
+                            height="35px"
+                            width="35px"
+                          />
+                          <h6 className="mt-1" style={{ color: "cyan" }}>
+                            Setting
+                          </h6>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <Link
-                    to="/game"
-                    className="footer_icon"
-                    style={{ color: "cyan" }}
-                  >
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/8002/8002123.png"
-                      alt="fund"
-                      height="35px"
-                      width="35px"
-                    />
-                    <h6 className="mt-1">Game</h6>
-                  </Link>
-                  <Link to="/setting" className="footer_icon">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/3953/3953226.png"
-                      alt="account Activation"
-                      height="35px"
-                      width="35px"
-                    />
-                    <h6 className="mt-1" style={{ color: "cyan" }}>
-                      Setting
-                    </h6>
-                  </Link>
+                </div>
+              </div>
+
+              {/*Deposit Start  */}
+              {/* Modal */}
+              <div
+                className="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex={-1}
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content bg-dark">
+                    <div className="modal-header">
+                      <h1
+                        className="modal-title fs-5 text-warning"
+                        id="staticBackdropLabel"
+                      >
+                        Deposit
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      />
+                    </div>
+                    <div className="modal-body">
+                      <div
+                        className="image"
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <img
+                          src={QRCODE}
+                          height="200px"
+                          width="200px"
+                          alt=""
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            border: "1px solid black",
+                          }}
+                        />
+                      </div>
+                      <h6 className="text-info">
+                        UPI:kumaromprakashhdhdksks@axl
+                      </h6>
+                      <form onSubmit={handleSubmit} className="deposit_Form">
+                        <label>UserId:</label>
+                        <input
+                          type="text"
+                          name="userId"
+                          value={formData.userId}
+                          onChange={handleChange}
+                          // disabled
+                          required
+                        />
+                        <label>Name:</label>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                        />
+
+                        <label>Amount:</label>
+                        <input
+                          type="number"
+                          name="amount"
+                          placeholder="Amount"
+                          value={formData.amount}
+                          onChange={handleChange}
+                          required
+                        />
+                        <label>UTR:</label>
+                        <input
+                          type="text"
+                          name="UTR"
+                          placeholder="UTR"
+                          value={formData.UTR}
+                          onChange={handleChange}
+                          required
+                        />
+
+                        <br />
+                        <button
+                          type="submit"
+                          className="btn btn-outline-primary"
+                        >
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Deposit End */}
+
+              {/*Withdrawal Start  */}
+              {/* Modal */}
+              <div
+                className="modal fade"
+                id="staticBackdrop2"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex={-1}
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                        Withdrawal
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      />
+                    </div>
+                    <div className="modal-body">
+                      <form
+                        onSubmit={handleSubmitWithdrawal}
+                        className="deposit_Form"
+                      >
+                        <label>UserId:</label>
+                        <input
+                          type="text"
+                          name="userId"
+                          value={formData1.userId}
+                          onChange={handleChange1}
+                          // disabled
+                          required
+                        />
+                        <label>Name:</label>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          value={formData1.name}
+                          onChange={handleChange1}
+                          required
+                        />
+
+                        <label>Amount:</label>
+                        <input
+                          type="number"
+                          name="amount"
+                          placeholder="Amount"
+                          value={formData1.amount}
+                          onChange={handleChange1}
+                          required
+                        />
+                        <label>UPI:</label>
+                        <input
+                          type="text"
+                          name="UPI"
+                          placeholder="Payment UPI "
+                          value={formData1.UPI}
+                          onChange={handleChange1}
+                          required
+                        />
+                        <br />
+                        <button
+                          type="submit"
+                          className="btn btn-outline-primary"
+                        >
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Withdrawal End */}
+              {/*Wthdrawal history Start  */}
+              {/* Modal */}
+              <div
+                className="modal fade"
+                id="staticBackdrop3"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex={-1}
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content bg-dark">
+                    <div className="modal-header">
+                      <h1
+                        className="modal-title fs-5 text-info"
+                        id="staticBackdropLabel"
+                      >
+                        Withdrawal History
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      />
+                    </div>
+                    <div className="modal-body table-responsive">
+                      <table className="table table-bordered table-hover table-dark">
+                        <thead>
+                          <tr className="text-secondary">
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>UserId</th>
+                            <th>Amount</th>
+                            <th>UPI</th>
+                            <th>status</th>
+                            <th>Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {withdrawalHistory.map((withdrawal, index) => (
+                            <tr key={index}>
+                              <td className="text-info">{index}</td>
+                              <td className="text-primary">
+                                {withdrawal.name}
+                              </td>
+                              <td className="text-secondary">
+                                {withdrawal.userId}
+                              </td>
+                              <td className="text-warning">
+                                {withdrawal.amount}
+                              </td>
+                              <td className="text-success">{withdrawal.UPI}</td>
+                              <td
+                                className={
+                                  withdrawal.approved === "Pending"
+                                    ? "text-warning"
+                                    : withdrawal.approved === "Approved"
+                                    ? "text-success"
+                                    : "text-danger"
+                                }
+                              >
+                                {withdrawal.approved}
+                              </td>
+                              <td className="text-secondary">
+                                {new Date(
+                                  withdrawal.createdAt
+                                ).toLocaleDateString()}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* withdrawal History End */}
+
+              {/*Deposit history Start  */}
+              {/* Modal */}
+              <div
+                className="modal fade"
+                id="staticBackdrop4"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex={-1}
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content bg-dark">
+                    <div className="modal-header">
+                      <h1
+                        className="modal-title fs-5 text-info"
+                        id="staticBackdropLabel"
+                      >
+                        Deposit History
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      />
+                    </div>
+                    <div className="modal-body table-responsive">
+                      <table className="table table-bordered table-hover table-dark">
+                        <thead>
+                          <tr className="text-secondary">
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>UserId</th>
+                            <th>Amount</th>
+                            <th>status</th>
+                            <th>Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {depositHistory.map((withdrawal, index) => (
+                            <tr key={index}>
+                              <td className="text-info">{index}</td>
+                              <td className="text-primary">
+                                {withdrawal.name}
+                              </td>
+                              <td className="text-secondary">
+                                {withdrawal.userId}
+                              </td>
+                              <td className="text-warning">
+                                {withdrawal.amount}
+                              </td>
+                              <td
+                                className={
+                                  withdrawal.approved === "Pending"
+                                    ? "text-warning"
+                                    : withdrawal.approved === "Approved"
+                                    ? "text-success"
+                                    : "text-danger"
+                                }
+                              >
+                                {withdrawal.approved}
+                              </td>
+                              <td className="text-secondary">
+                                {new Date(
+                                  withdrawal.createdAt
+                                ).toLocaleDateString()}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/*Deposit Start  */}
-        {/* Modal */}
-        <div
-          className="modal fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex={-1}
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content bg-dark">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-5 text-warning"
-                  id="staticBackdropLabel"
-                >
-                  Deposit
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body">
-              <div
-                    className="image"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <img
-                      src={QRCODE}
-                      height="200px"
-                      width="200px"
-                      alt=""
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        border: "1px solid black",
-                      }}
-                    />
-                  </div>
-                <h6 className="text-info">UPI:kumaromprakashhdhdksks@axl</h6>
-                <form onSubmit={handleSubmit} className="deposit_Form">
-                  <label>UserId:</label>
-                  <input
-                    type="text"
-                    name="userId"
-                    value={formData.userId}
-                    onChange={handleChange}
-                    // disabled
-                    required
-                  />
-                  <label>Name:</label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <label>Amount:</label>
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={formData.amount}
-                    onChange={handleChange}
-                    required
-                  />
-                  <label>UTR:</label>
-                  <input
-                    type="text"
-                    name="UTR"
-                    placeholder="UTR"
-                    value={formData.UTR}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <br />
-                  <button type="submit" className="btn btn-outline-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Deposit End */}
-
-        {/*Withdrawal Start  */}
-        {/* Modal */}
-        <div
-          className="modal fade"
-          id="staticBackdrop2"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex={-1}
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  Withdrawal
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body">
-                <form
-                  onSubmit={handleSubmitWithdrawal}
-                  className="deposit_Form"
-                >
-                  <label>UserId:</label>
-                  <input
-                    type="text"
-                    name="userId"
-                    value={formData1.userId}
-                    onChange={handleChange1}
-                    // disabled
-                    required
-                  />
-                  <label>Name:</label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={formData1.name}
-                    onChange={handleChange1}
-                    required
-                  />
-
-                  <label>Amount:</label>
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={formData1.amount}
-                    onChange={handleChange1}
-                    required
-                  />
-                  <label>UPI:</label>
-                  <input
-                    type="text"
-                    name="UPI"
-                    placeholder="Payment UPI "
-                    value={formData1.UPI}
-                    onChange={handleChange1}
-                    required
-                  />
-                  <br />
-                  <button type="submit" className="btn btn-outline-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Withdrawal End */}
-        {/*Wthdrawal history Start  */}
-        {/* Modal */}
-        <div
-          className="modal fade"
-          id="staticBackdrop3"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex={-1}
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content bg-dark">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-5 text-info"
-                  id="staticBackdropLabel"
-                >
-                  Withdrawal History
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body table-responsive">
-                <table className="table table-bordered table-hover table-dark">
-                  <thead>
-                    <tr className="text-secondary">
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>UserId</th>
-                      <th>Amount</th>
-                      <th>UPI</th>
-                      <th>status</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {withdrawalHistory.map((withdrawal, index) => (
-                      <tr key={index}>
-                        <td className="text-info">{index}</td>
-                        <td className="text-primary">{withdrawal.name}</td>
-                        <td className="text-secondary">{withdrawal.userId}</td>
-                        <td className="text-warning">{withdrawal.amount}</td>
-                        <td className="text-success">{withdrawal.UPI}</td>
-                        <td
-                          className={
-                            withdrawal.approved === "Pending"
-                              ? "text-warning"
-                              : withdrawal.approved === "Approved"
-                              ? "text-success"
-                              : "text-danger"
-                          }
-                        >
-                          {withdrawal.approved}
-                        </td>
-                        <td className="text-secondary">
-                          {new Date(withdrawal.createdAt).toLocaleDateString()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* withdrawal History End */}
-
-        {/*Deposit history Start  */}
-        {/* Modal */}
-        <div
-          className="modal fade"
-          id="staticBackdrop4"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex={-1}
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content bg-dark">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-5 text-info"
-                  id="staticBackdropLabel"
-                >
-                  Deposit History
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body table-responsive">
-                <table className="table table-bordered table-hover table-dark">
-                  <thead>
-                    <tr className="text-secondary">
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>UserId</th>
-                      <th>Amount</th>
-                      <th>status</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {depositHistory.map((withdrawal, index) => (
-                      <tr key={index}>
-                        <td className="text-info">{index}</td>
-                        <td className="text-primary">{withdrawal.name}</td>
-                        <td className="text-secondary">{withdrawal.userId}</td>
-                        <td className="text-warning">{withdrawal.amount}</td>
-                        <td
-                          className={
-                            withdrawal.approved === "Pending"
-                              ? "text-warning"
-                              : withdrawal.approved === "Approved"
-                              ? "text-success"
-                              : "text-danger"
-                          }
-                        >
-                          {withdrawal.approved}
-                        </td>
-                        <td className="text-secondary">
-                          {new Date(withdrawal.createdAt).toLocaleDateString()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </>
+      ) : (
+        <></>
+      )}
     </>
-  ):( <>
-  
-  </>)}
-</>
   );
 };
 
