@@ -628,6 +628,7 @@ const NewGame = () => {
     background: timerBlink && time <= 15 ? "White" : "",
     height: timerBlink && time <= 15 ? "80px" : "",
     width: timerBlink && time <= 15 ? "80px" : "",
+    fontSize: timerBlink && time <= 15 ? "40px" : "19px",
     color: timerBlink && time <= 15 ? "red" : "white",
     animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
   };
@@ -668,11 +669,10 @@ const NewGame = () => {
   }
 
 
-function ProgressTime() {
-  const now = 30;
-  return <ProgressBar now={now} />;
-}
-
+  function WithLabelExample() {
+    const now = 60;
+    return <ProgressBar now={now}  />;
+  }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
@@ -725,8 +725,9 @@ function ProgressTime() {
             <Container>
               <Row>
                 <Col sm={12}>
+                <WithLabelExample/>
                   <div className="time_box">
-                    <ProgressTime/>
+                   
                     <div className="time_box_2">
                       <div className="part1 p-3" >
                        <img src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png" width='50px' height='50px' alt="time"/>

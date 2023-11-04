@@ -7,6 +7,9 @@ const Game = () => {
     const handleGame2 = () => {
       window.location.href = "/game/spinWheel";
   }
+
+
+
   return (
     <div className="bg-spin" style={{height:'100vh'}}>
       <div className="gameLogo">
@@ -30,6 +33,7 @@ const Game = () => {
             <h6 className="text-light">Color Prediction</h6>
           </div>
           <h6 className="text-warning pt-3">UpComing Game</h6>
+          
           <div
             className="col-10 col-sm-10 col-md-6 col-lg-6 box d-flex align-items-center flex-column" style={{width:'70%'}}
             onClick={handleGame2}
