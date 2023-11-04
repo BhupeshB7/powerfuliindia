@@ -671,18 +671,18 @@ const NewGame = () => {
 
   function WithLabelExample() {
     const now = 30;
-    const now1 = 100;
+  
     // Define custom styles for the progress bar and background
     const progressBarStyle = {
-      backgroundColor: 'rgb(15, 14, 14)', // Change the background color
+      backgroundColor: 'lightgray', // Change the background color
     };
   
     const progressStyle = {
-      backgroundColor: '#434343', // Change the progress bar color
+      backgroundColor: 'blue', // Change the progress bar color
     };
   
     return (
-      <ProgressBar now={now1} style={progressBarStyle}>
+      <ProgressBar now={now} style={progressBarStyle}>
         <ProgressBar now={now} style={progressStyle} />
       </ProgressBar>
     );
