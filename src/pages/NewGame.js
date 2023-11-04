@@ -669,24 +669,24 @@ const NewGame = () => {
   }
 
 
-  function WithLabelExample() {
-    const now = 30;
+  // function WithLabelExample() {
+  //   const now = 30;
   
-    // Define custom styles for the progress bar and background
-    const progressBarStyle = {
-      backgroundColor: 'lightgray', // Change the background color
-    };
+  //   // Define custom styles for the progress bar and background
+  //   const progressBarStyle = {
+  //     backgroundColor: 'lightgray', // Change the background color
+  //   };
   
-    const progressStyle = {
-      backgroundColor: 'blue', // Change the progress bar color
-    };
+  //   const progressStyle = {
+  //     backgroundColor: 'blue', // Change the progress bar color
+  //   };
   
-    return (
-      <ProgressBar now={now} style={progressBarStyle}>
-        <ProgressBar now={now} style={progressStyle} />
-      </ProgressBar>
-    );
-  }
+  //   return (
+  //     <ProgressBar now={now} style={progressBarStyle}>
+  //       <ProgressBar now={now} style={progressStyle} />
+  //     </ProgressBar>
+  //   );
+  // }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
@@ -739,7 +739,7 @@ const NewGame = () => {
             <Container>
               <Row>
                 <Col sm={12}>
-                <WithLabelExample/>
+                {/* <WithLabelExample/> */}
                   <div className="time_box">
                    
                     <div className="time_box_2">
