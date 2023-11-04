@@ -195,7 +195,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
+import { Col, Container, Row, Button, Form, Modal, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import welcome from '../assets/gameWelcome.png'
 import spinner from '../assets/spinner2.gif'
