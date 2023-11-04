@@ -670,8 +670,8 @@ const NewGame = () => {
 
 
   function WithLabelExample() {
-    const now = 60;
-    return <ProgressBar now={now}  />;
+    const now = 30;
+    return <ProgressBar now={now}  style={{background:'gray', margin:'10px'}}/>;
   }
   // Shuffle the predefinedColors array
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
