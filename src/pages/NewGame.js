@@ -626,8 +626,8 @@ const NewGame = () => {
   }
   const timerStyle = {
     background: timerBlink && time <= 15 ? "White" : "",
-    height: timerBlink && time <= 15 ? "60px" : "",
-    width: timerBlink && time <= 15 ? "60px" : "",
+    height: timerBlink && time <= 15 ? "80px" : "",
+    width: timerBlink && time <= 15 ? "80px" : "",
     color: timerBlink && time <= 15 ? "red" : "white",
     animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
   };
