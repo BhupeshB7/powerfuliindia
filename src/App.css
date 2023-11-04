@@ -850,7 +850,21 @@ justify-content: space-around;
   left: 2%;
   right: 2%;
   z-index: 1000;
+
+}
+.notification-container{
+  display: flex;
+  justify-content: flex-end;
   
+}
+.notification{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
 }
 .bg-spin .gameLogo{
   width: 100%;

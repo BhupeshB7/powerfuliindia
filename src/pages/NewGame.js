@@ -231,11 +231,11 @@ const NewGame = () => {
 
   const openMessageModal = () => {
     setShowMessageModal(true);
-  }
+  };
 
   const closeMessageModal = () => {
     setShowMessageModal(false);
-  }
+  };
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
@@ -883,10 +883,7 @@ const NewGame = () => {
               </Row>
             </Container>
 
-            <div
-              className="table-responsive"
-              style={{ marginTop: "10px" }}
-            >
+            <div className="table-responsive" style={{ marginTop: "10px" }}>
               <table
                 className="table  table-hover "
                 style={{
@@ -964,10 +961,18 @@ const NewGame = () => {
               {/* Display page number and items per page information */}
               <div className="text-light">
                 Page {currentPage} of {totalPages}
-                
               </div>
-              <img src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png" height='35px' width='40px' alt="notification"  onClick={openMessageModal}/>
-
+              <div className="notification-container">
+                <div className="notification">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png"
+                    height="35px"
+                    width="40px"
+                    alt="notification"
+                    onClick={openMessageModal}
+                  />
+                </div>
+              </div>
             </div>
 
             <Modal
@@ -1021,14 +1026,19 @@ const NewGame = () => {
               </Modal.Footer>
             </Modal>
             <div>
-              
               <Modal show={showMessageModal} onHide={closeMessageModal}>
-                <Modal.Header closeButton style={{background:'blueViolet', color:'white'}}>
+                <Modal.Header
+                  closeButton
+                  style={{ background: "blueViolet", color: "white", border:'1px solid blueViolet' }}
+                >
                   <Modal.Title>Message</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>No Message.</Modal.Body>
                 <Modal.Footer>
-                  <Button  onClick={closeMessageModal} style={{background:'blueViolet'}}>
+                  <Button
+                    onClick={closeMessageModal}
+                    style={{ background: "blueViolet" }}
+                  >
                     Close
                   </Button>
                 </Modal.Footer>
