@@ -624,6 +624,9 @@ const NewGame = () => {
     return `${month}${day}-${hour}${minute}-${randomDigits}`;
   }
   const timerStyle = {
+    background: timerBlink && time <= 15 ? 'White':'',
+    height: timerBlink && time <= 15 ? '60px':'',
+    width: timerBlink && time <= 15 ? '60px':'',
     color: timerBlink && time <= 15 ? "red" : "white",
     animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
   };
@@ -736,7 +739,7 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        <h4 style={timerStyle}>Remaining Time: {time}s</h4>
+                        <h4 >Remaining Time: <b style={timerStyle}> {time}</b>s &nbsp; </h4>
                       </div>
                     </div>
                     <p className="text-info">Sessioin ID: {uniqueId}</p>

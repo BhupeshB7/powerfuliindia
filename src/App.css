@@ -792,7 +792,7 @@ justify-content: space-around;
   margin-top: -90px;
 }
 .game_choice_color {
-  animation: fadeInAnimation ease-in-out 2s;
+  animation: fadeInAnimation ease 4s;
   animation-iteration-count:1;
   animation-fill-mode:backwards;
   background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
