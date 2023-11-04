@@ -744,7 +744,7 @@ const NewGame = () => {
                 </Col>
                 <Col sm={12} md={6}>
                   <div>
-                    <h6 className="p-2" style={{ color: "#240b36" }}>
+                    <h6 className="p-2 text-warning" >
                       Have a Good Luck!
                     </h6>
                   </div>
@@ -786,6 +786,9 @@ const NewGame = () => {
                             ? "gray"
                             : color.toLowerCase(),
                           margin: "5px",
+                         border: contentDisabled
+                         ? "gray"
+                         : `1.5px solid ${color.toLowerCase()}` ,
                         }}
                         onClick={() => handleColorSelect(color)}
                         className="game_button"
@@ -955,7 +958,7 @@ const NewGame = () => {
               <Modal show={showMessageModal} onHide={closeMessageModal}>
                 <Modal.Header
                   closeButton
-                  style={{ background: "blueViolet", color: "white", border:'1px solid blueViolet' }}
+                  style={{ background: "blueViolet", color: "white", border:'1.7px solid blueViolet' }}
                 >
                   <Modal.Title>Message</Modal.Title>
                 </Modal.Header>
