@@ -373,8 +373,13 @@ const NewGame = () => {
   const [gameHistory, setGameHistory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   const pageSize = 20; // Set the page size (items per page)
-
+  const handleAlert = (message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+  }
   const fetchGameHistory = async (page) => {
     try {
       const response = await axios.get(
@@ -504,11 +509,12 @@ const NewGame = () => {
 
   const handleBet = async () => {
     if (betAmount < 5) {
-      alert("Bet Amount Should be greater than 5Rs.😌");
+      handleAlert("Bet Amount Should be greater than 5Rs.😌");
+      return;
     } else if (betAmount >= profile.balance) {
-      // alert(betAmount)
-      alert("Insufficient Balance");
-    } else {
+      handleAlert("Insufficient Balance");
+      return;
+    }else {
       // Close the modal after placing the bet
       setShowModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
@@ -621,6 +627,12 @@ const NewGame = () => {
    
   {isTokenValid ?(
     <>
+    {showAlert && (
+        <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+          <Alert.Heading>Error</Alert.Heading>
+          <p>{alertMessage}</p>
+        </Alert>
+      )}
      <div className="colorbackGround">
       <div className="logo">
         <img src={LOGO} alt="logo" height='70px' width='100px'/>
