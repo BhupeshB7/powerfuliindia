@@ -630,7 +630,7 @@ const NewGame = () => {
   {isTokenValid ?(
     <>
      <div className="colorbackGround">
-      <div style={{zIndex:'1000'}}>
+      <div className="alert">
      {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
           <Alert.Heading>Error</Alert.Heading>
