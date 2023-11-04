@@ -831,7 +831,7 @@ justify-content: space-around;
   /* background-image: url("https://img.freepik.com/free-vector/smooth-golden-wave-background_23-2148804707.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais"); */
   background-image: url("https://img.freepik.com/free-vector/gradient-violet-glowing-particles-background_23-2148338416.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph");
   /* background-repeat: no-repeat; */
-  background-size: contain;
+  background-size: 100%;
 }
 .bg-spin {
   display: flex;
