@@ -791,7 +791,6 @@ const NewGame = () => {
                         className="game_button"
                         disabled={gameResult !== ""}
                       >
-                        {color}
                       </button>
                     ))}
                   </div>
