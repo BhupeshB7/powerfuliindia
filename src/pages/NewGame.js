@@ -885,7 +885,7 @@ const NewGame = () => {
 
             <div
               className="table-responsive"
-              style={{ borderRadius: "10px", marginTop: "10px" }}
+              style={{ marginTop: "10px" }}
             >
               <table
                 className="table  table-hover "
