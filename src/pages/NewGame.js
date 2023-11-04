@@ -510,9 +510,11 @@ const NewGame = () => {
   const handleBet = async () => {
     if (betAmount < 5) {
       handleAlert("Bet Amount Should be greater than 5Rs.😌");
+      setShowModal(false);
       return;
     } else if (betAmount >= profile.balance) {
       handleAlert("Insufficient Balance");
+      setShowModal(false);
       return;
     }else {
       // Close the modal after placing the bet
@@ -627,13 +629,15 @@ const NewGame = () => {
    
   {isTokenValid ?(
     <>
-    {showAlert && (
+     <div className="colorbackGround">
+      <div style={{zIndex:'1000'}}>
+     {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
           <Alert.Heading>Error</Alert.Heading>
           <p>{alertMessage}</p>
         </Alert>
       )}
-     <div className="colorbackGround">
+      </div>
       <div className="logo">
         <img src={LOGO} alt="logo" height='70px' width='100px'/>
       </div>
