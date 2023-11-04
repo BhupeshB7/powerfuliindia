@@ -209,7 +209,7 @@ import welcome from "../assets/gameWelcome.png";
 import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import ProgressBar from "react-bootstrap/ProgressBar";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -625,9 +625,6 @@ const NewGame = () => {
     return `${month}${day}-${hour}${minute}-${randomDigits}`;
   }
   const timerStyle = {
-    background: timerBlink && time <= 15 ? "White" : "",
-    height: timerBlink && time <= 15 ? "80px" : "",
-    width: timerBlink && time <= 15 ? "80px" : "",
     fontSize: timerBlink && time <= 15 ? "40px" : "19px",
     color: timerBlink && time <= 15 ? "red" : "white",
     animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
@@ -668,19 +665,18 @@ const NewGame = () => {
     );
   }
 
-
   // function WithLabelExample() {
   //   const now = 30;
-  
+
   //   // Define custom styles for the progress bar and background
   //   const progressBarStyle = {
   //     backgroundColor: 'lightgray', // Change the background color
   //   };
-  
+
   //   const progressStyle = {
   //     backgroundColor: 'blue', // Change the progress bar color
   //   };
-  
+
   //   return (
   //     <ProgressBar now={now} style={progressBarStyle}>
   //       <ProgressBar now={now} style={progressStyle} />
@@ -739,18 +735,25 @@ const NewGame = () => {
             <Container>
               <Row>
                 <Col sm={12}>
-                {/* <WithLabelExample/> */}
+                  {/* <WithLabelExample/> */}
                   <div className="time_box">
-                   
                     <div className="time_box_2">
-                      <div className="part1 p-3" >
-                       <img src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png" width='50px' height='50px' alt="time"/>
-                      
-                      <br/> <h6 className="text-warning">1 min</h6>
+                      <div className="part1 p-3">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png"
+                          width="50px"
+                          height="50px"
+                          alt="time"
+                        />
+                        <br /> <h6 className="text-warning">1 min</h6>
                       </div>
                       <div className="part2">
-                       <img src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png" width='80px' height='70px' alt="time"/>
-                         
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png"
+                          width="80px"
+                          height="70px"
+                          alt="time"
+                        />
                       </div>
                     </div>
                   </div>
@@ -782,9 +785,34 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        <h4 style={{color:'#bbb'}}>
-                          Remaining Time: <b style={timerStyle}> {time}</b>s
-                          &nbsp;{" "}
+                        {time <= 15 ? (
+                          <div className="blur-background">
+                            <div
+                              style={{
+                                background: "white",
+                                width: "300px",
+                                height: "300px",
+                                borderRadius: "50%",
+                                textAlign: "center",
+                              }}
+                            >
+                              <h1>{`=00:${time
+                                .toString()
+                                .padStart(2, "0")}`}</h1>
+                            </div>
+                          </div>
+                        ) : null}
+                        <h4 style={{ color: "#bbb" }}>
+                          Remaining Time:{" "}
+                          <b
+                            style={
+                              time <= 15 ? { display: "none" } : timerStyle
+                            }
+                          >
+                            {" "}
+                            {time}
+                          </b>
+                          s &nbsp;{" "}
                         </h4>
                       </div>
                     </div>
