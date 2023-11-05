@@ -1,198 +1,3 @@
-// // import React, { useEffect, useState } from "react";
-// // import { Col, Container, Row } from "react-bootstrap";
-
-// // const NewGame = () => {
-// //   const [targetColor, setTargetColor] = useState("");
-// //   const [userChoice, setUserChoice] = useState("");
-// //   const predefinedColors = ["Blueviolet", "Red"];
-
-// //     const getRandomColor = () => {
-// //       const randomIndex = Math.floor(Math.random() * predefinedColors.length);
-// //       return predefinedColors[randomIndex];
-// //     };
-// //     useEffect(() => {
-// //       // Set the targetColor only if it's not set (for the first game)
-// //       if (!targetColor) {
-// //         setTargetColor(getRandomColor());
-// //       }
-
-// //     }, [targetColor ]);
-
-// //     const handleColorSelect = async (color) => {
-// //       setUserChoice(color);
-
-// //       const message = `You chose ${color}`;
-// //       alert(message);
-
-// //       if(userChoice === targetColor){
-// //         alert('You Win');
-// //       }
-// //     };
-// //     if(userChoice === targetColor){
-// //       alert('You Win');
-// //     }
-// //   return (
-// //     <div style={{ background: "rgb(199, 129, 129)", height: "100vh" }}>
-// //       <div className="game_box"></div>
-
-// //       <Container className="pt-5">
-// //         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
-// //           <Col sm={12} md={6} lg={6} className="game_session">
-// //             <div>
-// //               <h6 className="text-light p-2" style={{ textAlign: "end" }}>
-// //                 Game Session
-// //               </h6>
-// //             </div>
-// //           </Col>
-// //         </Row>
-// //         <Row>
-// //           <Col sm={12} md={6} lg={6}></Col>
-// //           <div className="color-options">
-// //             {predefinedColors.map((color) => (
-// //               <button
-// //                 key={color}
-// //                 style={{ backgroundColor: color.toLowerCase() }}
-// //                 onClick={() => handleColorSelect(color)}
-// //                 className="game_button"
-// //               >
-// //                 {color}
-// //               </button>
-// //             ))}
-// //           </div>
-// //         </Row>
-// //       </Container>
-// //     </div>
-// //   );
-// // };
-
-// // export default NewGame;
-
-// import React, { useEffect, useState } from "react";
-// import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
-
-// const NewGame = () => {
-//   const [targetColor, setTargetColor] = useState("");
-//   const [userChoice, setUserChoice] = useState("");
-//   const [gameResult, setGameResult] = useState("");
-//   const [showModal, setShowModal] = useState(false);
-//   const [betAmount, setBetAmount] = useState(0);
-//   const [winningAmount, setWinningAmount] = useState(0);
-//   const predefinedColors = ["Blueviolet", "Red", "Green"];
-
-//   const getRandomColor = () => {
-//     const randomIndex = Math.floor(Math.random() * predefinedColors.length);
-//     return predefinedColors[randomIndex];
-//   };
-
-//   useEffect(() => {
-//     if (!targetColor) {
-//       setTargetColor(getRandomColor());
-//     }
-//   }, [targetColor]);
-
-//   const handleColorSelect = (color) => {
-//     setUserChoice(color);
-//     setShowModal(true);
-//   };
-
-//   const handleBet = () => {
-//     const randomChance = Math.random();
-
-//     if (userChoice === targetColor) {
-//       const winnings = betAmount * 1.25;
-//       setWinningAmount(winnings);
-//       setGameResult(`You Win $${winnings}`);
-//       // Perform any necessary actions to update the user's balance or wallet for a win
-//     } else {
-//       setGameResult("You Lose");
-//       // Perform any necessary actions for a loss
-//     }
-
-//     setShowModal(false); // Close the modal after placing the bet
-//   };
-
-//   return (
-//     <div style={{ background: "rgb(199, 129, 129)", height: "100vh" }}>
-//       <div className="game_box"></div>
-
-//       <Container className="pt-5">
-//         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
-//           <Col sm={12} md={6} lg={6} className="game_session">
-//             <div>
-//               <h6 className="text-light p-2" style={{ textAlign: "end" }}>
-//                 Game Session
-//               </h6>
-//             </div>
-//           </Col>
-//         </Row>
-//         <Row>
-//           <Col sm={12} md={6} lg={6} className="game_choice_color">
-//             <div className="color-options">
-//               {predefinedColors.map((color) => (
-//                 <button
-//                   key={color}
-//                   style={{ backgroundColor: color.toLowerCase(), margin: "5px" }}
-//                   onClick={() => handleColorSelect(color)}
-//                   className="game_button"
-//                   disabled={gameResult !== ""}
-//                 >
-//                   {color}
-//                 </button>
-//               ))}
-//             </div>
-//           </Col>
-//         </Row>
-//         {gameResult && (
-//           <Row>
-//             <Col sm={12} md={6} lg={6}>
-//               <div className="text-center">
-//                 <h5 className="mt-3">{gameResult}</h5>
-//                 {gameResult === "You Win $0" ? (
-//                   <p>You didn't place a bet.</p>
-//                 ) : (
-//                   <p>Winning Amount: ${winningAmount}</p>
-//                 )}
-//               </div>
-//             </Col>
-//           </Row>
-//         )}
-//       </Container>
-
-//       <Modal show={showModal} onHide={() => setShowModal(false)}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Choose Bet Amount</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <p>You chose the color: {userChoice}</p>
-//           <Form>
-//             <Form.Group controlId="betAmount">
-//               <Form.Label>Enter Bet Amount</Form.Label>
-//               <Form.Control
-//                 type="number"
-//                 placeholder="Enter amount"
-//                 value={betAmount}
-//                 onChange={(e) => setBetAmount(e.target.value)}
-//               />
-//             </Form.Group>
-//           </Form>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button variant="secondary" onClick={() => setShowModal(false)}>
-//             Close
-//           </Button>
-//           <Button variant="primary" onClick={handleBet}>
-//             Place Bet
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </div>
-//   );
-// };
-
-// export default NewGame;
-
-//Latest Code
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
@@ -212,9 +17,13 @@ import LOGO from "../assets/icon.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
+  const [targetNumber, setTargetNumber] = useState("");
   const [userChoice, setUserChoice] = useState("");
+  const [userChoiceNumber, setUserChoiceNumber] = useState("");
+  const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState("");
   const [gameResult, setGameResult] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showNumberModal, setShowNumberModal] = useState(false);
   const [betAmount, setBetAmount] = useState(0);
   const [winningAmount, setWinningAmount] = useState("");
   const [profile, setProfile] = useState({});
@@ -223,12 +32,25 @@ const NewGame = () => {
   const [contentDisabled, setContentDisabled] = useState(false);
   const [timerBlink, setTimerBlink] = useState(false);
   const predefinedColors = ["Blueviolet", "Red", "Green"];
+  const predefinedColors1 = ["green", "orange", "purple"];
+  const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showMessageModal, setShowMessageModal] = useState(false);
+  const [buttonColors, setButtonColors] = useState([]);
+
+  useEffect(() => {
+    // Generate random colors when the component is initially rendered
+    const randomColors = predefinedNumbers.map(() => {
+      const randomIndex = Math.floor(Math.random() * predefinedColors1.length);
+      return predefinedColors1[randomIndex];
+    });
+
+    setButtonColors(randomColors);
+  }, []); // The empty dependency array ensures this effect runs only once
 
   const openMessageModal = () => {
     setShowMessageModal(true);
@@ -459,6 +281,10 @@ const NewGame = () => {
     const randomIndex = Math.floor(Math.random() * predefinedColors.length);
     return predefinedColors[randomIndex];
   };
+  const getRandomNumber = () => {
+    const randomIndex = Math.floor(Math.random() * predefinedNumbers.length);
+    return predefinedNumbers[randomIndex];
+  };
   // useEffect(() => {
   //   const timer = setInterval(() => {
   //     if (time > 0) {
@@ -515,16 +341,21 @@ const NewGame = () => {
     getGamerProfile();
   }, [data.userId]);
   useEffect(() => {
-    if (!targetColor) {
+    if (!targetColor || !targetNumber) {
       setTargetColor(getRandomColor());
+      setTargetNumber(getRandomNumber());
     }
-  }, [targetColor]);
+  }, [targetColor, targetNumber]);
 
   const handleColorSelect = (color) => {
     setUserChoice(color);
     setShowModal(true);
   };
-
+  const handleNumberSelect = (color, buttonColor) => {
+    setUserChoiceNumber(color);
+    setUserChoiceButtonNumber(buttonColor);
+    setShowNumberModal(true);
+  };
   const handleBet = async () => {
     if (betAmount < 5) {
       handleAlert("Bet Amount Should be greater than 5Rs.😌");
@@ -555,8 +386,13 @@ const NewGame = () => {
         console.error(error);
       }
 
-      if (userChoice === targetColor) {
-        const winnings = betAmount * 1.25;
+      if (userChoice === targetColor || userChoiceNumber === targetNumber) {
+        // const winnings = betAmount * 1.25;
+        if (userChoice === targetColor) {
+          winnings = betAmount * 1.25;
+        } else if (userChoiceNumber === targetNumber) {
+          winnings = betAmount * 4;
+        }
         setWinningAmount(winnings);
         setGameResult(`You Win ₹ ${winnings}`);
         try {
@@ -588,7 +424,7 @@ const NewGame = () => {
       // entryFee: betAmount,
 
       targetColor: targetColor,
-      chosenColor: userChoice,
+      chosenColor: targetNumber,
       result: uniqueId,
     };
 
@@ -613,6 +449,7 @@ const NewGame = () => {
       setUserChoice("");
       setBetAmount(0);
       setTargetColor(getRandomColor());
+      setTargetNumber(getRandomNumber());
     }, 3000); // 10 seconds in milliseconds
   };
   function generateUniqueId() {
@@ -714,8 +551,15 @@ const NewGame = () => {
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">{profile.balance} ₹</b>{" "}
-                  <p className="text-secondary">wallet</p>
+                  <b className="text-light">wallet {profile.balance} ₹</b>{" "}
+                  {/* <p className="text-secondary">wallet</p> */}
+                  <Button
+                    variant="outline-warning"
+                    className="m-1 "
+                    style={{ borderRadius: "20px" }}
+                  >
+                    Deposit
+                  </Button>
                 </div>
                 <div className="content">
                   <img
@@ -724,8 +568,15 @@ const NewGame = () => {
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">{profile.totalwin} ₹</b>{" "}
-                  <p className="text-secondary">Income </p>
+                  <b className="text-light">Income {profile.totalwin} ₹</b>{" "}
+                  {/* <p className="text-secondary">Income </p> */}
+                  <Button
+                    variant="outline-warning"
+                    className="m-1"
+                    style={{ borderRadius: "20px" }}
+                  >
+                    Withdraw
+                  </Button>
                 </div>
               </div>
             </div>
@@ -787,10 +638,11 @@ const NewGame = () => {
                       <div className="timer">
                         {time <= 15 ? (
                           <div className="blur-background">
-                            <div className="remaining" >
-                              <h1 className="text-danger" style={{fontSize:'56px'}}>{`00:${time
-                                .toString()
-                                .padStart(2, "0")}`}</h1>
+                            <div className="remaining">
+                              <h1
+                                className="text-danger"
+                                style={{ fontSize: "66px", fontWeight: "bold" }}
+                              >{`00:${time.toString().padStart(2, "0")}`}</h1>
                             </div>
                           </div>
                         ) : null}
@@ -813,7 +665,7 @@ const NewGame = () => {
                 </Col>
                 <Col sm={12} md={6}>
                   <div>
-                    <h6 className="p-2 text-warning">Have a Good Luck!</h6>
+                    <h6 className="p-2 text-warning">Predict a Color</h6>
                   </div>
                 </Col>
               </Row>
@@ -875,6 +727,50 @@ const NewGame = () => {
             /> */}
                 </Col>
               </Row>
+              {/*Number-start  */}
+              <Row>
+                <Col
+                  sm={12}
+                  md={6}
+                  lg={6}
+                  className={`game_choice_color game_choice_Number  ${
+                    contentDisabled ? "disabled" : ""
+                  }`}
+                  style={{
+                    opacity: contentDisabled ? 0.7 : 1,
+                    pointerEvents: contentDisabled ? "none" : "auto",
+                  }}
+                >
+                  <div className="color-options number-options">
+                    {predefinedNumbers.map((color, index) => (
+                      <button
+                        key={color}
+                        style={{
+                          backgroundColor: contentDisabled
+                            ? "#ffe7d9"
+                            : buttonColors[index],
+                          margin: "5px",
+                          border: contentDisabled ? "2px solid gray" : '1.5px solid transparent',
+                          color: "white",
+                          fontWeight: "bold",
+                          borderRadius: "50%",
+                          width: "50px",
+                          height: "50px",
+                          boxShadow: contentDisabled
+                            ? "0 0 0 2px red"
+                            : `0 0 0 1px ${buttonColors[index]}`,backgroundClip: "content-box",
+                        }}
+                        onClick={() => handleNumberSelect(color, buttonColors[index])}
+                        className="game_button"
+                        disabled={gameResult !== ""}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+              {/*Number-End  */}
             </Container>
 
             <div className="table-responsive" style={{ marginTop: "10px" }}>
@@ -885,12 +781,12 @@ const NewGame = () => {
                     "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
                 }}
               >
-                <thead className="text-warning">
+                <thead className="text-warning" style={{height:'55px'}}>
                   <tr>
                     <th>#</th>
                     <th>Session</th>
-                    <th>select</th>
-                    <th>Target</th>
+                    <th>Number</th>
+                    <th>Color</th>
                     <th>Date</th>
                   </tr>
                 </thead>
@@ -976,7 +872,7 @@ const NewGame = () => {
             >
               <Modal.Header
                 closeButton
-                style={{ background: userChoice.toLowerCase(), color: "white" }}
+                style={{ background: userChoice.toLowerCase() || userChoiceButtonNumber.toLocaleLowerCase(), color: "white" }}
               >
                 <Modal.Title>Choose Bet Amount</Modal.Title>
               </Modal.Header>
@@ -993,6 +889,7 @@ const NewGame = () => {
           </div> */}
                 <Form>
                   <Form.Group controlId="betAmount">
+                   {/* {userChoiceNumber &&<h5 className="m-2">Choosed Number: {userChoiceNumber}</h5>}  */}
                     <h6 className="m-2">Balance: {profile.balance}</h6>
                     <Form.Label>Enter Bet Amount</Form.Label>
                     <Form.Control
@@ -1005,20 +902,64 @@ const NewGame = () => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                  Close
+                <Button variant="danger" onClick={() => setShowModal(false)}>
+                  Cancel
                 </Button>
                 <Button
                   onClick={handleBet}
                   style={{
-                    background: userChoice.toLowerCase(),
-                    border: `1.5px solid ${userChoice.toLowerCase()}`,
+                    background: userChoice.toLowerCase() || userChoiceButtonNumber.toLocaleLowerCase(),
+                    border: `1.5px solid ${userChoice.toLowerCase()}` || `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
                   }}
                 >
                   Place Bet
                 </Button>
               </Modal.Footer>
             </Modal>
+            {/* Number Model */}
+            <Modal
+              show={showNumberModal}
+              onHide={() => setShowNumberModal(false)}
+              className="modal-center"
+            >
+              <Modal.Header
+                closeButton
+                style={{ background: userChoiceButtonNumber.toLocaleLowerCase(), color: "white" }}
+              >
+                <Modal.Title>Choose Bet Amount</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group controlId="betAmount">
+                   {userChoiceNumber &&<h6 className="m-2">Choosed Number: {userChoiceNumber}</h6>} 
+                    <h6 className="m-2">Balance: {profile.balance}</h6>
+                    <Form.Label>Enter Bet Amount</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter amount"
+                      value={betAmount}
+                      onChange={(e) => setBetAmount(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="danger" onClick={() => setShowNumberModal(false)} style={{width:'150px'}}>
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleBet}
+                  style={{
+                    background: userChoiceButtonNumber.toLocaleLowerCase(),
+                    border: `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
+                    width:'150px'
+                  }}
+                >
+                  Place Bet
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            {/* Number Model */}
             <div>
               <Modal show={showMessageModal} onHide={closeMessageModal}>
                 <Modal.Header
@@ -1033,11 +974,11 @@ const NewGame = () => {
                 </Modal.Header>
                 <Modal.Body>No Message.</Modal.Body>
                 <Modal.Footer>
-                  <Button
+                  <Button 
                     onClick={closeMessageModal}
                     style={{ background: "blueViolet" }}
                   >
-                    Close
+                    Cancel
                   </Button>
                 </Modal.Footer>
               </Modal>

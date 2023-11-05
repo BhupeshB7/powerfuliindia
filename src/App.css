@@ -616,12 +616,21 @@ ul li:nth-child(3) {
   justify-content: space-between;
   width: 100%;
   padding: 10px;
+ 
+}
+.number-options{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
 }
 .color-options button{
-  width: 100px;
+  width: 90px;
   height: 40px;
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border: 2px solid ffe7d9;
+  /* color: #ffe7d9; */
 }
 .color-options button:nth-child(2){
   border-top-right-radius: none !important;
@@ -760,7 +769,8 @@ flex-direction: column;
 display: flex;
 padding-left: 40px;
 padding-top: 20px;
-justify-content: space-around;
+flex-direction: row;
+gap: 30px;
   
 }
 .time_box{
@@ -824,6 +834,14 @@ justify-content: space-around;
   display: flex;
   align-items: center;
 }
+.game_choice_Number{
+  margin-top: 30px;
+  height: 150px;
+  background-image: url('https://img.freepik.com/free-vector/magic-portal-mountain-top-alien-planet-surface-futuristic-landscape-background-with-glowing-entrance-rock-starry-sky-fantasy-book-computer-game-scene-cartoon-vector-illustration_107791-4566.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 .game_choice1 {
   margin-top: 10px;
   min-height: 300px !important;
@@ -853,6 +871,9 @@ justify-content: space-around;
 
 /* For larger devices, display all boxes in one line */
 @media (min-width: 768px) {
+  .game_choice_Number{
+    height: 120px;
+  }
   .color-optionsText {
     display: flex;
     justify-content: space-between;
@@ -883,7 +904,7 @@ justify-content: space-around;
 }
 .alert{
   position: absolute;
-  top: 20%;
+  top: 27%;
   left: 2%;
   right: 2%;
   z-index: 1000;
