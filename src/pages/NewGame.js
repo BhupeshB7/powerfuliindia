@@ -389,9 +389,9 @@ const NewGame = () => {
       if (userChoice === targetColor || userChoiceNumber === targetNumber) {
         // const winnings = betAmount * 1.25;
         if (userChoice === targetColor) {
-          winnings = betAmount * 1.25;
+        const  winnings = betAmount * 1.25;
         } else if (userChoiceNumber === targetNumber) {
-          winnings = betAmount * 4;
+         const winnings = betAmount * 4;
         }
         setWinningAmount(winnings);
         setGameResult(`You Win ₹ ${winnings}`);
