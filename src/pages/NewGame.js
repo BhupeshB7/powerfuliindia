@@ -357,17 +357,20 @@ const NewGame = () => {
     setShowNumberModal(true);
   };
   const handleBet = async () => {
+    alert(targetNumber)
     if (betAmount < 5) {
       handleAlert("Bet Amount Should be greater than 5Rs.😌");
       setShowModal(false);
+      setShowNumberModal(false);
       return;
     } else if (betAmount >= profile.balance) {
       handleAlert("Insufficient Balance");
       setShowModal(false);
+      setShowNumberModal(false);
       return;
     } else {
       // Close the modal after placing the bet
-      setShowModal(false);
+      setShowNumberModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
