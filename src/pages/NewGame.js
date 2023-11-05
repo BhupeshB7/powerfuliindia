@@ -370,6 +370,7 @@ const NewGame = () => {
     } else {
       // Close the modal after placing the bet
       setShowNumberModal(false);
+      setShowModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
@@ -812,7 +813,7 @@ const NewGame = () => {
                         <td>{index + 1}</td>
                         <td>{game.result}</td>
                         {/* <td>{game.chosenColor}</td> */}
-                        <td>{game.chosenColor}</td>
+                        <td style={{color:game.targetColor}}>{game.chosenColor}</td>
                         <td>
                           <div
                             style={{
