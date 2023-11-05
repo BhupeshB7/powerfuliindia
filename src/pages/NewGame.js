@@ -450,6 +450,7 @@ const NewGame = () => {
     setTimeout(() => {
       setGameResult("");
       setUserChoice("");
+      setUserChoiceNumber("");
       setBetAmount(0);
       setTargetColor(getRandomColor());
       setTargetNumber(getRandomNumber());
@@ -811,7 +812,7 @@ const NewGame = () => {
                         <td>{index + 1}</td>
                         <td>{game.result}</td>
                         {/* <td>{game.chosenColor}</td> */}
-                        <td>{game.choosenColor}</td>
+                        <td>{game.chosenColor}</td>
                         <td>
                           <div
                             style={{
