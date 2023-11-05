@@ -794,7 +794,7 @@ const NewGame = () => {
                     <th>Date</th>
                   </tr>
                 </thead>
-                <tbody style={{ color: "#FFD700" }}>
+                <tbody style={{ color: "#FFD700" }} className="table-hover">
                   {gameHistory && gameHistory.length > 0 ? (
                     gameHistory.map((game, index) => (
                       <tr key={index}>
