@@ -388,10 +388,11 @@ const NewGame = () => {
 
       if (userChoice === targetColor || userChoiceNumber === targetNumber) {
         // const winnings = betAmount * 1.25;
+        let winnings;
         if (userChoice === targetColor) {
-        const  winnings = betAmount * 1.25;
+          winnings = betAmount * 1.25;
         } else if (userChoiceNumber === targetNumber) {
-         const winnings = betAmount * 4;
+          winnings = betAmount * 4;
         }
         setWinningAmount(winnings);
         setGameResult(`You Win ₹ ${winnings}`);
@@ -673,11 +674,11 @@ const NewGame = () => {
                 <Row>
                   <Col sm={12} md={6} lg={6}>
                     <div className="text-center">
-                      <h5 className="mt-3">{gameResult}</h5>
+                      <h5 className="mt-3 text-success">{gameResult}</h5>
                       {gameResult === "You Win ₹ 0" ? (
                         <p>You didn't place a bet.</p>
                       ) : (
-                        <p>Winning Amount: ₹ {winningAmount}</p>
+                        <p className="text-center text-success">Winning Amount: ₹ {winningAmount}</p>
                       )}
                     </div>
                   </Col>
