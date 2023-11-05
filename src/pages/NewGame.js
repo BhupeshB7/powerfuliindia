@@ -357,7 +357,6 @@ const NewGame = () => {
     setShowNumberModal(true);
   };
   const handleBet = async () => {
-    alert(targetNumber)
     if (betAmount < 5) {
       handleAlert("Bet Amount Should be greater than 5Rs.😌");
       setShowModal(false);
@@ -561,6 +560,8 @@ const NewGame = () => {
                     variant="outline-warning"
                     className="m-1 "
                     style={{ borderRadius: "20px" }}
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
                   >
                     Deposit
                   </Button>
@@ -578,6 +579,8 @@ const NewGame = () => {
                     variant="outline-warning"
                     className="m-1"
                     style={{ borderRadius: "20px" }}
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop2"
                   >
                     Withdraw
                   </Button>
@@ -681,7 +684,9 @@ const NewGame = () => {
                       {gameResult === "You Win ₹ 0" ? (
                         <p>You didn't place a bet.</p>
                       ) : (
-                        <p className="text-center text-success">Winning Amount: ₹ {winningAmount}</p>
+                        <p className="text-center text-success">
+                          Winning Amount: ₹ {winningAmount}
+                        </p>
                       )}
                     </div>
                   </Col>
@@ -754,7 +759,9 @@ const NewGame = () => {
                             ? "#ffe7d9"
                             : buttonColors[index],
                           margin: "5px",
-                          border: contentDisabled ? "2px solid gray" : '1.5px solid transparent',
+                          border: contentDisabled
+                            ? "2px solid gray"
+                            : "1.5px solid transparent",
                           color: "white",
                           fontWeight: "bold",
                           borderRadius: "50%",
@@ -762,9 +769,12 @@ const NewGame = () => {
                           height: "50px",
                           boxShadow: contentDisabled
                             ? "0 0 0 2px red"
-                            : `0 0 0 1px ${buttonColors[index]}`,backgroundClip: "content-box",
+                            : `0 0 0 1px ${buttonColors[index]}`,
+                          backgroundClip: "content-box",
                         }}
-                        onClick={() => handleNumberSelect(color, buttonColors[index])}
+                        onClick={() =>
+                          handleNumberSelect(color, buttonColors[index])
+                        }
                         className="game_button"
                         disabled={gameResult !== ""}
                       >
@@ -779,13 +789,13 @@ const NewGame = () => {
 
             <div className="table-responsive" style={{ marginTop: "10px" }}>
               <table
-                className="table  table-hover "
+                className="table"
                 style={{
                   backgroundImage:
                     "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
                 }}
               >
-                <thead className="text-warning" style={{height:'55px'}}>
+                <thead className="text-warning" style={{ height: "55px" }}>
                   <tr>
                     <th>#</th>
                     <th>Session</th>
@@ -801,16 +811,7 @@ const NewGame = () => {
                         <td>{index + 1}</td>
                         <td>{game.result}</td>
                         {/* <td>{game.chosenColor}</td> */}
-                        <td>
-                          <div
-                            style={{
-                              backgroundColor: game.chosenColor,
-                              width: "25px",
-                              height: "25px",
-                              borderRadius: "50%",
-                            }}
-                          ></div>
-                        </td>
+                        <td>{game.choosenColor}</td>
                         <td>
                           <div
                             style={{
@@ -876,7 +877,12 @@ const NewGame = () => {
             >
               <Modal.Header
                 closeButton
-                style={{ background: userChoice.toLowerCase() || userChoiceButtonNumber.toLocaleLowerCase(), color: "white" }}
+                style={{
+                  background:
+                    userChoice.toLowerCase() ||
+                    userChoiceButtonNumber.toLocaleLowerCase(),
+                  color: "white",
+                }}
               >
                 <Modal.Title>Choose Bet Amount</Modal.Title>
               </Modal.Header>
@@ -893,7 +899,7 @@ const NewGame = () => {
           </div> */}
                 <Form>
                   <Form.Group controlId="betAmount">
-                   {/* {userChoiceNumber &&<h5 className="m-2">Choosed Number: {userChoiceNumber}</h5>}  */}
+                    {/* {userChoiceNumber &&<h5 className="m-2">Choosed Number: {userChoiceNumber}</h5>}  */}
                     <h6 className="m-2">Balance: {profile.balance}</h6>
                     <Form.Label>Enter Bet Amount</Form.Label>
                     <Form.Control
@@ -912,8 +918,12 @@ const NewGame = () => {
                 <Button
                   onClick={handleBet}
                   style={{
-                    background: userChoice.toLowerCase() || userChoiceButtonNumber.toLocaleLowerCase(),
-                    border: `1.5px solid ${userChoice.toLowerCase()}` || `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
+                    background:
+                      userChoice.toLowerCase() ||
+                      userChoiceButtonNumber.toLocaleLowerCase(),
+                    border:
+                      `1.5px solid ${userChoice.toLowerCase()}` ||
+                      `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
                   }}
                 >
                   Place Bet
@@ -928,14 +938,21 @@ const NewGame = () => {
             >
               <Modal.Header
                 closeButton
-                style={{ background: userChoiceButtonNumber.toLocaleLowerCase(), color: "white" }}
+                style={{
+                  background: userChoiceButtonNumber.toLocaleLowerCase(),
+                  color: "white",
+                }}
               >
                 <Modal.Title>Choose Bet Amount</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form>
                   <Form.Group controlId="betAmount">
-                   {userChoiceNumber &&<h6 className="m-2">Choosed Number: {userChoiceNumber}</h6>} 
+                    {userChoiceNumber && (
+                      <h6 className="m-2">
+                        Choosed Number: {userChoiceNumber}
+                      </h6>
+                    )}
                     <h6 className="m-2">Balance: {profile.balance}</h6>
                     <Form.Label>Enter Bet Amount</Form.Label>
                     <Form.Control
@@ -948,7 +965,11 @@ const NewGame = () => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="danger" onClick={() => setShowNumberModal(false)} style={{width:'150px'}}>
+                <Button
+                  variant="danger"
+                  onClick={() => setShowNumberModal(false)}
+                  style={{ width: "150px" }}
+                >
                   Cancel
                 </Button>
                 <Button
@@ -956,7 +977,7 @@ const NewGame = () => {
                   style={{
                     background: userChoiceButtonNumber.toLocaleLowerCase(),
                     border: `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
-                    width:'150px'
+                    width: "150px",
                   }}
                 >
                   Place Bet
@@ -978,7 +999,7 @@ const NewGame = () => {
                 </Modal.Header>
                 <Modal.Body>No Message.</Modal.Body>
                 <Modal.Footer>
-                  <Button 
+                  <Button
                     onClick={closeMessageModal}
                     style={{ background: "blueViolet" }}
                   >

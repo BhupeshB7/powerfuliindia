@@ -1257,6 +1257,6 @@ gap: 30px;
   left: 0 !important;
   right: 0 !important;
 }
-.table-hover:hover, .table-hover:focus, .table-hover:active{
+/* .table-hover:hover, .table-hover:focus, .table-hover:active{
 color: green !important;
-}
+} */
