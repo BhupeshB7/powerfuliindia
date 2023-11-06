@@ -38,7 +38,7 @@ const NewGame = () => {
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
@@ -95,13 +95,14 @@ const NewGame = () => {
     return expireTime ? expireTime < Date.now() : true;
   };
   const token = localStorage.getItem("token");
-  useEffect(() => {
-    if (isTokenExpired()) {
-      setIsTokenValid(false);
-      // redirect to homepage
-      window.location.href = "/login";
-    }
-  }, []);
+  const isTokenValids = 'localStorage.getItem("token")';
+  // useEffect(() => {
+  //   if (isTokenExpired()) {
+  //     setIsTokenValid(false);
+  //     // redirect to homepage
+  //     window.location.href = "/login";
+  //   }
+  // }, []);
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
@@ -557,7 +558,7 @@ const NewGame = () => {
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
     <>
-      {isTokenValid ? (
+      {isTokenValids ? (
         <>
           <div className="colorbackGround">
             <div className="alert">
@@ -991,6 +992,7 @@ const NewGame = () => {
               show={showModal}
               onHide={() => setShowModal(false)}
               className="modal-center"
+              
             >
               <Modal.Header
                 closeButton
@@ -999,8 +1001,8 @@ const NewGame = () => {
                     userChoice.toLowerCase() ||
                     userChoiceButtonNumber.toLocaleLowerCase(),
                   color: "white",
-                  clipPath: "polygon(51% 29%, 100% 15%, 100% 0, 0 0, 0 15%)",
-                  height:'70px'
+                  // clipPath: "polygon(71% 99%, 100% 95%, 100% 0, 0 0, 0 15%)",
+                  // height:'270px'
                 }}
               >
                 <Modal.Title>Choose Bet Amount</Modal.Title>
