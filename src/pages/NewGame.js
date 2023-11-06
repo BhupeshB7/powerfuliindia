@@ -95,14 +95,14 @@ const NewGame = () => {
     return expireTime ? expireTime < Date.now() : true;
   };
   const token = localStorage.getItem("token");
-  const isTokenValids = 'localStorage.getItem("token")';
-  // useEffect(() => {
-  //   if (isTokenExpired()) {
-  //     setIsTokenValid(false);
-  //     // redirect to homepage
-  //     window.location.href = "/login";
-  //   }
-  // }, []);
+  // const isTokenValids = 'localStorage.getItem("token")';
+  useEffect(() => {
+    if (isTokenExpired()) {
+      setIsTokenValid(false);
+      // redirect to homepage
+      window.location.href = "/login";
+    }
+  }, []);
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
@@ -558,7 +558,7 @@ const NewGame = () => {
   const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
     <>
-      {isTokenValids ? (
+      {isTokenValid ? (
         <>
           <div className="colorbackGround">
             <div className="alert">
