@@ -41,6 +41,32 @@ const NewGame = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Function to scroll to the top of the page
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Adds smooth scrolling animation
+    });
+  };
+
+  // Listen to the scroll event to show/hide the button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     // Generate random colors when the component is initially rendered
@@ -645,7 +671,7 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        {time <= 15 ? (
+                        {time <= 1 ? (
                           <div className="blur-background">
                             <div className="remaining">
                               <h1
@@ -659,7 +685,7 @@ const NewGame = () => {
                           Remaining Time:{" "}
                           <b
                             style={
-                              time <= 15 ? { display: "none" } : timerStyle
+                              time <= 1 ? { display: "none" } : timerStyle
                             }
                           >
                             {" "}
@@ -694,7 +720,7 @@ const NewGame = () => {
                   </Col>
                 </Row>
               )}
-              <Row>
+              <Row className="p-3">
                 <Col
                   sm={12}
                   md={6}
@@ -739,19 +765,21 @@ const NewGame = () => {
                 </Col>
               </Row>
               {/*Number-start  */}
-              <Row>
+              <Row className="p-3">
                 <Col
                   sm={12}
                   md={6}
-                  lg={6}
-                  className={`game_choice_color game_choice_Number  ${
+                  lg={6} className="backgroundOfColorPrediction"
+                >
+                  <div className={`game_choice_color game_choice_Number  ${
                     contentDisabled ? "disabled" : ""
                   }`}
                   style={{
                     opacity: contentDisabled ? 0.7 : 1,
                     pointerEvents: contentDisabled ? "none" : "auto",
-                  }}
-                >
+                  }}>
+
+                  
                   <div className="color-options number-options">
                     {predefinedNumbers.map((color, index) => (
                       <button
@@ -784,6 +812,29 @@ const NewGame = () => {
                       </button>
                     ))}
                   </div>
+                  </div>
+                   {/* <div className="mt-2" style={{display:'flex', width:'90%', justifyContent:'space-around', gap:'30px', margin:'auto', backgroundImage:'linear-gradient(-20deg, #d558c8 0%, #24d292 100%)',borderRadius:'5px'}}>
+                    <Button variant="light" className="m-1 text-success fw-bold" style={{width:'100px', borderRadius:'30px'}}>Up</Button>
+                    <Button variant="success" className="m-1" style={{width:'130px', borderRadius:'30px'}}>Down</Button>
+                   </div> */}
+                    <div className={`mt-1 game_choice_color game_choice_Number  ${
+                    contentDisabled ? "disabled" : ""
+                  }`}
+                  style={{
+                    opacity: contentDisabled ? 0.7 : 1,
+                    pointerEvents: contentDisabled ? "none" : "auto",
+                    height:'50px'
+                  }}>
+
+                  
+                  {/* <div className="color-options" style={{height:'40px !important'}}> */}
+                 <div  style={{display:'flex', margin:'auto', borderRadius:'5px'}}>
+                    <Button variant="light" className="m-1 text-success fw-bold upDown" style={{width:'130px', borderTopRightRadius:'0px', borderTopLeftRadius:'30px', borderBottomLeftRadius:'30px'}}>Up</Button>
+                 
+                    <Button variant="success" className="m-1 text-light fw-bold upDown" style={{width:'150px', borderTopRightRadius:'30px', borderTopLeftRadius:'0px', borderBottomRightRadius:'30px', marginLeft:'100px !important'}}>Down</Button>
+                   </div>
+                  </div>
+                  {/* </div> */}
                 </Col>
               </Row>
               {/*Number-End  */}
@@ -813,7 +864,9 @@ const NewGame = () => {
                         <td>{index + 1}</td>
                         <td>{game.result}</td>
                         {/* <td>{game.chosenColor}</td> */}
-                        <td style={{color:game.targetColor}}>{game.chosenColor}</td>
+                        <td style={{ color: game.targetColor }}>
+                          {game.chosenColor}
+                        </td>
                         <td>
                           <div
                             style={{
@@ -859,7 +912,8 @@ const NewGame = () => {
               <div className="text-light">
                 Page {currentPage} of {totalPages}
               </div>
-              <div className="notification-container">
+            </div>
+            <div className="notification-container" style={{marginTop:'-80px'}}>
                 <div className="notification">
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png"
@@ -870,8 +924,16 @@ const NewGame = () => {
                   />
                 </div>
               </div>
-            </div>
 
+            <div style={{display:'flex', justifyContent:'flex-end', width:'100%'}}>
+            <div
+                className={`scroll-to-top ${isVisible ? "visible" : ""}`}
+                onClick={scrollToTop}
+                style={{display:'flex', alignItems: 'center', justifyContent:'center', background:'#fff', borderRadius:'50%', width:'50px', height:'50px', margin:'20px'}}
+              >
+                <img src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png" height='35px' width='35px' alt="scrollToTop"/>
+              </div>
+              </div>
             <Modal
               show={showModal}
               onHide={() => setShowModal(false)}
@@ -956,10 +1018,10 @@ const NewGame = () => {
                       </h6>
                     )}
                     <h6 className="m-2">Balance: {profile.balance}</h6>
-                    <Form.Label>Enter Bet Amount</Form.Label>
+                    {/* <Form.Label>Enter Bet Amount</Form.Label> */}
                     <Form.Control
                       type="number"
-                      placeholder="Enter amount"
+                      placeholder="Enter Bet amount"
                       value={betAmount}
                       onChange={(e) => setBetAmount(e.target.value)}
                     />
