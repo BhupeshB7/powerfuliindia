@@ -334,6 +334,8 @@ const NewGame = () => {
         if (time <= 15) {
           setTimerBlink(true);
           setContentDisabled(true);
+          setShowModal(false);
+          setShowNumberModal(false);
         } else {
           setTimerBlink(false);
         }
@@ -671,7 +673,7 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        {time <= 1 ? (
+                        {time <= 15 ? (
                           <div className="blur-background">
                             <div className="remaining">
                               <h1
@@ -684,9 +686,7 @@ const NewGame = () => {
                         <h4 style={{ color: "#bbb" }}>
                           Remaining Time:{" "}
                           <b
-                            style={
-                              time <= 1 ? { display: "none" } : timerStyle
-                            }
+                            style={time <= 15 ? { display: "none" } : timerStyle}
                           >
                             {" "}
                             {time}
@@ -769,70 +769,100 @@ const NewGame = () => {
                 <Col
                   sm={12}
                   md={6}
-                  lg={6} className="backgroundOfColorPrediction"
+                  lg={6}
+                  className="backgroundOfColorPrediction"
                 >
-                  <div className={`game_choice_color game_choice_Number  ${
-                    contentDisabled ? "disabled" : ""
-                  }`}
-                  style={{
-                    opacity: contentDisabled ? 0.7 : 1,
-                    pointerEvents: contentDisabled ? "none" : "auto",
-                  }}>
-
-                  
-                  <div className="color-options number-options">
-                    {predefinedNumbers.map((color, index) => (
-                      <button
-                        key={color}
-                        style={{
-                          backgroundColor: contentDisabled
-                            ? "#ffe7d9"
-                            : buttonColors[index],
-                          margin: "5px",
-                          border: contentDisabled
-                            ? "2px solid gray"
-                            : "1.5px solid transparent",
-                          color: "white",
-                          fontWeight: "bold",
-                          borderRadius: "50%",
-                          width: "50px",
-                          height: "50px",
-                          boxShadow: contentDisabled
-                            ? "0 0 0 2px red"
-                            : `0 0 0 1px ${buttonColors[index]}`,
-                          backgroundClip: "content-box",
-                        }}
-                        onClick={() =>
-                          handleNumberSelect(color, buttonColors[index])
-                        }
-                        className="game_button"
-                        disabled={gameResult !== ""}
-                      >
-                        {color}
-                      </button>
-                    ))}
+                  <div
+                    className={`game_choice_color game_choice_Number  ${
+                      contentDisabled ? "disabled" : ""
+                    }`}
+                    style={{
+                      opacity: contentDisabled ? 0.7 : 1,
+                      pointerEvents: contentDisabled ? "none" : "auto",
+                    }}
+                  >
+                    <div className="color-options number-options">
+                      {predefinedNumbers.map((color, index) => (
+                        <button
+                          key={color}
+                          style={{
+                            backgroundColor: contentDisabled
+                              ? "#ffe7d9"
+                              : buttonColors[index],
+                            margin: "5px",
+                            border: contentDisabled
+                              ? "2px solid gray"
+                              : "1.5px solid transparent",
+                            color: "white",
+                            fontWeight: "bold",
+                            borderRadius: "50%",
+                            width: "50px",
+                            height: "50px",
+                            boxShadow: contentDisabled
+                              ? "0 0 0 2px red"
+                              : `0 0 0 1px ${buttonColors[index]}`,
+                            backgroundClip: "content-box",
+                          }}
+                          onClick={() =>
+                            handleNumberSelect(color, buttonColors[index])
+                          }
+                          className="game_button"
+                          disabled={gameResult !== ""}
+                        >
+                          {color}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  </div>
-                   {/* <div className="mt-2" style={{display:'flex', width:'90%', justifyContent:'space-around', gap:'30px', margin:'auto', backgroundImage:'linear-gradient(-20deg, #d558c8 0%, #24d292 100%)',borderRadius:'5px'}}>
+                  {/* <div className="mt-2" style={{display:'flex', width:'90%', justifyContent:'space-around', gap:'30px', margin:'auto', backgroundImage:'linear-gradient(-20deg, #d558c8 0%, #24d292 100%)',borderRadius:'5px'}}>
                     <Button variant="light" className="m-1 text-success fw-bold" style={{width:'100px', borderRadius:'30px'}}>Up</Button>
                     <Button variant="success" className="m-1" style={{width:'130px', borderRadius:'30px'}}>Down</Button>
                    </div> */}
-                    <div className={`mt-1 game_choice_color game_choice_Number  ${
-                    contentDisabled ? "disabled" : ""
-                  }`}
-                  style={{
-                    opacity: contentDisabled ? 0.7 : 1,
-                    pointerEvents: contentDisabled ? "none" : "auto",
-                    height:'50px'
-                  }}>
+                  <div
+                    className={`mt-1 game_choice_color game_choice_Number  ${
+                      contentDisabled ? "disabled" : ""
+                    }`}
+                    style={{
+                      opacity: contentDisabled ? 0.7 : 1,
+                      pointerEvents: contentDisabled ? "none" : "auto",
+                      height: "50px",
+                    }}
+                  >
+                    {/* <div className="color-options" style={{height:'40px !important'}}> */}
+                    <div
+                      style={{
+                        display: "flex",
+                        margin: "auto",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      <Button
+                        variant="light"
+                        className="m-1 text-success fw-bold upDown"
+                        style={{
+                          width: "130px",
+                          borderTopRightRadius: "0px",
+                          borderTopLeftRadius: "30px",
+                          borderBottomLeftRadius: "30px",
+                        }}
+                      >
+                        Up
+                      </Button>
 
-                  
-                  {/* <div className="color-options" style={{height:'40px !important'}}> */}
-                 <div  style={{display:'flex', margin:'auto', borderRadius:'5px'}}>
-                    <Button variant="light" className="m-1 text-success fw-bold upDown" style={{width:'130px', borderTopRightRadius:'0px', borderTopLeftRadius:'30px', borderBottomLeftRadius:'30px'}}>Up</Button>
-                 
-                    <Button variant="success" className="m-1 text-light fw-bold upDown" style={{width:'150px', borderTopRightRadius:'30px', borderTopLeftRadius:'0px', borderBottomRightRadius:'30px', marginLeft:'100px !important'}}>Down</Button>
-                   </div>
+                      <Button
+                        variant="success"
+                        className="m-1 text-light fw-bold upDown"
+                        style={{
+                          width: "150px",
+                          borderTopRightRadius: "30px",
+                          borderTopLeftRadius: "0px",
+                          borderBottomRightRadius: "30px",
+                          marginLeft: "100px !important",
+                        }}
+                      >
+                        Down
+                      </Button>
+                    </div>
                   </div>
                   {/* </div> */}
                 </Col>
@@ -913,27 +943,50 @@ const NewGame = () => {
                 Page {currentPage} of {totalPages}
               </div>
             </div>
-            <div className="notification-container" style={{marginTop:'-80px'}}>
-                <div className="notification">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png"
-                    height="35px"
-                    width="40px"
-                    alt="notification"
-                    onClick={openMessageModal}
-                  />
-                </div>
-              </div>
-
-            <div style={{display:'flex', justifyContent:'flex-end', width:'100%'}}>
             <div
+              className="notification-container"
+              style={{ marginTop: "-80px" }}
+            >
+              <div className="notification">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png"
+                  height="35px"
+                  width="40px"
+                  alt="notification"
+                  onClick={openMessageModal}
+                />
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "100%",
+              }}
+            >
+              <div
                 className={`scroll-to-top ${isVisible ? "visible" : ""}`}
                 onClick={scrollToTop}
-                style={{display:'flex', alignItems: 'center', justifyContent:'center', background:'#fff', borderRadius:'50%', width:'50px', height:'50px', margin:'20px'}}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "#fff",
+                  borderRadius: "50%",
+                  width: "50px",
+                  height: "50px",
+                  margin: "20px",
+                }}
               >
-                <img src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png" height='35px' width='35px' alt="scrollToTop"/>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png"
+                  height="35px"
+                  width="35px"
+                  alt="scrollToTop"
+                />
               </div>
-              </div>
+            </div>
             <Modal
               show={showModal}
               onHide={() => setShowModal(false)}
@@ -946,6 +999,8 @@ const NewGame = () => {
                     userChoice.toLowerCase() ||
                     userChoiceButtonNumber.toLocaleLowerCase(),
                   color: "white",
+                  clipPath: "polygon(51% 29%, 100% 15%, 100% 0, 0 0, 0 15%)",
+                  height:'70px'
                 }}
               >
                 <Modal.Title>Choose Bet Amount</Modal.Title>
