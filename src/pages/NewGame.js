@@ -10,11 +10,12 @@ import {
   Alert,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ImWhatsapp } from "react-icons/im";
 import welcome from "../assets/gameWelcome.png";
 import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
-import ProgressBar from "react-bootstrap/ProgressBar";
+import sound from "../assets/audio.mp3"
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
@@ -28,6 +29,7 @@ const NewGame = () => {
   const [winningAmount, setWinningAmount] = useState("");
   const [profile, setProfile] = useState({});
   const [time, setTime] = useState(60);
+  const [audio, setAudio] = useState(new Audio(sound));
   const [uniqueId, setUniqueId] = useState(generateUniqueId());
   const [contentDisabled, setContentDisabled] = useState(false);
   const [timerBlink, setTimerBlink] = useState(false);
@@ -38,11 +40,21 @@ const NewGame = () => {
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-
+  
+  useEffect(() => {
+    if (time === 5) {
+      // Start the audio when time is equal to 5
+      audio.play();
+    } else if (time === 0) {
+      // Stop and reset the audio when time is equal to 0
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [time, audio]);
   // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
@@ -496,9 +508,9 @@ const NewGame = () => {
     return `${month}${day}-${hour}${minute}-${randomDigits}`;
   }
   const timerStyle = {
-    fontSize: timerBlink && time <= 15 ? "40px" : "19px",
-    color: timerBlink && time <= 15 ? "red" : "white",
-    animation: timerBlink && time <= 15 ? "blink 1s infinite" : "none",
+    fontSize: timerBlink && time <= 5 ? "40px" : "19px",
+    color: timerBlink && time <= 5 ? "red" : "white",
+    animation: timerBlink && time <= 5 ? "blink 1s infinite" : "none",
   };
   // Function to shuffle an array in place
   function shuffleArray(array) {
@@ -618,9 +630,9 @@ const NewGame = () => {
                 </div>
               </div>
             </div>
-            <div className="game_welcome">
+            {/* <div className="game_welcome">
               <img src={welcome} height="100px" width="130px" alt="welcome" />
-            </div>
+            </div> */}
             <Container>
               <Row>
                 <Col sm={12}>
@@ -674,9 +686,9 @@ const NewGame = () => {
                       </style>
 
                       <div className="timer">
-                        {time <= 15 ? (
+                        {time <= 5 ? (
                           <div className="blur-background">
-                            <div className="remaining">
+                            <div className="remaining" style={{display:'flex'}}>
                               <h1
                                 className="text-danger"
                                 style={{ fontSize: "66px", fontWeight: "bold" }}
@@ -684,19 +696,23 @@ const NewGame = () => {
                             </div>
                           </div>
                         ) : null}
-                        <h4 style={{ color: "#bbb" }}>
-                          Remaining Time:{" "}
+                        <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <p className="text-warning">{uniqueId}</p>
+                        <h1 style={{ color: "#bbb"}}>
+                          {" "}
                           <b
-                            style={time <= 15 ? { display: "none" } : timerStyle}
+                            style={time <= 5 ? { display: "none",fontSize:'30px !important' } : timerStyle}
                           >
                             {" "}
-                            {time}
+                           00: {time}
                           </b>
                           s &nbsp;{" "}
-                        </h4>
+                        </h1>
+                  
+                        </div>
+                        
                       </div>
                     </div>
-                    <p className="text-info">Sessioin ID: {uniqueId}</p>
                   </div>
                 </Col>
                 <Col sm={12} md={6}>
@@ -797,8 +813,8 @@ const NewGame = () => {
                             color: "white",
                             fontWeight: "bold",
                             borderRadius: "50%",
-                            width: "50px",
-                            height: "50px",
+                            width: "53px",
+                            height: "53px",
                             boxShadow: contentDisabled
                               ? "0 0 0 2px red"
                               : `0 0 0 1px ${buttonColors[index]}`,
@@ -967,6 +983,29 @@ const NewGame = () => {
               }}
             >
               <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "#fff",
+                  borderRadius: "50%",
+                  width: "55px",
+                  height: "55px",
+                  margin:'20px',
+                  textAlign: "center",
+                }}
+              >
+                <Link
+                        to={
+                          "https://wa.me/918102256637/?text=Hi"
+                        }
+                        
+                      >
+                        <ImWhatsapp className="contact-svg" style={{height:'35px',width:'35px', color:'green', margin:'auto'}}/>
+                      </Link>
+              </div>
+              {/*  */}
+              <div
                 className={`scroll-to-top ${isVisible ? "visible" : ""}`}
                 onClick={scrollToTop}
                 style={{
@@ -987,6 +1026,8 @@ const NewGame = () => {
                   alt="scrollToTop"
                 />
               </div>
+              {/*  */}
+              
             </div>
             <Modal
               show={showModal}
