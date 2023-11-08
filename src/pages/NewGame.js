@@ -419,7 +419,7 @@ const NewGame = () => {
       setShowNumberModal(false);
       setShowLetterModal(false);
       return;
-    } else if (betAmount >= profile.balance || betAmount>=1) {
+    } else if (betAmount >= profile.balance ) {
       handleAlert("Insufficient Balance");
       setShowModal(false);
       setShowNumberModal(false);
