@@ -15,16 +15,19 @@ import welcome from "../assets/gameWelcome.png";
 import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
-import sound from "../assets/audio.mp3"
+import sound from "../assets/audio.mp3";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
+  const [targetLetter, setTargetLetter] = useState("");
   const [userChoice, setUserChoice] = useState("");
   const [userChoiceNumber, setUserChoiceNumber] = useState("");
+  const [userChoiceLetter, setUserChoiceLetter] = useState("");
   const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState("");
   const [gameResult, setGameResult] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showNumberModal, setShowNumberModal] = useState(false);
+  const [showLetterModal, setShowLetterModal] = useState(false);
   const [betAmount, setBetAmount] = useState(0);
   const [winningAmount, setWinningAmount] = useState("");
   const [profile, setProfile] = useState({});
@@ -34,6 +37,7 @@ const NewGame = () => {
   const [contentDisabled, setContentDisabled] = useState(false);
   const [timerBlink, setTimerBlink] = useState(false);
   const predefinedColors = ["Blueviolet", "Red", "Green"];
+  const predefinedLetter = ["Small", "Big",];
   const predefinedColors1 = ["green", "orange", "purple"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
@@ -44,7 +48,7 @@ const NewGame = () => {
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-  
+  const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   useEffect(() => {
     if (time === 5) {
       // Start the audio when time is equal to 5
@@ -324,6 +328,10 @@ const NewGame = () => {
     const randomIndex = Math.floor(Math.random() * predefinedNumbers.length);
     return predefinedNumbers[randomIndex];
   };
+  const getRandomLetter = () => {
+    const randomIndex = Math.floor(Math.random() * predefinedLetter.length);
+    return predefinedLetter[randomIndex];
+  };
   // useEffect(() => {
   //   const timer = setInterval(() => {
   //     if (time > 0) {
@@ -344,11 +352,12 @@ const NewGame = () => {
     const timer = setInterval(() => {
       if (time > 0) {
         setTime(time - 1);
-        if (time <= 15) {
+        if (time <= 5) {
           setTimerBlink(true);
           setContentDisabled(true);
           setShowModal(false);
           setShowNumberModal(false);
+          setShowLetterModal(false);
         } else {
           setTimerBlink(false);
         }
@@ -382,11 +391,12 @@ const NewGame = () => {
     getGamerProfile();
   }, [data.userId]);
   useEffect(() => {
-    if (!targetColor || !targetNumber) {
+    if (!targetColor || !targetNumber || !targetLetter) {
       setTargetColor(getRandomColor());
       setTargetNumber(getRandomNumber());
+      setTargetLetter(getRandomLetter());
     }
-  }, [targetColor, targetNumber]);
+  }, [targetColor, targetNumber, targetLetter]);
 
   const handleColorSelect = (color) => {
     setUserChoice(color);
@@ -397,20 +407,28 @@ const NewGame = () => {
     setUserChoiceButtonNumber(buttonColor);
     setShowNumberModal(true);
   };
+  const handleLetterSelect = (letter, buttonColor) => {
+    setUserChoiceLetter(letter);
+    setUserChoiceButtonNumber(buttonColor);
+    setShowLetterModal(true);
+  };
   const handleBet = async () => {
     if (betAmount < 5) {
       handleAlert("Bet Amount Should be greater than 5Rs.😌");
       setShowModal(false);
       setShowNumberModal(false);
+      setShowLetterModal(false);
       return;
-    } else if (betAmount >= profile.balance) {
+    } else if (betAmount >= profile.balance || betAmount>=1) {
       handleAlert("Insufficient Balance");
       setShowModal(false);
       setShowNumberModal(false);
+      setShowLetterModal(false);
       return;
     } else {
       // Close the modal after placing the bet
       setShowNumberModal(false);
+      setShowLetterModal(false);
       setShowModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
@@ -430,13 +448,15 @@ const NewGame = () => {
         console.error(error);
       }
 
-      if (userChoice === targetColor || userChoiceNumber === targetNumber) {
+      if (userChoice === targetColor || userChoiceNumber === targetNumber || userChoiceLetter === targetLetter) {
         // const winnings = betAmount * 1.25;
         let winnings;
         if (userChoice === targetColor) {
           winnings = betAmount * 1.25;
         } else if (userChoiceNumber === targetNumber) {
           winnings = betAmount * 4;
+        } else if (userChoiceLetter === targetLetter) {
+          winnings = betAmount *2;
         }
         setWinningAmount(winnings);
         setGameResult(`You Win ₹ ${winnings}`);
@@ -463,12 +483,13 @@ const NewGame = () => {
         // Perform any necessary actions for a loss
       }
     }
-    console.log(winningAmount);
+    // console.log(winningAmount);
     const gameDetails = {
       userId: data.userId, // Make sure userId is defined or passed as a prop
       // entryFee: betAmount,
 
       targetColor: targetColor,
+      targetLetter: targetLetter,
       chosenColor: targetNumber,
       result: uniqueId,
     };
@@ -493,8 +514,10 @@ const NewGame = () => {
       setGameResult("");
       setUserChoice("");
       setUserChoiceNumber("");
+      setUserChoiceLetter("");
       setBetAmount(0);
       setTargetColor(getRandomColor());
+      setTargetLetter(getRandomLetter());
       setTargetNumber(getRandomNumber());
     }, 3000); // 10 seconds in milliseconds
   };
@@ -513,13 +536,7 @@ const NewGame = () => {
     animation: timerBlink && time <= 5 ? "blink 1s infinite" : "none",
   };
   // Function to shuffle an array in place
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
+
   if (isLoading) {
     return (
       <h6
@@ -547,27 +564,26 @@ const NewGame = () => {
       </h6>
     );
   }
+  //
+  const incrementBetAmount = () => {
+    setBetAmount((prevAmount) => prevAmount + 5);
+  };
 
+  const decrementBetAmount = () => {
+    if (betAmount >= 5) {
+      setBetAmount((prevAmount) => prevAmount - 5);
+    }
+  };
+  const multiplyBetAmount = (factor) => {
+    setBetAmount((prevAmount) => prevAmount * factor);
+    setMultiplicationFactor(factor);
+  };
+  const resetBetAmount = () => {
+    setBetAmount(0);
+    setMultiplicationFactor(1); // Reset multiplication factor as well if needed
+  };
+  
   // function WithLabelExample() {
-  //   const now = 30;
-
-  //   // Define custom styles for the progress bar and background
-  //   const progressBarStyle = {
-  //     backgroundColor: 'lightgray', // Change the background color
-  //   };
-
-  //   const progressStyle = {
-  //     backgroundColor: 'blue', // Change the progress bar color
-  //   };
-
-  //   return (
-  //     <ProgressBar now={now} style={progressBarStyle}>
-  //       <ProgressBar now={now} style={progressStyle} />
-  //     </ProgressBar>
-  //   );
-  // }
-  // Shuffle the predefinedColors array
-  const gameColors = shuffleArray(predefinedColors.slice(0, 3));
   return (
     <>
       {isTokenValid ? (
@@ -688,7 +704,10 @@ const NewGame = () => {
                       <div className="timer">
                         {time <= 5 ? (
                           <div className="blur-background">
-                            <div className="remaining" style={{display:'flex'}}>
+                            <div
+                              className="remaining"
+                              style={{ display: "flex" }}
+                            >
                               <h1
                                 className="text-danger"
                                 style={{ fontSize: "66px", fontWeight: "bold" }}
@@ -696,21 +715,31 @@ const NewGame = () => {
                             </div>
                           </div>
                         ) : null}
-                        <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <p className="text-warning">{uniqueId}</p>
-                        <h1 style={{ color: "#bbb"}}>
-                          {" "}
-                          <b
-                            style={time <= 5 ? { display: "none",fontSize:'30px !important' } : timerStyle}
-                          >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <p className="text-warning">{uniqueId}</p>
+                          <h1 style={{ color: "#bbb" }}>
                             {" "}
-                           00: {time}
-                          </b>
-                          s &nbsp;{" "}
-                        </h1>
-                  
+                            <b
+                              style={
+                                time <= 5
+                                  ? {
+                                      display: "none",
+                                      fontSize: "30px !important",
+                                    }
+                                  : timerStyle
+                              }
+                            >
+                              {" "}
+                              00: {time}
+                            </b>
+                            s &nbsp;{" "}
+                          </h1>
                         </div>
-                        
                       </div>
                     </div>
                   </div>
@@ -853,32 +882,38 @@ const NewGame = () => {
                         borderRadius: "5px",
                       }}
                     >
-                      <Button
-                        variant="light"
-                        className="m-1 text-success fw-bold upDown"
-                        style={{
-                          width: "130px",
-                          borderTopRightRadius: "0px",
-                          borderTopLeftRadius: "30px",
-                          borderBottomLeftRadius: "30px",
-                        }}
-                      >
-                        Up
-                      </Button>
-
-                      <Button
-                        variant="success"
-                        className="m-1 text-light fw-bold upDown"
-                        style={{
-                          width: "150px",
-                          borderTopRightRadius: "30px",
-                          borderTopLeftRadius: "0px",
-                          borderBottomRightRadius: "30px",
-                          marginLeft: "100px !important",
-                        }}
-                      >
-                        Down
-                      </Button>
+                      <div className="color-options number-options">
+                      {predefinedLetter.map((color, index) => (
+                        <button
+                          key={color}
+                          style={{
+                            backgroundColor: contentDisabled
+                              ? "#ffe7d9"
+                              : buttonColors[index],
+                            margin: "5px",
+                            border: contentDisabled
+                              ? "2px solid gray"
+                              : "1.5px solid transparent",
+                            color: "white",
+                            fontWeight: "bold",
+                            borderRadius: "10px",
+                            width: "100px",
+                            height: "33px",
+                            boxShadow: contentDisabled
+                              ? "0 0 0 2px red"
+                              : `0 0 0 1px ${buttonColors[index]}`,
+                            backgroundClip: "content-box",
+                          }}
+                          onClick={() =>
+                            handleLetterSelect(color, buttonColors[index])
+                          }
+                          className="game_button"
+                          disabled={gameResult !== ""}
+                        >
+                          {color}
+                        </button>
+                      ))}
+                    </div>
                     </div>
                   </div>
                   {/* </div> */}
@@ -895,13 +930,13 @@ const NewGame = () => {
                     "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
                 }}
               >
-                <thead className="text-warning" style={{ height: "55px" }}>
+                <thead className="text-light" style={{ height: "55px" }}>
                   <tr>
                     <th>#</th>
                     <th>Session</th>
                     <th>Number</th>
                     <th>Color</th>
-                    <th>Date</th>
+                    <th>Size</th>
                   </tr>
                 </thead>
                 <tbody style={{ color: "#FFD700" }} className="table-hover">
@@ -924,7 +959,8 @@ const NewGame = () => {
                             }}
                           ></div>
                         </td>
-                        <td>{new Date(game.createdAt).toLocaleDateString()}</td>
+                        <td style={{ color: game.targetColor }}>{game.targetLetter}</td>
+                        {/* <td>{new Date(game.createdAt).toLocaleDateString()}</td> */}
                       </tr>
                     ))
                   ) : (
@@ -991,18 +1027,21 @@ const NewGame = () => {
                   borderRadius: "50%",
                   width: "55px",
                   height: "55px",
-                  margin:'20px',
+                  margin: "20px",
                   textAlign: "center",
                 }}
               >
-                <Link
-                        to={
-                          "https://wa.me/918102256637/?text=Hi"
-                        }
-                        
-                      >
-                        <ImWhatsapp className="contact-svg" style={{height:'35px',width:'35px', color:'green', margin:'auto'}}/>
-                      </Link>
+                <Link to={"https://wa.me/918102256637/?text=Hi"}>
+                  <ImWhatsapp
+                    className="contact-svg"
+                    style={{
+                      height: "35px",
+                      width: "35px",
+                      color: "green",
+                      margin: "auto",
+                    }}
+                  />
+                </Link>
               </div>
               {/*  */}
               <div
@@ -1027,13 +1066,11 @@ const NewGame = () => {
                 />
               </div>
               {/*  */}
-              
             </div>
             <Modal
               show={showModal}
               onHide={() => setShowModal(false)}
               className="modal-center"
-              
             >
               <Modal.Header
                 closeButton
@@ -1072,6 +1109,56 @@ const NewGame = () => {
                     />
                   </Form.Group>
                 </Form>
+                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                  <button
+                    className="p-1 m-1"
+                    onClick={incrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="p-1 m-1"
+                    onClick={decrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    -
+                  </button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => 
+                    multiplyBetAmount(10)}>x</button>
+                    <img className="p-1 m-1"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                    }} onClick={resetBetAmount}
+                    src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
+                    alt="reset"/>
+                </div>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="danger" onClick={() => setShowModal(false)}>
@@ -1125,11 +1212,166 @@ const NewGame = () => {
                     />
                   </Form.Group>
                 </Form>
+                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                  <button
+                    className="p-1 m-1"
+                    onClick={incrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="p-1 m-1"
+                    onClick={decrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    -
+                  </button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => 
+                    multiplyBetAmount(10)}>x</button>
+                    <img className="p-1 m-1"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                    }} onClick={resetBetAmount}
+                    src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
+                    alt="reset"/>
+                </div>
               </Modal.Body>
               <Modal.Footer>
                 <Button
                   variant="danger"
                   onClick={() => setShowNumberModal(false)}
+                  style={{ width: "150px" }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleBet}
+                  style={{
+                    background: userChoiceButtonNumber.toLocaleLowerCase(),
+                    border: `1.5px solid ${userChoiceButtonNumber.toLowerCase()}`,
+                    width: "150px",
+                  }}
+                >
+                  Place Bet
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            {/* Number Model */}
+             {/* Number Model */}
+             <Modal
+              show={showLetterModal}
+              onHide={() => setShowLetterModal(false)}
+              className="modal-center"
+            >
+              <Modal.Header
+                closeButton
+                style={{
+                  background: userChoiceButtonNumber.toLocaleLowerCase(),
+                  color: "white",
+                }}
+              >
+                <Modal.Title>Choose Bet Amount</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group controlId="betAmount">
+                    {userChoiceLetter && (
+                      <h6 className="m-2">
+                        Choosed Letter: {userChoiceLetter}
+                      </h6>
+                    )}
+                    <h6 className="m-2">Balance: {profile.balance}</h6>
+                    {/* <Form.Label>Enter Bet Amount</Form.Label> */}
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter Bet amount"
+                      value={betAmount}
+                      onChange={(e) => setBetAmount(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
+                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                  <button
+                    className="p-1 m-1"
+                    onClick={incrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="p-1 m-1"
+                    onClick={decrementBetAmount}
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }}
+                  >
+                    -
+                  </button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
+                  <button className="p-1 m-1"
+                    style={{
+                      border: "none",
+                      borderRadius: "8px",
+                      width: "30px",
+                    }} onClick={() => 
+                    multiplyBetAmount(10)}>x</button>
+                    <img className="p-1 m-1"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                    }} onClick={resetBetAmount}
+                    src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
+                    alt="reset"/>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="danger"
+                  onClick={() => setShowLetterModal(false)}
                   style={{ width: "150px" }}
                 >
                   Cancel
