@@ -1,6 +1,5 @@
 import React from "react";
 import LOGO from "../assets/icon.png"
-import AdminNotice from "./AdminNotice";
 const Game = () => {
     const handleGame = () => {
         window.location.href = "/game/colorpridiction";
@@ -42,7 +41,7 @@ const Game = () => {
             <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/big-six-wheel-2-1084832.png?f=avif&w=256" height='100px' width='100px'/>
             <h6 className="mt-2 text-light">Spin Wheel</h6>
           </div>
-          <AdminNotice/>
+          
           {/* <div
             className="col-10 col-sm-10 col-md-6 col-lg-6 box d-flex align-items-center flex-column" style={{width:'70%'}}
             onClick={handleGame2}

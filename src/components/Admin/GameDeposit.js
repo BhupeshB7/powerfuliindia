@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import GameHistory from "./NewGameHistory";
 import NavbarComponent from "./NavbarComponent";
+import AdminNotice from "../../pages/AdminNotice";
 
 function  GameDeposit() {
   const [gameHistory, setGameHistory] = useState([]);
@@ -121,7 +122,7 @@ function  GameDeposit() {
     
       </Row>
    
-
+      <AdminNotice/>
       <div className="table-responsive">
         <table className="table table-bordered table-warning">
           <thead className="table-primary">

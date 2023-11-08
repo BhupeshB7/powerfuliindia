@@ -50,8 +50,8 @@ function AdminNotice() {
 
   return (
     <div>
-      <h1>Notice Board</h1>
-      <button onClick={handleShowModal}>Add Message</button>
+      {/* <h6 className='text-warning'>Message</h6> */}
+      <Button variant='primary' onClick={handleShowModal} >Add Message</Button>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Message</Modal.Title>
