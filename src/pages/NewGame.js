@@ -37,7 +37,7 @@ const NewGame = () => {
   const [contentDisabled, setContentDisabled] = useState(false);
   const [timerBlink, setTimerBlink] = useState(false);
   const predefinedColors = ["Blueviolet", "Red", "Green"];
-  const predefinedLetter = ["Small", "Big",];
+  const predefinedLetter = ["Small", "Big"];
   const predefinedColors1 = ["green", "orange", "purple"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
@@ -49,6 +49,7 @@ const NewGame = () => {
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
+   const [notices, setNotices] = useState([]);
   useEffect(() => {
     if (time === 5) {
       // Start the audio when time is equal to 5
@@ -82,6 +83,11 @@ const NewGame = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    fetch('http://localhost:5000/api/notice/v1')
+      .then((response) => response.json())
+      .then((data) => setNotices(data));
   }, []);
 
   useEffect(() => {
@@ -419,7 +425,7 @@ const NewGame = () => {
       setShowNumberModal(false);
       setShowLetterModal(false);
       return;
-    } else if (betAmount >= profile.balance ) {
+    } else if (betAmount >= profile.balance) {
       handleAlert("Insufficient Balance");
       setShowModal(false);
       setShowNumberModal(false);
@@ -448,7 +454,11 @@ const NewGame = () => {
         console.error(error);
       }
 
-      if (userChoice === targetColor || userChoiceNumber === targetNumber || userChoiceLetter === targetLetter) {
+      if (
+        userChoice === targetColor ||
+        userChoiceNumber === targetNumber ||
+        userChoiceLetter === targetLetter
+      ) {
         // const winnings = betAmount * 1.25;
         let winnings;
         if (userChoice === targetColor) {
@@ -456,7 +466,7 @@ const NewGame = () => {
         } else if (userChoiceNumber === targetNumber) {
           winnings = betAmount * 4;
         } else if (userChoiceLetter === targetLetter) {
-          winnings = betAmount *2;
+          winnings = betAmount * 2;
         }
         setWinningAmount(winnings);
         setGameResult(`You Win ₹ ${winnings}`);
@@ -582,7 +592,9 @@ const NewGame = () => {
     setBetAmount(0);
     setMultiplicationFactor(1); // Reset multiplication factor as well if needed
   };
-  
+const handleLive=()=>{
+  window.location.href='/game/colorpridiction/live';
+}
   // function WithLabelExample() {
   return (
     <>
@@ -670,6 +682,7 @@ const NewGame = () => {
                           width="80px"
                           height="70px"
                           alt="time"
+                          onClick={handleLive}
                         />
                       </div>
                     </div>
@@ -883,37 +896,37 @@ const NewGame = () => {
                       }}
                     >
                       <div className="color-options number-options">
-                      {predefinedLetter.map((color, index) => (
-                        <button
-                          key={color}
-                          style={{
-                            backgroundColor: contentDisabled
-                              ? "#ffe7d9"
-                              : buttonColors[index],
-                            margin: "4px",
-                            border: contentDisabled
-                              ? "2px solid gray"
-                              : "1.5px solid transparent",
-                            color: "white",
-                            fontWeight: "bold",
-                            borderRadius: "10px",
-                            width: "100px",
-                            height: "35px",
-                            boxShadow: contentDisabled
-                              ? "0 0 0 2px red"
-                              : `0 0 0 1px ${buttonColors[index]}`,
-                            backgroundClip: "content-box",
-                          }}
-                          onClick={() =>
-                            handleLetterSelect(color, buttonColors[index])
-                          }
-                          className="game_button"
-                          disabled={gameResult !== ""}
-                        >
-                          {color}
-                        </button>
-                      ))}
-                    </div>
+                        {predefinedLetter.map((color, index) => (
+                          <button
+                            key={color}
+                            style={{
+                              backgroundColor: contentDisabled
+                                ? "#ffe7d9"
+                                : buttonColors[index],
+                              margin: "4px",
+                              border: contentDisabled
+                                ? "2px solid gray"
+                                : "1.5px solid transparent",
+                              color: "white",
+                              fontWeight: "bold",
+                              borderRadius: "10px",
+                              width: "100px",
+                              height: "35px",
+                              boxShadow: contentDisabled
+                                ? "0 0 0 2px red"
+                                : `0 0 0 1px ${buttonColors[index]}`,
+                              backgroundClip: "content-box",
+                            }}
+                            onClick={() =>
+                              handleLetterSelect(color, buttonColors[index])
+                            }
+                            className="game_button"
+                            disabled={gameResult !== ""}
+                          >
+                            {color}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   {/* </div> */}
@@ -959,7 +972,9 @@ const NewGame = () => {
                             }}
                           ></div>
                         </td>
-                        <td style={{ color: game.targetColor }}>{game.targetLetter}</td>
+                        <td style={{ color: game.targetColor }}>
+                          {game.targetLetter}
+                        </td>
                         {/* <td>{new Date(game.createdAt).toLocaleDateString()}</td> */}
                       </tr>
                     ))
@@ -1132,32 +1147,49 @@ const NewGame = () => {
                   >
                     -
                   </button>
-                  <button className="p-1 m-1"
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(3)}
+                  >
+                    3x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(2)}
+                  >
+                    2x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => 
-                    multiplyBetAmount(10)}>x</button>
-                    <img className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(10)}
+                  >
+                    x
+                  </button>
+                  <img
+                    className="p-1 m-1"
                     style={{
                       width: "40px",
                       height: "40px",
-                    }} onClick={resetBetAmount}
+                    }}
+                    onClick={resetBetAmount}
                     src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
-                    alt="reset"/>
+                    alt="reset"
+                  />
                 </div>
               </Modal.Body>
               <Modal.Footer>
@@ -1235,32 +1267,49 @@ const NewGame = () => {
                   >
                     -
                   </button>
-                  <button className="p-1 m-1"
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(3)}
+                  >
+                    3x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(2)}
+                  >
+                    2x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => 
-                    multiplyBetAmount(10)}>x</button>
-                    <img className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(10)}
+                  >
+                    x
+                  </button>
+                  <img
+                    className="p-1 m-1"
                     style={{
                       width: "40px",
                       height: "40px",
-                    }} onClick={resetBetAmount}
+                    }}
+                    onClick={resetBetAmount}
                     src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
-                    alt="reset"/>
+                    alt="reset"
+                  />
                 </div>
               </Modal.Body>
               <Modal.Footer>
@@ -1284,8 +1333,8 @@ const NewGame = () => {
               </Modal.Footer>
             </Modal>
             {/* Number Model */}
-             {/* Number Model */}
-             <Modal
+            {/* Number Model */}
+            <Modal
               show={showLetterModal}
               onHide={() => setShowLetterModal(false)}
               className="modal-center"
@@ -1340,32 +1389,49 @@ const NewGame = () => {
                   >
                     -
                   </button>
-                  <button className="p-1 m-1"
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(3)}>3x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(3)}
+                  >
+                    3x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => multiplyBetAmount(2)}>2x</button>
-                  <button className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(2)}
+                  >
+                    2x
+                  </button>
+                  <button
+                    className="p-1 m-1"
                     style={{
                       border: "none",
                       borderRadius: "8px",
                       width: "30px",
-                    }} onClick={() => 
-                    multiplyBetAmount(10)}>x</button>
-                    <img className="p-1 m-1"
+                    }}
+                    onClick={() => multiplyBetAmount(10)}
+                  >
+                    x
+                  </button>
+                  <img
+                    className="p-1 m-1"
                     style={{
                       width: "40px",
                       height: "40px",
-                    }} onClick={resetBetAmount}
+                    }}
+                    onClick={resetBetAmount}
                     src="https://cdn-icons-png.flaticon.com/128/9497/9497072.png"
-                    alt="reset"/>
+                    alt="reset"
+                  />
                 </div>
               </Modal.Body>
               <Modal.Footer>
@@ -1401,7 +1467,32 @@ const NewGame = () => {
                 >
                   <Modal.Title>Message</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>No Message.</Modal.Body>
+                <Modal.Body>
+                  <ul>
+                    {notices && notices.length > 0 ? (
+                      notices.map((notice) => (
+                        <li key={notice._id} style={{ listStyle: "none" }}>
+                          <h6>{notice.text}</h6>
+                          <div
+                            style={{
+                              display: "flex",
+                              width: "100%",
+                              justifyContent: "space-between",
+                              margin: "auto",
+                            }}
+                          >
+                            <h6>
+                              {new Date(notice.timestamp).toLocaleDateString()}
+                            </h6>
+                            
+                          </div>
+                        </li>
+                      ))
+                    ) : (
+                      <h6>No Message</h6>
+                    )}
+                  </ul>
+                </Modal.Body>
                 <Modal.Footer>
                   <Button
                     onClick={closeMessageModal}

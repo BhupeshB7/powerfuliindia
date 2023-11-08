@@ -1270,10 +1270,14 @@ gap: 30px;
 .modal-center{
   position: fixed;
   top: 37% !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
 }
 /* .table-hover:hover, .table-hover:focus, .table-hover:active{
 color: green !important;
 } */
+.liveGame{
+  
+  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2148999934.jpg?w=996&t=st=1699479758~exp=1699480358~hmac=ca23036ead199cc90d009e62b12a114f02c12e5b6c190c1f2d3de150beb3236e');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

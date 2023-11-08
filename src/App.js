@@ -38,6 +38,7 @@ import DepositForm from './pages/DepositForm';
 import DepsoitHistory from './pages/DepositHistory';
 import ChangePassword from './pages/ChangePassword';
 import TopUpHistory from './pages/TopUpHistory';
+import LiveGame from './pages/LiveGame';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
           <Route path='/game' element={<Game/>} />
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
           <Route path='/game/colorpridiction' element={<NewGame/>} />
+          <Route path='/game/colorpridiction/live' element={<LiveGame/>} />
           <Route path='/game/spinWheel' element={<SpinGame/>} />
           <Route path='/withdrawal' element={<Withdrawal/>} token={token}/>
           <Route path='/topUp' element={<TopUp/>}/>
