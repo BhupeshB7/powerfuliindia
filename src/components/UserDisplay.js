@@ -2560,7 +2560,7 @@ const Dashboard = () => {
                         <h6 className=" mt-1">Wallet</h6>
                       </Link>
                       <Link
-                        to="/game"
+                        to="/game/colorpridiction"
                         className="footer_icon"
                         style={{ color: "cyan" }}
                       >
