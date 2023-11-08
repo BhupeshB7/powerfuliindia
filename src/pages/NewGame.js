@@ -890,7 +890,7 @@ const NewGame = () => {
                             backgroundColor: contentDisabled
                               ? "#ffe7d9"
                               : buttonColors[index],
-                            margin: "5px",
+                            margin: "4px",
                             border: contentDisabled
                               ? "2px solid gray"
                               : "1.5px solid transparent",
@@ -898,7 +898,7 @@ const NewGame = () => {
                             fontWeight: "bold",
                             borderRadius: "10px",
                             width: "100px",
-                            height: "38px",
+                            height: "35px",
                             boxShadow: contentDisabled
                               ? "0 0 0 2px red"
                               : `0 0 0 1px ${buttonColors[index]}`,
