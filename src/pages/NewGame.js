@@ -188,10 +188,10 @@ const NewGame = () => {
     fetchData();
   }, [token]);
   // const userId = "PI17218169";
-  if(data.userId){
-    const newUserName = data.userId;
-    updateUser(newUserName);
-  }
+  // if(data.userId){
+  //   const newUserName = data.userId;
+  //   updateUser(newUserName);
+  // }
   const handleSubmit = async (e) => {
     if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 200");
