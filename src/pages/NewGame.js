@@ -168,10 +168,7 @@ const NewGame = () => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
-        if(result.userId){
-          const newUserName = result.userId;
-          updateUser(newUserName);
-        }
+        
        
         if (result.role) {
           const userrole = result.role;
@@ -191,6 +188,10 @@ const NewGame = () => {
     fetchData();
   }, [token]);
   // const userId = "PI17218169";
+  if(data.userId){
+    const newUserName = data.userId;
+    updateUser(newUserName);
+  }
   const handleSubmit = async (e) => {
     if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 200");
