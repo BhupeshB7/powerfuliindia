@@ -175,7 +175,7 @@ const NewGame = () => {
        
         if (result.role) {
           const userrole = result.role;
-          // console.log(userrole);
+          
           if (userrole === "admin") {
             localStorage.setItem("check", "nfwnwen");
           }
