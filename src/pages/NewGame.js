@@ -16,6 +16,7 @@ import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
+import { useUser } from "../components/UserContext";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
@@ -44,12 +45,13 @@ const NewGame = () => {
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
    const [notices, setNotices] = useState([]);
+   const {updateUser} = useUser;
   useEffect(() => {
     if (time === 5) {
       // Start the audio when time is equal to 5
@@ -118,13 +120,13 @@ const NewGame = () => {
   };
   const token = localStorage.getItem("token");
   // const isTokenValids = 'localStorage.getItem("token")';
-  useEffect(() => {
-    if (isTokenExpired()) {
-      setIsTokenValid(false);
-      // redirect to homepage
-      window.location.href = "/login";
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isTokenExpired()) {
+  //     setIsTokenValid(false);
+  //     // redirect to homepage
+  //     window.location.href = "/login";
+  //   }
+  // }, []);
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
@@ -173,6 +175,7 @@ const NewGame = () => {
             localStorage.setItem("check", "nfwnwen");
           }
         }
+        if(result.userId)
         setData(result);
 
         setIsLoading(false);
@@ -425,7 +428,7 @@ const NewGame = () => {
       setShowNumberModal(false);
       setShowLetterModal(false);
       return;
-    } else if (betAmount >= profile.balance) {
+    } else if (betAmount > profile.balance) {
       handleAlert("Insufficient Balance");
       setShowModal(false);
       setShowNumberModal(false);
@@ -594,6 +597,8 @@ const NewGame = () => {
   };
 const handleLive=()=>{
   window.location.href='/game/colorpridiction/live';
+  const newUserName = data.userId;
+  updateUser(newUserName);
 }
   // function WithLabelExample() {
   return (

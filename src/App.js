@@ -39,6 +39,7 @@ import DepsoitHistory from './pages/DepositHistory';
 import ChangePassword from './pages/ChangePassword';
 import TopUpHistory from './pages/TopUpHistory';
 import LiveGame from './pages/LiveGame';
+import { UserProvider } from './components/UserContext';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
 
 
   return (
+    <UserProvider>
     <BrowserRouter>
       <div className="App">
       <Helmet>
@@ -123,6 +125,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+    </UserProvider>
   );
 }
 

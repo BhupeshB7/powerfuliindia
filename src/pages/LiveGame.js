@@ -263,6 +263,8 @@ import { Modal, Button, Form } from "react-bootstrap";
 import play from "../assets/play.jpg";
 import { Container } from "react-bootstrap";
 import Axios from "axios";
+import { useUser } from "../components/UserContext";
+import axios from "axios";
 const LiveGame = () => {
   const predefinedColors = ["Blueviolet", "Red", "Green"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -281,18 +283,22 @@ const LiveGame = () => {
   const predefinedLetter = ["Small", "Big"];
 
   const [showModal, setShowModal] = useState(false);
-  const [userChoice, setUserChoice] = useState(null);
+  const [userChoice, setUserChoice] = useState('');
+  const [userChoiceNumber, setUserChoiceNumber] = useState('');
   const [betAmount, setBetAmount] = useState(0);
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   const [showLetterModal, setShowLetterModal] = useState(false);
-  const [userChoiceLetter, setUserChoiceLetter] = useState(null);
+  const [userChoiceLetter, setUserChoiceLetter] = useState('');
   const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState(null);
-
+  const {userName} = useUser;
   const handleChoice = (choice) => {
     setUserChoice(choice);
     setShowModal(true);
   };
-
+  const handleChoiceNumber = (choice) => {
+    setUserChoiceNumber(choice);
+    setShowModal(true);
+  };
   const handleModalClose = () => {
     setShowModal(false);
   };
@@ -326,23 +332,48 @@ const LiveGame = () => {
     setShowLetterModal(false);
   };
 
-  const handleBet = () => {
-    if (userChoice && betAmount > 0) {
-      // Send a POST request to the backend
-      console.log("User Choice:", userChoice);
-      console.log("Bet Amount:", betAmount);
-      Axios.post("/api/placeBet", { userChoice, amount: betAmount })
-        .then((response) => {
-          // Handle the response from the backend
-          console.log(response.data); // You can show a success message to the user
-        })
-        .catch((error) => {
-          // Handle any errors, e.g., display an error message to the user
-          console.error(error);
-        });
-    } else {
-      // Handle invalid user choice or bet amount, e.g., show an error message
-      console.error("Invalid user choice or bet amount");
+  const handleBet = async() => {
+    alert(betAmount)
+    if(betAmount <5){
+      alert('Bet amount must be greater than 5');
+      setShowModal(false);
+      setShowLetterModal(false);
+      return; 
+    }
+    else{
+      setShowModal(false);
+      setShowLetterModal(false);
+      alert(`Bet SuccessFully  Place of ${betAmount}`);
+      const gameDetails = {
+        userId: userName, // Make sure userId is defined or passed as a prop
+        entryFee: betAmount,
+        choosenColor: userChoice,
+        choosenLetter: userChoiceLetter,
+        choosenNumber: userChoiceNumber,
+      };
+      console.log(gameDetails);
+      try {
+        const response = await axios.post(
+          "https://mlm-production.up.railway.app/api/game/saveGame",
+          gameDetails
+        );
+        console.log(gameDetails);
+        if (response.status === 201) {
+          console.log("Game details saved successfully");
+        } else {
+          console.error("Error saving game details");
+        }
+      } catch (error) {
+        console.error("Error saving game details:", error);
+      }
+  
+      // Reset the game after 10 seconds
+      setTimeout(() => {
+        setUserChoice("");
+        setUserChoiceLetter("");
+        setUserChoiceNumber("");
+        setBetAmount(0);
+      }, 1000); // 10 seconds in milliseconds
     }
   };
   return (
@@ -399,7 +430,7 @@ const LiveGame = () => {
                 }}
                 onClick={() => {
                   setUserChoiceButtonNumber(predefinedColors1[index]);
-                  handleChoice(color);
+                  handleChoiceNumber(color);
                 }}
                 className="game_button"
               >
@@ -442,7 +473,6 @@ const LiveGame = () => {
         >
           <Modal.Header
             closeButton
-            onClick={handleBet}
             style={{
               background: predefinedColors1[userChoice] || userChoice,
               color: "white",
@@ -456,7 +486,10 @@ const LiveGame = () => {
             <Form>
               <Form.Group controlId="betAmount">
                 {userChoice && (
-                  <h6 className="m-2">Choosed Number: {userChoice}</h6>
+                  <h6 className="m-2">Choosed Color: {userChoice}</h6>
+                )}
+                {userChoiceNumber && (
+                  <h6 className="m-2">Choosed Number: {userChoiceNumber}</h6>
                 )}
                 <h6 className="m-2">Balance: </h6>
                 <Form.Control
@@ -552,7 +585,7 @@ const LiveGame = () => {
                   predefinedColors1[userChoice] || userChoice
                 }`,
               }}
-              onClick={handleModalClose}
+              onClick={handleBet}
             >
               Place Bet
             </Button>
