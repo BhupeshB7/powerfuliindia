@@ -354,7 +354,7 @@ const LiveGame = () => {
       console.log(gameDetails);
       try {
         const response = await axios.post(
-          "https://mlm-production.up.railway.app/api/game/saveGame",
+          "https://mlm-production.up.railway.app/api/liveGame/saveGame",
           gameDetails
         );
         console.log(gameDetails);
