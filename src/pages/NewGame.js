@@ -168,8 +168,11 @@ const NewGame = () => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
-        const newUserName = result.userId;
-        updateUser(newUserName);
+        if(result.userId){
+          const newUserName = result.userId;
+          updateUser(newUserName);
+        }
+       
         if (result.role) {
           const userrole = result.role;
           // console.log(userrole);
