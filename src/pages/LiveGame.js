@@ -333,7 +333,7 @@ const LiveGame = () => {
   };
 
   const handleBet = async() => {
-    alert(betAmount)
+    // alert(betAmount)
     if(betAmount <5){
       alert('Bet amount must be greater than 5');
       setShowModal(false);
@@ -344,6 +344,7 @@ const LiveGame = () => {
       setShowModal(false);
       setShowLetterModal(false);
       alert(`Bet SuccessFully  Place of ${betAmount}`);
+      alert(userName)
       const gameDetails = {
         userId: userName, // Make sure userId is defined or passed as a prop
         entryFee: betAmount,
@@ -474,7 +475,7 @@ const LiveGame = () => {
           <Modal.Header
             closeButton
             style={{
-              background: predefinedColors1[userChoice] || userChoice,
+              background: predefinedColors1[userChoiceNumber] || userChoice,
               color: "white",
             }}
           >
