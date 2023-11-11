@@ -45,7 +45,7 @@ const NewGame = () => {
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
@@ -120,13 +120,13 @@ const NewGame = () => {
   };
   const token = localStorage.getItem("token");
   // const isTokenValids = 'localStorage.getItem("token")';
-  // useEffect(() => {
-  //   if (isTokenExpired()) {
-  //     setIsTokenValid(false);
-  //     // redirect to homepage
-  //     window.location.href = "/login";
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isTokenExpired()) {
+      setIsTokenValid(false);
+      // redirect to homepage
+      window.location.href = "/login";
+    }
+  }, []);
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
