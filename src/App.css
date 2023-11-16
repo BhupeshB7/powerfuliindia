@@ -753,7 +753,7 @@ ul li:nth-child(3) {
   animation-iteration-count:1;
   animation-fill-mode:backwards;
 }
-.game_box .wallet{
+.game_box .wallet, .wallet{
   display: flex;
   height: 150px;
   background-image: linear-gradient(to left, #434343 0%, rgb(15, 14, 14) 100%); border-radius: 10px;
@@ -1274,10 +1274,27 @@ gap: 30px;
 /* .table-hover:hover, .table-hover:focus, .table-hover:active{
 color: green !important;
 } */
-.liveGame{
+.liveGame, .adminLive{
   
   background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2148999934.jpg?w=996&t=st=1699479758~exp=1699480358~hmac=ca23036ead199cc90d009e62b12a114f02c12e5b6c190c1f2d3de150beb3236e');
+  background-image: url('https://img.freepik.com/premium-photo/futuristic-technology-background_828075-4616.jpg?size=626&ext=jpg&uid=R124466029&ga=GA1.1.393936886.1688825666&semt=ais');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+}
+.LiveGameDashboard{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+  background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  border-radius: 10px;
+}
+.LiveGameDashboard label{
+  font-size: 19px !important;
+  color: #000428;
+  padding: 3px;
 }

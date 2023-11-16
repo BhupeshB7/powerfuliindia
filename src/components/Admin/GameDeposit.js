@@ -94,9 +94,9 @@ function  GameDeposit() {
     <>
     {isTokenValid ?(
 
-      <>
+      <div style={{background:'#fbffde',}}>
       <NavbarComponent/>
-      <div style={{background:'#fbffde', minHeight:'100vh', paddingBottom:'20px'}}>
+      <div style={{ minHeight:'100vh', paddingBottom:'20px'}}>
       <h3 className="text-center pt-3">Admin Game</h3>
     <Container>
       <Row>
@@ -171,7 +171,7 @@ function  GameDeposit() {
         </Container>
     </div>
     
-    </>
+    </div>
     ):(
       <>
       <h6></h6>

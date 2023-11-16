@@ -87,7 +87,7 @@ const NewGame = () => {
     };
   }, []);
   useEffect(() => {
-    fetch('http://localhost:5000/api/notice/v1')
+    fetch('https://mlm-production.up.railway.app/api/notice/v1')
       .then((response) => response.json())
       .then((data) => setNotices(data));
   }, []);
@@ -188,10 +188,7 @@ const NewGame = () => {
     fetchData();
   }, [token]);
   // const userId = "PI17218169";
-  // if(data.userId){
-  //   const newUserName = data.userId;
-  //   updateUser(newUserName);
-  // }
+  
   const handleSubmit = async (e) => {
     if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 200");
@@ -397,7 +394,7 @@ const NewGame = () => {
       );
       const result = response.data;
       setProfile(result);
-      console.log(result);
+      // console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -1480,9 +1477,10 @@ const handleLive=()=>{
                 <Modal.Body>
                   <ul>
                     {notices && notices.length > 0 ? (
-                      notices.map((notice) => (
+                      notices.map((notice,index) => (
                         <li key={notice._id} style={{ listStyle: "none" }}>
-                          <h6>{notice.text}</h6>
+                          
+                          <h6>{index+1}. &nbsp; &nbsp;{notice.text}</h6>
                           <div
                             style={{
                               display: "flex",

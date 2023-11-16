@@ -258,9 +258,10 @@
 
 // export default LiveGame;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import play from "../assets/play.jpg";
+import spinner from "../assets/spinner2.gif";
 import { Container } from "react-bootstrap";
 import { useUser } from "../components/UserContext";
 import axios from "axios";
@@ -280,16 +281,65 @@ const LiveGame = () => {
     "orange",
   ];
   const predefinedLetter = ["Small", "Big"];
-
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [profile, setProfile] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [userChoice, setUserChoice] = useState('');
-  const [userChoiceNumber, setUserChoiceNumber] = useState('');
+  const [userChoice, setUserChoice] = useState("");
+  const [userChoiceNumber, setUserChoiceNumber] = useState("");
   const [betAmount, setBetAmount] = useState(0);
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   const [showLetterModal, setShowLetterModal] = useState(false);
-  const [userChoiceLetter, setUserChoiceLetter] = useState('');
+  const [userChoiceLetter, setUserChoiceLetter] = useState("");
   const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState(null);
-  const {userName} = useUser;
+  const { userName } = useUser;
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://mlm-production.up.railway.app/api/users/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const result = await response.json();
+        // const userLevel = getUserLevel(result.level);
+        // setLevel(userLevel);
+
+        if (result.role) {
+          const userrole = result.role;
+
+          if (userrole === "admin") {
+            localStorage.setItem("check", "nfwnwen");
+          }
+        }
+        if (result.userId) setData(result);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [token]);
+  const getGamerProfile = async () => {
+    try {
+      const response = await axios.get(
+        `https://mlm-production.up.railway.app/api/gameProfile/${data.userId}`
+      );
+      const result = response.data;
+      setProfile(result);
+      // console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getGamerProfile();
+  }, [data.userId]);
   const handleChoice = (choice) => {
     setUserChoice(choice);
     setShowModal(true);
@@ -299,6 +349,10 @@ const LiveGame = () => {
     setShowModal(true);
   };
   const handleModalClose = () => {
+    setUserChoice("");
+    setUserChoiceLetter("");
+    setUserChoiceNumber("");
+    setBetAmount(0);
     setShowModal(false);
   };
 
@@ -331,21 +385,18 @@ const LiveGame = () => {
     setShowLetterModal(false);
   };
 
-  const handleBet = async() => {
-    // alert(betAmount)
-    if(betAmount <5){
-      alert('Bet amount must be greater than 5');
+  const handleBet = async () => {
+    if (betAmount < 5) {
+      alert("Bet amount must be greater than 5");
       setShowModal(false);
       setShowLetterModal(false);
-      return; 
-    }
-    else{
+      return;
+    } else {
       setShowModal(false);
       setShowLetterModal(false);
       alert(`Bet SuccessFully  Place of ${betAmount}`);
-      alert(userName)
       const gameDetails = {
-        userId: userName, // Make sure userId is defined or passed as a prop
+        userId: profile.userId, // Make sure userId is defined or passed as a prop
         entryFee: betAmount,
         choosenColor: userChoice,
         choosenLetter: userChoiceLetter,
@@ -357,7 +408,7 @@ const LiveGame = () => {
           "https://mlm-production.up.railway.app/api/liveGame/saveGame",
           gameDetails
         );
-        console.log(gameDetails);
+        // console.log(gameDetails);
         if (response.status === 201) {
           console.log("Game details saved successfully");
         } else {
@@ -366,7 +417,7 @@ const LiveGame = () => {
       } catch (error) {
         console.error("Error saving game details:", error);
       }
-  
+
       // Reset the game after 10 seconds
       setTimeout(() => {
         setUserChoice("");
@@ -376,6 +427,33 @@ const LiveGame = () => {
       }, 1000); // 10 seconds in milliseconds
     }
   };
+  if (isLoading) {
+    return (
+      <h6
+        className="text-center"
+        style={{
+          marginTop: "-70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          width: "100%",
+        }}
+      >
+        <img
+          src={spinner}
+          alt="spinner"
+          height="100px"
+          width="100px"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      </h6>
+    );
+  }
   return (
     <div className="liveGame" style={{ height: "785px", width: "100%" }}>
       <div className="p-3">
@@ -387,7 +465,33 @@ const LiveGame = () => {
           style={{ borderRadius: "10px" }}
         />
       </div>
-
+      <div className="game_boxx">
+        <div className="wallet">
+          <div className="content">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png"
+              height="40px"
+              width="50px"
+              alt="wallet"
+            />
+            <b className="text-light">
+              wallet <br /> {profile.balance} ₹
+            </b>{" "}
+            {/* <p className="text-secondary">wallet</p> */}
+          </div>
+          <div className="content">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png"
+              height="40px"
+              width="50px"
+              alt="wallet"
+            />
+            <b className="text-light">Income {profile.totalwin} ₹</b>{" "}
+            {/* <p className="text-secondary">Income </p> */}
+          </div>
+        </div>
+      </div>
+      
       <Container>
         <div
           style={{
@@ -580,9 +684,9 @@ const LiveGame = () => {
             <Button
               style={{
                 width: "120px",
-                background: predefinedColors1[userChoice] || userChoice,
+                background: predefinedColors1[userChoiceNumber] || userChoice,
                 border: `2px solid ${
-                  predefinedColors1[userChoice] || userChoice
+                  predefinedColors1[userChoiceNumber] || userChoice
                 }`,
               }}
               onClick={handleBet}
@@ -602,7 +706,7 @@ const LiveGame = () => {
             style={{
               background:
                 userChoiceButtonNumber && userChoiceButtonNumber.toLowerCase(),
-                color:'white'
+              color: "white",
             }}
           >
             <Modal.Title>Choose Bet Amount</Modal.Title>

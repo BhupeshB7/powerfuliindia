@@ -47,11 +47,14 @@ function AdminNotice() {
         setNotices(notices.filter((notice) => notice._id !== id));
       });
   };
-
+const handleLive =()=>{
+  window.location.href='/game/colorpridiction/admin/live'
+}
   return (
     <div>
       {/* <h6 className='text-warning'>Message</h6> */}
-      <Button variant='primary' onClick={handleShowModal} >Add Message</Button>
+      <Button variant='primary' className='m-1' onClick={handleShowModal} >Add Message</Button>
+      <img src='https://cdn-icons-png.flaticon.com/128/5822/5822037.png' className='m-1' height='80px' width='110px' onClick={handleLive} />
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Message</Modal.Title>

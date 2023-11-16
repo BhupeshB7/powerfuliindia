@@ -39,6 +39,7 @@ import DepsoitHistory from './pages/DepositHistory';
 import ChangePassword from './pages/ChangePassword';
 import TopUpHistory from './pages/TopUpHistory';
 import LiveGame from './pages/LiveGame';
+import AdminLive from './pages/AdminLive';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
           <Route path='/game/colorpridiction' element={<NewGame/>} />
           <Route path='/game/colorpridiction/live' element={<LiveGame/>} />
+          <Route path='/game/colorpridiction/admin/live' element={<AdminLive/>} />
           <Route path='/game/spinWheel' element={<SpinGame/>} />
           <Route path='/withdrawal' element={<Withdrawal/>} token={token}/>
           <Route path='/topUp' element={<TopUp/>}/>
