@@ -259,12 +259,12 @@
 // export default LiveGame;
 
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 import play from "../assets/play.jpg";
 import spinner from "../assets/spinner2.gif";
 import { Container } from "react-bootstrap";
-import { useUser } from "../components/UserContext";
 import axios from "axios";
+import LiveHistory from "./LiveHistory";
 const LiveGame = () => {
   const predefinedColors = ["Blueviolet", "Red", "Green"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -292,8 +292,18 @@ const LiveGame = () => {
   const [showLetterModal, setShowLetterModal] = useState(false);
   const [userChoiceLetter, setUserChoiceLetter] = useState("");
   const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState(null);
-  const { userName } = useUser;
+ const [alertMessage, setAlertMessage] = useState('');
   const token = localStorage.getItem("token");
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const fetchButtonState = async () => {
+      const response = await axios.get('https://mlm-production.up.railway.app/api/notice/button');
+      setIsActive(response.data.active);
+    };
+
+    fetchButtonState();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -387,20 +397,55 @@ const LiveGame = () => {
 
   const handleBet = async () => {
     if (betAmount < 5) {
-      alert("Bet amount must be greater than 5");
+      setAlertMessage("Bet amount must be greater than 5");
       setShowModal(false);
       setShowLetterModal(false);
+      setTimeout(() => {
+        setUserChoice("");
+        setUserChoiceLetter("");
+        setUserChoiceNumber("");
+        setAlertMessage("");
+        setBetAmount(0);
+      }, 1300); // 10 seconds in milliseconds
       return;
-    } else {
+    } else if(betAmount > profile.balance){
+      setAlertMessage('Insufficient Balance');
       setShowModal(false);
       setShowLetterModal(false);
-      alert(`Bet SuccessFully  Place of ${betAmount}`);
+      setTimeout(() => {
+        setUserChoice("");
+        setUserChoiceLetter("");
+        setUserChoiceNumber("");
+        setAlertMessage("");
+        setBetAmount(0);
+      }, 1300); // 10 seconds in milliseconds
+    }
+    else {
+      setShowModal(false);
+      setShowLetterModal(false);
+      setAlertMessage(`Bet SuccessFully  Place of ${betAmount}`);
+      try {
+        const response = await axios.post(
+          "https://mlm-production.up.railway.app/api/gameProfile/startGame",
+          {
+            userId: data.userId, // Make sure userId is defined or passed as a prop
+            entryFee: betAmount,
+          }
+        );
+
+        // Assuming the response contains updated balance data
+        const updatedBalance = response.data.balance;
+        // Make sure you have defined setProfile elsewhere
+        setProfile({ ...profile, balance: updatedBalance });
+      } catch (error) {
+        console.error(error);
+      }
       const gameDetails = {
         userId: profile.userId, // Make sure userId is defined or passed as a prop
         entryFee: betAmount,
+        choosenNumber: userChoiceNumber,
         choosenColor: userChoice,
         choosenLetter: userChoiceLetter,
-        choosenNumber: userChoiceNumber,
       };
       console.log(gameDetails);
       try {
@@ -455,7 +500,18 @@ const LiveGame = () => {
     );
   }
   return (
-    <div className="liveGame" style={{ height: "785px", width: "100%" }}>
+    <>
+    {isActive ?(<>
+      <div className="liveGame" style={{ height: "785px", width: "100%" }}>
+      {alertMessage && (
+        <Alert
+          variant="info"
+          dismissible
+          style={{ position: "absolute", top: "10px" }}
+        >
+          {alertMessage}
+        </Alert>
+      )}
       <div className="p-3">
         <img
           src={play}
@@ -595,7 +651,7 @@ const LiveGame = () => {
                 {userChoiceNumber && (
                   <h6 className="m-2">Choosed Number: {userChoiceNumber}</h6>
                 )}
-                <h6 className="m-2">Balance: </h6>
+                <h6 className="m-2">Balance: {profile.balance}</h6>
                 <Form.Control
                   type="number"
                   placeholder="Enter Bet amount"
@@ -717,7 +773,7 @@ const LiveGame = () => {
                 {userChoiceLetter && (
                   <h6 className="m-2">Choosed Letter: {userChoiceLetter}</h6>
                 )}
-                <h6 className="m-2">Balance: </h6>
+                <h6 className="m-2">Balance:{profile.balance} </h6>
                 <Form.Control
                   type="number"
                   placeholder="Enter Bet amount"
@@ -819,7 +875,15 @@ const LiveGame = () => {
           </Modal.Footer>
         </Modal>
       </Container>
+      <LiveHistory/>
     </div>
+    </>):(
+      <>
+      <h6 className="text-center text-dark p-5">Game Not started yet!</h6>
+      </>
+    )}
+   
+    </>
   );
 };
 

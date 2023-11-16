@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { Alert, Button } from "react-bootstrap";
+import ButtonToggle from "./ButtonToggle";
 
 const generateSessionId = () => {
   const getCurrentYear = () => new Date().getFullYear();
@@ -28,7 +29,7 @@ const AdminLiveGame = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const newSessionId = generateSessionId();
-
+  
   const handleColorChange = (color) => {
     setSelectedColor(color);
   };
@@ -46,7 +47,7 @@ const AdminLiveGame = () => {
     if (selectedColor && selectedNumber && selectedSize) {
       // Send the data to the backend along with the session ID
       axios
-        .post("http://localhost:5000/api/saveSelection", {
+        .post("https://mlm-production.up.railway.app/api/saveSelection", {
           sessionId: newSessionId,
           color: selectedColor,
           number: selectedNumber,
@@ -78,7 +79,8 @@ const AdminLiveGame = () => {
   };
 
   return (
-    <div className="p-2">
+    
+      <div className="p-2">
       {/* Render Alert component if there is a message */}
       {alertMessage && (
         <Alert
@@ -89,6 +91,7 @@ const AdminLiveGame = () => {
           {alertMessage}
         </Alert>
       )}
+      <ButtonToggle/>
       <form className="LiveGameDashboard p-2" ref={formRef}>
         <div>
           <p>Session ID: {newSessionId}</p>
@@ -99,7 +102,7 @@ const AdminLiveGame = () => {
             <input
               type="radio"
               name="size"
-              onChange={() => handleSizeChange("small")}
+              onChange={() => handleSizeChange("Small")}
             />{" "}
             Small
           </label>
@@ -107,7 +110,7 @@ const AdminLiveGame = () => {
             <input
               type="radio"
               name="size"
-              onChange={() => handleSizeChange("big")}
+              onChange={() => handleSizeChange("Big")}
             />{" "}
             Big
           </label>
@@ -117,7 +120,7 @@ const AdminLiveGame = () => {
             <input
               type="radio"
               name="color"
-              onChange={() => handleColorChange("red")}
+              onChange={() => handleColorChange("Red")}
             />{" "}
             Red
           </label>
@@ -125,15 +128,15 @@ const AdminLiveGame = () => {
             <input
               type="radio"
               name="color"
-              onChange={() => handleColorChange("blue")}
+              onChange={() => handleColorChange("Green")}
             />{" "}
-            Blue
+            Green
           </label>
           <label>
             <input
               type="radio"
               name="color"
-              onChange={() => handleColorChange("blueViolet")}
+              onChange={() => handleColorChange("BlueViolet")}
             />{" "}
             BlueViolet
           </label>
@@ -161,6 +164,7 @@ const AdminLiveGame = () => {
         
       </form>
     </div>
+
   );
 };
 
