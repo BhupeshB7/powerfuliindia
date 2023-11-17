@@ -647,6 +647,32 @@ ul li:nth-child(3) {
   flex-direction: column;
   align-items: flex-start;
 }
+.deposit_Form label{
+  color: white;
+}
+.deposit_Form input{
+  border: 1.3px solid #000428;;
+}
+.bgDepositHeader{
+  background:#330867 !important;
+}
+.bgDepositGame{
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  
+}
+.buttonDW{
+   margin-bottom: -23px;
+}
+.modal-header .btn-close {
+  padding: 0.1rem ;
+  margin:  -0.5rem -0.5rem -0.5rem auto;
+  background: url('https://cdn-icons-png.flaticon.com/128/463/463612.png')   center/1em auto no-repeat !important;
+    border: 0;
+    height: 27px;
+    width: 27px;
+    opacity: 1  !important;
+    background-size: 100% !important;
+}
 .imageContainer {
   display: flex;
   flex-direction: column;
@@ -746,7 +772,8 @@ ul li:nth-child(3) {
   border-bottom-left-radius: 25px !important;
  border-bottom-right-radius: 25px !important;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  padding: 20px;
 }
 .logo img{
   animation: fadeInAnimation ease-in 5s;
@@ -763,6 +790,14 @@ ul li:nth-child(3) {
   width: 100%;
 margin: 30px;
 flex-direction: column;
+}
+.betAmountMultiple{
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  align-items: center;
 }
 .wallet .content{
   width: 200px;
@@ -843,7 +878,7 @@ gap: 30px;
 }
 .backgroundOfColorPrediction{
   margin-top: -20px;
-  height: 215px;
+  height: 100%;
   width: 100%;
   padding: 5px;
   background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);

@@ -16,7 +16,6 @@ import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE2.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
-import { useUser } from "../components/UserContext";
 const NewGame = () => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
@@ -50,8 +49,13 @@ const NewGame = () => {
   const [buttonColors, setButtonColors] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
-   const [notices, setNotices] = useState([]);
-   const {updateUser} = useUser;
+  const [notices, setNotices] = useState([]);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     if (time === 5) {
       // Start the audio when time is equal to 5
@@ -87,7 +91,7 @@ const NewGame = () => {
     };
   }, []);
   useEffect(() => {
-    fetch('https://mlm-production.up.railway.app/api/notice/v1')
+    fetch("https://mlm-production.up.railway.app/api/notice/v1")
       .then((response) => response.json())
       .then((data) => setNotices(data));
   }, []);
@@ -168,17 +172,15 @@ const NewGame = () => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
-        
-       
+
         if (result.role) {
           const userrole = result.role;
-          
+
           if (userrole === "admin") {
             localStorage.setItem("check", "nfwnwen");
           }
         }
-        if(result.userId)
-        setData(result);
+        if (result.userId) setData(result);
 
         setIsLoading(false);
       } catch (error) {
@@ -188,7 +190,7 @@ const NewGame = () => {
     fetchData();
   }, [token]);
   // const userId = "PI17218169";
-  
+
   const handleSubmit = async (e) => {
     if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 200");
@@ -270,6 +272,13 @@ const NewGame = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const handleButtonClick = (multiplier) => {
+    if (betAmount === 0) {
+      setBetAmount(1);
+    } else {
+      setBetAmount(betAmount * multiplier);
+    }
+  };
   const pageSize = 20; // Set the page size (items per page)
   const handleAlert = (message) => {
     setAlertMessage(message);
@@ -598,10 +607,9 @@ const NewGame = () => {
     setBetAmount(0);
     setMultiplicationFactor(1); // Reset multiplication factor as well if needed
   };
-const handleLive=()=>{
-  window.location.href='/game/colorpridiction/live';
- 
-}
+  const handleLive = () => {
+    window.location.href = "/game/colorpridiction/live";
+  };
   // function WithLabelExample() {
   return (
     <>
@@ -623,7 +631,33 @@ const handleLive=()=>{
             <div className="logo">
               <img src={LOGO} alt="logo" height="70px" width="100px" />
             </div>
+
             <div className="game_box">
+              <div
+                className="d-flex justify-content-center  align-items-center buttonDW"
+                style={{ flexDirection: "row", background: "transparent" }}
+              >
+                <Button
+                  variant="outline-warning"
+                  className="m-1 text-warning p-2"
+                  style={{
+                    borderRadius: "20px",
+                    width: "110px",
+                  }}
+                  onClick={handleShow}
+                >
+                  Deposit
+                </Button>
+                <Button
+                  variant="outline-warning"
+                  className="m-1"
+                  style={{ borderRadius: "20px" }}
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop2"
+                >
+                  Withdraw
+                </Button>
+              </div>
               <div className="wallet">
                 <div className="content">
                   <img
@@ -632,17 +666,10 @@ const handleLive=()=>{
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">wallet {profile.balance} ₹</b>{" "}
+                  <b className="text-light">
+                    wallet <br /> {profile.balance} ₹
+                  </b>{" "}
                   {/* <p className="text-secondary">wallet</p> */}
-                  <Button
-                    variant="outline-warning"
-                    className="m-1 "
-                    style={{ borderRadius: "20px" }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                  >
-                    Deposit
-                  </Button>
                 </div>
                 <div className="content">
                   <img
@@ -651,17 +678,8 @@ const handleLive=()=>{
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">Income {profile.totalwin} ₹</b>{" "}
+                  <b className="text-light">Income <br/> {profile.totalwin} ₹</b>{" "}
                   {/* <p className="text-secondary">Income </p> */}
-                  <Button
-                    variant="outline-warning"
-                    className="m-1"
-                    style={{ borderRadius: "20px" }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop2"
-                  >
-                    Withdraw
-                  </Button>
                 </div>
               </div>
             </div>
@@ -813,9 +831,11 @@ const handleLive=()=>{
                             : `1.5px solid ${color.toLowerCase()}`,
                         }}
                         onClick={() => handleColorSelect(color)}
-                        className="game_button"
+                        className="game_button text-light"
                         disabled={gameResult !== ""}
-                      ></button>
+                      >
+                        {color}
+                      </button>
                     ))}
                   </div>
 
@@ -936,6 +956,36 @@ const handleLive=()=>{
                       </div>
                     </div>
                   </div>
+                  <div className="p-1 betAmountMultiple">
+                    <Button
+                      variant="secondary"
+                      className="fw-bold m-1"
+                      onClick={() => handleButtonClick(1)}
+                    >
+                      1x
+                    </Button>
+                    <Button
+                      variant="primary"
+                      className="fw-bold m-1"
+                      onClick={() => handleButtonClick(2)}
+                    >
+                      2x
+                    </Button>
+                    <Button
+                      variant="success"
+                      className="fw-bold m-1"
+                      onClick={() => handleButtonClick(3)}
+                    >
+                      3x
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="fw-bold m-1"
+                      onClick={() => handleButtonClick(4)}
+                    >
+                      4x
+                    </Button>
+                  </div>
                   {/* </div> */}
                 </Col>
               </Row>
@@ -950,20 +1000,26 @@ const handleLive=()=>{
                     "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
                 }}
               >
-                <thead className="text-light" style={{ height: "55px" }}>
+                <thead
+                  className="text-light text-center"
+                  style={{ height: "55px" }}
+                >
                   <tr>
-                    <th>#</th>
+                    {/* <th>#</th> */}
                     <th>Session</th>
                     <th>Number</th>
                     <th>Color</th>
                     <th>Size</th>
                   </tr>
                 </thead>
-                <tbody style={{ color: "#FFD700" }} className="table-hover">
+                <tbody
+                  style={{ color: "#FFD700" }}
+                  className="table-hover text-center"
+                >
                   {gameHistory && gameHistory.length > 0 ? (
                     gameHistory.map((game, index) => (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        {/* <td>{index + 1}</td> */}
                         <td>{game.result}</td>
                         {/* <td>{game.chosenColor}</td> */}
                         <td style={{ color: game.targetColor }}>
@@ -1477,10 +1533,11 @@ const handleLive=()=>{
                 <Modal.Body>
                   <ul>
                     {notices && notices.length > 0 ? (
-                      notices.map((notice,index) => (
+                      notices.map((notice, index) => (
                         <li key={notice._id} style={{ listStyle: "none" }}>
-                          
-                          <h6>{index+1}. &nbsp; &nbsp;{notice.text}</h6>
+                          <h6>
+                            {index + 1}. &nbsp; &nbsp;{notice.text}
+                          </h6>
                           <div
                             style={{
                               display: "flex",
@@ -1492,7 +1549,6 @@ const handleLive=()=>{
                             <h6>
                               {new Date(notice.timestamp).toLocaleDateString()}
                             </h6>
-                            
                           </div>
                         </li>
                       ))
@@ -1558,8 +1614,7 @@ const handleLive=()=>{
                             <li>
                               <h6
                                 className="dropdown-item"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
+                                onClick={handleShow}
                               >
                                 Deposit
                               </h6>
@@ -1625,111 +1680,89 @@ const handleLive=()=>{
 
               {/*Deposit Start  */}
               {/* Modal */}
-              <div
-                className="modal fade"
-                id="staticBackdrop"
-                data-bs-backdrop="static"
-                data-bs-keyboard="false"
+              <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
                 tabIndex={-1}
-                aria-labelledby="staticBackdropLabel"
-                aria-hidden="true"
+                className="topUPBg"
+                style={{ maxHeight: "500px !important" }}
               >
-                <div className="modal-dialog">
-                  <div className="modal-content bg-dark">
-                    <div className="modal-header">
-                      <h1
-                        className="modal-title fs-5 text-warning"
-                        id="staticBackdropLabel"
-                      >
-                        Deposit
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      />
-                    </div>
-                    <div className="modal-body">
-                      <div
-                        className="image"
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <img
-                          src={QRCODE}
-                          height="200px"
-                          width="200px"
-                          alt=""
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            border: "1px solid black",
-                          }}
-                        />
-                      </div>
-                      <h6 className="text-info">
-                        UPI:kumaromprakashhdhdksks@axl
-                      </h6>
-                      <form onSubmit={handleSubmit} className="deposit_Form">
-                        <label>UserId:</label>
-                        <input
-                          type="text"
-                          name="userId"
-                          value={formData.userId}
-                          onChange={handleChange}
-                          // disabled
-                          required
-                        />
-                        <label>Name:</label>
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                        />
-
-                        <label>Amount:</label>
-                        <input
-                          type="number"
-                          name="amount"
-                          placeholder="Amount"
-                          value={formData.amount}
-                          onChange={handleChange}
-                          required
-                        />
-                        <label>UTR:</label>
-                        <input
-                          type="text"
-                          name="UTR"
-                          placeholder="UTR"
-                          value={formData.UTR}
-                          onChange={handleChange}
-                          required
-                        />
-
-                        <br />
-                        <button
-                          type="submit"
-                          className="btn btn-outline-primary"
-                        >
-                          Submit
-                        </button>
-                      </form>
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
+                <Modal.Header
+                  closeButton
+                  className="bgDepositHeader"
+                  style={{ maxHeight: "70px" }}
+                >
+                  <Modal.Title className="fs-5 text-warning">
+                    Deposit
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="bgDepositGame">
+                  <div
+                    className="image"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <img
+                      src={QRCODE}
+                      height="200px"
+                      width="200px"
+                      alt=""
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        border: "1px solid black",
+                      }}
+                    />
                   </div>
-                </div>
-              </div>
+                  <h6 className="text-info">UPI: kumaromprakashhdhdksks@axl</h6>
+                  <form onSubmit={handleSubmit} className="deposit_Form">
+                    <label>UserId:</label>
+                    <input
+                      type="text"
+                      name="userId"
+                      value={formData.userId}
+                      onChange={handleChange}
+                      required
+                    />
+                    <label>Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                    <label>Amount:</label>
+                    <input
+                      type="number"
+                      name="amount"
+                      placeholder="Amount"
+                      value={formData.amount}
+                      onChange={handleChange}
+                      required
+                    />
+                    <label>UTR:</label>
+                    <input
+                      type="text"
+                      name="UTR"
+                      placeholder="UTR"
+                      value={formData.UTR}
+                      onChange={handleChange}
+                      required
+                    />
+                    <br />
+                    <button
+                      type="submit"
+                      className="btn btn-warning"
+                      style={{ borderRadius: "20px" }}
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </Modal.Body>
+              </Modal>
 
               {/* Deposit End */}
 
@@ -1745,9 +1778,15 @@ const handleLive=()=>{
                 aria-hidden="true"
               >
                 <div className="modal-dialog">
-                  <div className="modal-content">
+                  <div
+                    className="modal-content topUPBg"
+                    style={{ maxHeight: "600px" }}
+                  >
                     <div className="modal-header">
-                      <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                      <h1
+                        className="modal-title fs-5 text-warning"
+                        id="staticBackdropLabel"
+                      >
                         Withdrawal
                       </h1>
                       <button
@@ -1767,6 +1806,7 @@ const handleLive=()=>{
                           type="text"
                           name="userId"
                           value={formData1.userId}
+                          placeholder="UserId"
                           onChange={handleChange1}
                           // disabled
                           required
@@ -1800,10 +1840,7 @@ const handleLive=()=>{
                           required
                         />
                         <br />
-                        <button
-                          type="submit"
-                          className="btn btn-outline-primary"
-                        >
+                        <button type="submit" className="btn btn-warning">
                           Submit
                         </button>
                       </form>
